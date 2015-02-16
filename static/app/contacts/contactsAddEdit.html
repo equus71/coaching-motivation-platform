@@ -1,0 +1,126 @@
+<div class="row" ng-cloak>
+    <div class="col-xs-12">
+        <div class="pull-left">
+            <a class="btn btn-default" ui-sref="^"><i class="fa fa-chevron-left"></i> Cofnij</a>
+        </div>
+        TODO: kasowanie
+        <div class="pull-right">
+            <a class="btn btn-success" ng-click="vm.save()"><i class="fa fa-save"></i> Zapisz</a>
+        </div>
+    </div>
+</div>
+
+<div class="row" ng-cloak>
+    <div class="col-xs-12 col-sm-8">
+        <form class="form-horizontal" name="vm.contactForm">
+            <div class="form-group" ng-class="{'has-error': vm.fieldValidation(vm.contactForm.firstName)}">
+                <label for="name" class="col-sm-2 control-label">Imię </label>
+
+                <div class="col-sm-10">
+                    <input type="text" name="firstName" class="form-control" ng-model="vm.contact.firstName"
+                           cmp-is-focused
+                           ng-maxlength="64" ng-required="true"
+                           placeholder="Imię">
+                </div>
+            </div>
+            <div class="form-group" ng-class="{'has-error': vm.fieldValidation(vm.contactForm.lastName)}">
+                <label for="name" class="col-sm-2 control-label">Nazwisko </label>
+
+                <div class="col-sm-10">
+                    <input type="text" name="lastName" class="form-control" ng-model="vm.contact.lastName"
+                           cmp-is-focused
+                           ng-maxlength="64" ng-required="true"
+                           placeholder="Nazwisko">
+                </div>
+            </div>
+            <div class="form-group" ng-class="{'has-error': vm.fieldValidation(vm.contactForm.age)}">
+                <label for="type" class="col-sm-2 control-label">Wiek</label>
+
+                <div class="col-sm-10">
+                    <select name="age" class="form-control" ng-model="vm.contact.age"
+                            ng-options="age for age in vm.ageRange" ng-required="true">
+                    </select>
+                </div>
+            </div>
+            <div class="form-group" >
+                <label for="lastContact" class="col-sm-2 control-label">Ostatni kontakt</label>
+
+                <div class="col-sm-10">
+                    <input type="text" name="lastContact" class="form-control" value="{{ vm.contact.lastContact | date: dd.MM.yyyy }}"
+                           placeholder="Brak kontaktu" readonly>
+                </div>
+            </div>
+            <div class="form-group" ng-class="{'has-error': vm.contact.postponeChecked && vm.fieldValidation(vm.contactForm.postponed)}">
+                <div class="col-sm-10 col-sm-offset-2">
+                    <label>
+                        <input type="checkbox" ng-model="vm.contact.postponeChecked"> Odrocz kontakt
+                    </label>
+                </div>
+                <div class="col-sm-10 col-sm-offset-2" ng-if="vm.contact.postponeChecked">
+                    Przypomnij o kontakcie po
+                    <p class="input-group input-calendar">
+                        <input type="date" class="form-control" ng-model="vm.contact.postponedDate"
+                                min="2015-01-01" required="true" />
+                       <!-- <input type="text" class="form-control" ng-model="vm.contact.postponed" datepicker-popup="{{ 'dd.MM.yyyy' }}"
+                               is-open="opened" min-date="'01.01.2015'"
+                               ng-required="true" close-text="Zamknij" current-text="Dziś" clear-text="Wyczyść"/>
+                        <span class="input-group-btn">
+                        <button type="button" class="btn btn-default"
+                                ng-click="$event.preventDefault();$event.stopPropagation();opened = true;"><i
+                                class="fa fa-calendar"></i></button>
+                        </span> -->
+                    </p>
+                </div>
+            </div>
+            <div class="form-group" ng-class="{'has-error': vm.fieldValidation(vm.contactForm.notificationsFrequency)}">
+                <label for="notificationsFrequency" class="col-sm-2 control-label">Kontakt co:</label>
+
+                <div class="col-sm-10">
+                    <select name="notificationsFrequency" class="form-control"
+                            ng-required="true" ng-model="vm.contact.notificationsFrequency">
+                        <option value="24">1d</option>
+                        <option value="48">2d</option>
+                        <option value="72">3d</option>
+                        <option value="96">4d</option>
+                        <option value="120">5d</option>
+                        <option value="144">6d</option>
+                        <option value="168">7d</option>
+                        <option value="240">10d</option>
+                        <option value="336">14d</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="tags" class="col-sm-2 control-label">Tagi</label>
+
+                <div class="col-sm-10">
+                    <tags-input ng-model="vm.contact.tags" placeholder="Dodaj tagi opisujące cech i potrzeby danej osoby">
+                        <auto-complete source="vm.matchingTags($query)"></auto-complete>
+                    </tags-input>
+                </div>
+            </div>
+            <div class="form-group" ng-class="{'has-error': vm.fieldValidation(vm.contactForm.notes)}">
+                <label for="message" class="col-sm-2 control-label">Notatki</label>
+
+                <div class="col-sm-10">
+                    <textarea ng-maxlength="65536" maxlength="65536" ng-model="vm.contact.notes"
+                              class="form-control" name="notes" rows="16" cmp-is-focused></textarea>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-10 col-sm-offset-2">
+                    <label>
+                        <input type="checkbox" ng-model="vm.contact.isActive"> Kontakt aktywny
+                    </label>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="col-xs-12 col-sm-4">
+        <div class="well">
+            <a class="btn btn-primary btn-sm pull-right" ui-sref="message({contactId:vm.contact.id})"><i class="fa fa-send"></i> Napisz</a>
+            <small><strong>WYSŁANE:</strong></small>
+            <p>TODO: dodać liste wysłanych wiadomości</p>
+        </div>
+    </div>
+</div>

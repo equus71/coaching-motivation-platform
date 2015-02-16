@@ -1,0 +1,74 @@
+.table > tbody > tr td.action-cell {
+  display: none;
+  padding: 3px 8px; }
+  .table > tbody > tr td.action-cell.wide {
+    width: 250px; }
+.table > tbody > tr td.info-cell {
+  display: table-cell; }
+.table > tbody > tr:hover td.action-cell {
+  display: table-cell; }
+.table > tbody > tr:hover td.info-cell {
+  display: none; }
+.table.table-hover tr {
+  cursor: pointer; }
+
+ol.breadcrumb {
+  padding: 0;
+  margin-bottom: 0;
+  background: none;
+  border-radius: 0; }
+
+.sidebar-toggler {
+  cursor: pointer; }
+
+.master-container {
+  position: relative; }
+
+.floating-panel {
+  position: fixed;
+  right: 0px;
+  bottom: 0px;
+  width: 100%; }
+  .floating-panel .panel-body {
+    min-height: 35vh; }
+    .floating-panel .panel-body .pagination {
+      margin: 0; }
+
+.input-group.input-calendar {
+  max-width: 40%; }
+
+.at-view-plain-fade-in.ng-enter {
+  -webkit-transition-property: opacity;
+  -moz-transition-property: opacity;
+  -o-transition-property: opacity;
+  transition-property: opacity;
+  -webkit-transition-duration: 0.5s;
+  -moz-transition-duration: 0.5s;
+  -o-transition-duration: 0.5s;
+  transition-duration: 0.5s;
+  opacity: 0;
+  position: absolute;
+  left: 0;
+  right: 0; }
+
+.at-view-plain-fade-in.ng-enter-active {
+  opacity: 1; }
+
+.at-view-plain-fade-out.ng-leave {
+  -webkit-transition-property: opacity;
+  -moz-transition-property: opacity;
+  -o-transition-property: opacity;
+  transition-property: opacity;
+  -webkit-transition-duration: 0.5s;
+  -moz-transition-duration: 0.5s;
+  -o-transition-duration: 0.5s;
+  transition-duration: 0.5s;
+  opacity: 1;
+  position: absolute;
+  left: 0;
+  right: 0; }
+
+.at-view-plain-fade-out.ng-leave-active {
+  opacity: 0; }
+
+/*# sourceMappingURL=stylesheet.css.map */

@@ -1,0 +1,122 @@
+<div class="row" ng-cloak>
+    <div class="col-xs-12">
+        <div class="form-inline">
+            <button type="button" class="btn btn-default" ng-click="vm.openContactPicker()">
+                {{ vm.contact ? vm.contact.firstName + ' ' + vm.contact.lastName : 'Wybierz adresata' }}</button>
+            <button type="button" class="btn btn-default" ng-click="vm.openTemplatePicker()">
+                {{ vm.template.name || 'Wybierz szablon' }}</button>
+            <select class="form-control" ng-model="vm.message.type">
+                <option value="SMS">SMS</option>
+                <option value="EMAIL">Email</option>
+            </select>
+
+            <div class="pull-right">
+                <a class="btn btn-primary" ng-click="vm.send()"><i class="fa fa-send"></i> Wyślij</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row" ng-cloak>
+    <div class="col-sm-8">
+        <div class="form-group" ng-if="vm.message.type == 'EMAIL'">
+            <label for="messageHeader" class="control-label">Tytuł wiadomości</label>
+            <input type="text" ng-maxlength="65536" ng-required="true" ng-model="vm.message.header"
+                   class="form-control" name="messageHeader" cmp-is-focused/>
+        </div>
+        <div class="form-group">
+            <label for="messageBody" class="control-label">Treść wiadomości</label>
+            <textarea ng-maxlength="65536" ng-required="true" ng-model="vm.message.body"
+                      class="form-control" name="messageBody" rows="16" cmp-is-focused></textarea>
+        </div>
+    </div>
+    <div class="col-sm-4" ng-if="vm.contact">
+        <div class="well">
+            <div>{{ vm.contact.firstName }} {{ vm.contact.lastName }} (lat {{ vm.contact.age }})</div>
+            <p>
+                <cmp-tag tags="vm.contact.tags" limit="36"></cmp-tag>
+            </p>
+            <div>
+                <small><strong>NOTATKI:</strong></small>
+            </div>
+            <textarea ng-maxlength="65536" maxlength="65536" ng-model="vm.contact.notes"
+                      class="form-control" name="notes" rows="12" cmp-is-focused></textarea>
+
+            <div class="help-block">
+                <button class="btn btn-success" ng-click="vm.save()"><i class="fa fa-save"></i> Zapisz notatki</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="floating-panel" ng-cloak>
+    <div class="row">
+        <div class="col-xs-10 col-sm-5 pull-right" ng-if="vm.userPicker">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Wybór adresata
+                        <button type="button" class="close" aria-label="Close" ng-click="vm.closeUserPicker()"><span
+                                aria-hidden="true">&times;</span>
+                        </button>
+                    </h3>
+                </div>
+                <div class="panel-body">
+                    user picker
+                </div>
+                <div class="panel-footer">
+                    <button type="button" class="btn btn-default"><i class="fa fa-refresh"></i> Wybierz adresata
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-10 col-sm-5 pull-right" ng-if="vm.templatePicker">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Wybór szablonu
+                        <button type="button" class="close" aria-label="Close" ng-click="vm.closeTemplatePicker()"><span
+                                aria-hidden="true">&times;</span>
+                        </button>
+                    </h3>
+                </div>
+                <div class="panel-body">
+                    <div class="form-inline">
+                        <cmp-type-select value="vm.templateTypeFilterValue" options="vm.templateTypeFilterOptions">
+                        </cmp-type-select>
+                        <div class="form-group">
+                            <label class="sr-only" for="templateFilter">Filter results</label>
+                            <input type="search" name="templateFilter" ng-model="templateFilter" placeholder="Filtruj szablony"
+                                   class="form-control"/>
+                        </div>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                            <tr>
+                                <th>Nazwa</th>
+                                <th>Tagi</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="template in vm.templates | nameTagFilter:templateFilter | typeFilter:vm.templateTypeFilterValue" popover-trigger="mouseenter"
+                                popover="{{ template.templateBody|limitTo:300 }}"
+                                popover-title="{{ template.templateHeader }}" popover-append-to-body="true">
+                                <td>{{ template.name }}</td>
+                                <td>
+                                    <cmp-tag tags="template.tags"></cmp-tag>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <pagination total-items="vm.templates.length" ng-model="vm.currentPage"
+                                items-per-page="7" max-size="5" class="pagination-sm"
+                                direction-links="false" boundary-links="true"
+                                rotate="false" previous-text></pagination>
+                </div>
+                <div class="panel-footer">
+                    <button type="button" class="btn btn-default"><i class="fa fa-refresh"></i> Użyj szablonu</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

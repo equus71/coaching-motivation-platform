@@ -1,0 +1,31 @@
+{
+    "templates": [
+        {
+            "id": 1,
+            "name": "Przypomninie o śniadaniu II",
+            "type": "EMAIL",
+            "uses": 23,
+            "tags": ["śniadanie", "email", "przypomnienie", "posiłek", "przykład", "uprzejmie", "wsparcie"],
+            "templateBody": "blah",
+            "templateHeader": "blah"
+        },
+        {
+            "id": 1,
+            "name": "Ćwicz!",
+            "type": "SMS",
+            "uses": 2,
+            "tags": ["motywacja", "sms", "trening"],
+            "templateBody": "blah",
+            "templateHeader": ""
+        },
+        {
+            "id": 3,
+            "name": "Pamiętaj o warzywach",
+            "type": "EMAIL",
+            "uses": 11,
+            "tags": ["warzywa", "email", "przypomnienie"],
+            "templateBody": "Wilk, wilk szary (Canis lupus) – gatunek drapieżnego ssaka z rodziny psowatych (Canidae), zamieszkującego lasy, równiny, tereny bagienne oraz góry Eurazji i Ameryki Północnej. Gatunek o skłonnościach terytorialnych. Zwykle terytorium zajmowane przez watahę to 100-300 km²[4], ale wielkość ta zależy od dostępności pokarmu i terenu. Może występować współużytkowanie części terenu przez dwie konkurujące watahy[5]. Wilk jest w stanie w dobę pokonać dystans kilkudziesięciu kilometrów. W poszukiwaniu partnerki samiec potrafi w ciągu 2 tygodni przebyć ponad 600 km[6]. Stada wilków liczą do 20 osobników, zwykle jednak są znacznie mniej liczne, będąc grupą rodzinną składającą się z pary rodzicielskiej, młodych i ewentualnie części wilków z poprzedniego miotu. Watahy mają ściśle określoną hierarchię wewnętrzną. Wilki mają rozwinięty system komunikowania się przy pomocy mowy ciała, odgłosów oraz przy użyciu substancji chemicznych – feromonów i własnych odchodów (znakowanie). Żywią się głównie średniej i dużej wielkości ssakami kopytnymi (jelenie, dziki, sarny), nie gardząc mniejszymi zwierzętami czy padliną, a jeśli stado jest duże, wspólnie polują także na większe ssaki lub ich stada. W sprzyjających warunkach chętnie zjadają ryby[7]. Przy braku pożywienia, lub w okresie wychowywania młodych, zdarza im się atakować zwierzęta hodowlane. Dawniej wilki były szeroko rozprzestrzenione, lecz ekspansja człowieka wpłynęła na ograniczenie ich populacji. Obecnie w większości państw objęto je ochroną gatunkową. Podejmuje się próby reintrodukcji tego gatunku, na najszerszą skalę w USA, ale także w Europie. Wilk od początku był i jest nadal obecny w ludzkiej kulturze. Na ogół w kontekście negatywnym, jako drapieżca, zabójca lub wcielone zło, wzbudzające powszechny lęk. Z drugiej strony, podziwiana jest wilcza niezależność, siła i wytrwałość. Ostatnio, na skutek wzrostu świadomości ekologicznej, postrzeganie wilka ulega stopniowej poprawie. Miejsce strachu zaczyna zajmować zrozumienie jego roli w ekosystemie.",
+            "templateHeader": "Słów kilka o wilkach"
+        }
+    ]
+}

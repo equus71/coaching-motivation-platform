@@ -1,0 +1,66 @@
+<div class="row" ng-cloak>
+    <div class="col-xs-12">
+        <div class="pull-left">
+            <a class="btn btn-default" ui-sref="^"><i class="fa fa-chevron-left"></i> Cofnij</a>
+        </div>
+        <div class="pull-right">
+            <a class="btn btn-success" ng-click="vm.save()"><i class="fa fa-save"></i> Zapisz</a>
+        </div>
+    </div>
+</div>
+
+<div class="row" ng-cloak>
+    <div class="col-xs-12 col-sm-8">
+        <form class="form-horizontal" name="vm.templateForm">
+            <div class="form-group" ng-class="{'has-error': vm.fieldValidation(vm.templateForm.nameField)}">
+                <label for="name" class="col-sm-2 control-label">Nazwa </label>
+
+                <div class="col-sm-10">
+                    <input type="text" name="nameField" class="form-control" ng-model="vm.template.name" cmp-is-focused
+                           ng-maxlength="64" ng-required="true"
+                           placeholder="Nazwa szablonu; wykorzystywana tylko wewnątrz aplikacji">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="type" class="col-sm-2 control-label">Typ</label>
+
+                <div class="col-sm-10">
+                    <select name="type" class="form-control" ng-model="vm.template.type">
+                        <option>EMAIL</option>
+                        <option>SMS</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="tags" class="col-sm-2 control-label">Tagi</label>
+
+                <div class="col-sm-10">
+                    <tags-input ng-model="vm.template.tags" placeholder="Dodaj tagi opisujące szablon">
+                        <auto-complete source="vm.matchingTags($query)"></auto-complete>
+                    </tags-input>
+                </div>
+            </div>
+            <div class="form-group" ng-if="vm.template.type != 'SMS'" ng-class="{'has-error': vm.fieldValidation(vm.templateForm.templateHeader)}">
+                <label for="subject" class="col-sm-2 control-label">Temat wiadomości</label>
+
+                <div class="col-sm-10">
+                    <input type="text" name="templateHeader" ng-model="vm.template.templateHeader"
+                           ng-maxlength="256" ng-required="true"
+                           class="form-control" placeholder="Temat też może zawierać zmienne" cmp-is-focused>
+                </div>
+            </div>
+            <div class="form-group" ng-class="{'has-error': vm.fieldValidation(vm.templateForm.templateBody)}">
+                <label for="message" class="col-sm-2 control-label">Wiadomość</label>
+
+                <div class="col-sm-10">
+                    <textarea ng-maxlength="65536" ng-required="true" ng-model="vm.template.templateBody" class="form-control" name="templateBody" rows="16" cmp-is-focused></textarea>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="col-xs-12 col-sm-4">
+        <div class="well">
+            lista dostępnych zmiennych!
+        </div>
+    </div>
+</div>

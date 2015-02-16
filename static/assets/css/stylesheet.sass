@@ -1,0 +1,81 @@
+
+.table
+  > tbody > tr
+    td.action-cell
+      display: none
+      padding: 3px 8px
+      &.wide
+        width: 250px
+    td.info-cell
+      display: table-cell
+    &:hover
+      td.action-cell
+        display: table-cell
+      td.info-cell
+        display: none
+  &.table-hover
+    tr
+      cursor: pointer
+
+
+ol.breadcrumb
+  padding: 0
+  margin-bottom: 0
+  background: none
+  border-radius: 0
+
+.sidebar-toggler
+  cursor: pointer
+
+.master-container
+  position: relative
+
+.floating-panel
+  position: fixed
+  right: 0px
+  bottom: 0px
+  width: 100%
+  .panel-body
+    min-height: 35vh
+    .pagination
+      margin: 0
+
+  
+.input-group.input-calendar
+  max-width: 40%
+
+.at-view-plain-fade-in.ng-enter
+  -webkit-transition-property: opacity
+  -moz-transition-property: opacity
+  -o-transition-property: opacity
+  transition-property: opacity
+  -webkit-transition-duration: 0.5s
+  -moz-transition-duration: 0.5s
+  -o-transition-duration: 0.5s
+  transition-duration: 0.5s
+  opacity: 0
+  position: absolute
+  left: 0
+  right: 0
+
+.at-view-plain-fade-in.ng-enter-active
+  opacity: 1
+
+.at-view-plain-fade-out.ng-leave
+  -webkit-transition-property: opacity
+  -moz-transition-property: opacity
+  -o-transition-property: opacity
+  transition-property: opacity
+  -webkit-transition-duration: 0.5s
+  -moz-transition-duration: 0.5s
+  -o-transition-duration: 0.5s
+  transition-duration: 0.5s
+  opacity: 1
+  position: absolute
+  left: 0
+  right: 0
+
+.at-view-plain-fade-out.ng-leave-active
+  opacity: 0
+
+

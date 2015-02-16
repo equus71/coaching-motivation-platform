@@ -1,0 +1,45 @@
+<div class="row" ng-cloak>
+    <div class="col-xs-12">
+        <div class="form-inline">
+            <cmp-type-select value="vm.typeFilterValue" options="vm.typeFilterOptions">
+            </cmp-type-select>
+            <div class="form-group">
+                <label class="sr-only" for="filter">Filter results</label>
+                <input type="search" name="filter" ng-model="filter" placeholder="Filtruj szablony"
+                       class="form-control"/>
+            </div>
+            <div class="pull-right">
+                <a class="btn btn-success" ui-sref=".add"><i class="fa fa-plus"></i> Dodaj nowy </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row" ng-cloak>
+    <div class="col-xs-12">
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th>Nazwa</th>
+                    <th>Tagi</th>
+                    <th class="text-center">Typ</th>
+                    <th class="text-center">Użyto</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="template in vm.templates| nameTagFilter:filter | typeFilter:vm.typeFilterValue" ng-click="vm.goToTemplate(template.id)">
+                    <td>{{ template.name }}</td>
+                    <td>
+                        <cmp-tag tags="template.tags"></cmp-tag>
+                    </td>
+                    <td class="text-center">{{ template.type }}</td>
+                    <td class="text-center">
+                        {{ template.uses }}
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

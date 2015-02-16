@@ -1,0 +1,51 @@
+<div class="row" ng-cloak>
+    <div class="col-xs-12">
+        <div class="form-inline">
+            <cmp-type-select value="vm.typeFilterValue" options="vm.typeFilterOptions">
+            </cmp-type-select>
+            <div class="form-group">
+                <label class="sr-only" for="filter">Filter results</label>
+                <input type="search" name="filter" ng-model="filter" placeholder="Filtruj szablony"
+                       class="form-control"/>
+            </div>
+            <div class="pull-right">
+                <a class="btn btn-success" ui-sref=".add"><i class="fa fa-plus"></i> Dodaj nowy </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row" ng-cloak>
+    <div class="col-xs-12">
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th>Imię</th>
+                    <th>Nazwisko</th>
+                    <th>Tagi</th>
+                    <th class="text-center">Ostatni kontakt</th>
+                    <th class="text-center">Kontakt co</th>
+                    <th class="text-center">Stan</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="contact in vm.contacts | nameTagFilter:filter" ng-click="vm.goToContact(contact.id)">
+                    <td>{{ contact.firstName }}</td>
+                    <td>{{ contact.lastName }}</td>
+                    <td>
+                        <cmp-tag tags="contact.tags"></cmp-tag>
+                    </td>
+                    <td class="text-center">{{ contact.lastContact }}</td>
+                    <td class="text-center">
+                        {{ (contact.notificationsFrequency / 24) + 'd' }}
+                    </td>
+                    <td class="text-center">
+                        x
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
