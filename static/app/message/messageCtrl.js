@@ -19,12 +19,8 @@
             header: '',
             body: ''
         };
-        vm.templateTypeFilterValue = null;
-        vm.templateTypeFilterOptions = [
-            {name: 'Wszystkie', value: null},
-            {name: 'SMSy', value: 'SMS'},
-            {name: 'Emaile', value: 'EMAIL'}
-        ];
+        vm.templatePicker = false;
+        vm.templates = [];
         vm.contactTypeFilterValue = null;
         vm.contactTypeFilterOptions = [
             {name: 'Wszystkie', value: null},
