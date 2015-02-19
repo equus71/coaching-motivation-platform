@@ -10,7 +10,17 @@
             "notificationsFrequency": 72,
             "tags": ["śniadanie", "przypomnienie", "luźno"],
             "notes": "",
-            "isActive": true
+            "isActive": true,
+            "messages":[
+                {
+                    "type": "SMS",
+                    "body": "Pamiętaj o kanapkach",
+                    "header": "",
+                    "state": "SEND",
+                    "timestamp": "2015-02-15T00:08:20.969Z",
+                    "deliveryDate": "2015-02-15T00:08:20.969Z"
+                }
+            ]
         },
         {
             "id": 2,
@@ -22,7 +32,8 @@
             "notificationsFrequency": 48,
             "tags": ["kolacje", "przekąski", "uprzejmie"],
             "notes": "",
-            "isActive": true
+            "isActive": true,
+            "messages":[]
         },
         {
             "id": 3,
@@ -34,7 +45,8 @@
             "notificationsFrequency": 24,
             "tags": ["warzywa", "motywacja", "stanowczo", "sms"],
             "notes": "",
-            "isActive": true
+            "isActive": true,
+            "messages":[]
         }
     ]
 }

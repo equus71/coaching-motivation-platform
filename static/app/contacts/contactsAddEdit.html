@@ -119,8 +119,11 @@
     <div class="col-xs-12 col-sm-4">
         <div class="well">
             <a class="btn btn-primary btn-sm pull-right" ui-sref="message({contactId:vm.contact.id})"><i class="fa fa-send"></i> Napisz</a>
-            <small><strong>WYSŁANE:</strong></small>
-            <p>TODO: dodać liste wysłanych wiadomości</p>
+            <p><small><strong>WYSŁANE:</strong></small></p>
+            <ul class="list-unstyled">
+                <li ng-repeat="message in vm.contact.messages">{{ message.deliveryDate }}<strong>{{ message.header }}</strong> - {{ message.body |limitTo:80 }} </li>
+            </ul>
+
         </div>
     </div>
 </div>
