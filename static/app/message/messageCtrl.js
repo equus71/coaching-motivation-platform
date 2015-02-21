@@ -28,11 +28,10 @@
             {name: 'Nieaktywne', value: 'inactive'}
         ];
 
-        activate();
+        $scope.$watch('vm.contact', contactChange);
+        $scope.$on('templateSelect', templateChange);
 
-        $scope.$watch('vm.contact', function () {
-            sortTemplates();
-        });
+        activate();
 
         function activate() {
             vm.loading = true;
@@ -58,6 +57,15 @@
                     renderTemplate();
                 }
             });
+        }
+
+        function contactChange() {
+            sortTemplates();
+        }
+
+        function templateChange(event, template){
+            vm.template = template;
+            renderTemplate();
         }
 
         function openContactPicker() {

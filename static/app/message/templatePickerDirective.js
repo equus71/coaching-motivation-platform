@@ -4,9 +4,9 @@
     angular.module('cmp.message')
         .directive('cmpTemplatePickerDirective', cmpTemplatePickerDirective);
 
-    cmpTemplatePickerDirective.$inject = [];
+    cmpTemplatePickerDirective.$inject = ['$modal'];
 
-    function cmpTemplatePickerDirective() {
+    function cmpTemplatePickerDirective($modal) {
         var directive = {
             restrict: 'E',
             scope: {
@@ -42,8 +42,13 @@
             }
 
             function selectTemplate() {
-                vm.isOpen = false;
-                $scope.$emit('templateSelect', vm.preselectedTemplate);
+                var promptModal = $modal.open({
+                    template: '<div><div class="modal-header"><button type="button" class="close" ng-click="$dismiss()">x</button><div>Zmiana szablonu</div></div><div class="modal-body">Wprowadzone dane w tytule i treści wiadomości zostaną zastąpione danymi z wybranego szablonu. Kontunuować?<p><button type="button" class="btn btn-warning" ng-click="$close()">Tak</button> <button type="button" class="btn btn-default" ng-click="$dismiss()">Nie</button></p></div></div>'
+                });
+                promptModal.result.then(function(){
+                    vm.isOpen = false;
+                    $scope.$emit('templateSelect', vm.preselectedTemplate);
+                });
             }
 
             function closeTemplatePicker() {

@@ -29,9 +29,11 @@ ol.breadcrumb {
   right: 0px;
   bottom: 0px;
   width: 100%; }
-  .floating-panel .panel-body {
+  .floating-panel .panel.floating {
+    box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5); }
+  .floating-panel .panel .panel-body {
     min-height: 35vh; }
-    .floating-panel .panel-body .pagination {
+    .floating-panel .panel .panel-body .pagination {
       margin: 0; }
 
 .input-group.input-calendar {
