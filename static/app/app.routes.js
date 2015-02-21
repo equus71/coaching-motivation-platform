@@ -77,6 +77,7 @@
                     url: '/message?contactId&templateId',
                     templateUrl: '/static/app/message/message.html',
                     controller: "MessageCtrl as vm",
+                    reloadOnSearch: false,
                     data: {
                         displayName: 'Przygotowanie wiadmości'
                     }

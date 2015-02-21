@@ -5,9 +5,9 @@
         .module('cmp.message', ['ngLodash'])
         .controller('MessageCtrl', MessageCtrl);
 
-    MessageCtrl.$inject = ['$q', '$scope', '$state', 'contactsService', 'lodash', 'messageTemplatesService'];
+    MessageCtrl.$inject = ['$location', '$q', '$scope', '$state', 'contactsService', 'lodash', 'messageTemplatesService'];
 
-    function MessageCtrl($q, $scope, $state, contactsService, lodash, messageTemplatesService) {
+    function MessageCtrl($location, $q, $scope, $state, contactsService, lodash, messageTemplatesService) {
         var vm = this;
 
         vm.openContactPicker = openContactPicker;
@@ -65,6 +65,7 @@
 
         function templateChange(event, template){
             vm.template = template;
+            $location.search('templateId', template.id);
             renderTemplate();
         }
 
