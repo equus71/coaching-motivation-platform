@@ -21,15 +21,15 @@
         };
         vm.templatePicker = false;
         vm.templates = [];
-        vm.contactTypeFilterValue = null;
-        vm.contactTypeFilterOptions = [
-            {name: 'Wszystkie', value: null},
-            {name: 'Aktywne', value: 'active'},
-            {name: 'Nieaktywne', value: 'inactive'}
-        ];
+//        vm.contactTypeFilterValue = null;
+//        vm.contactTypeFilterOptions = [
+//            {name: 'Wszystkie', value: null},
+//            {name: 'Aktywne', value: 'active'},
+//            {name: 'Nieaktywne', value: 'inactive'}
+//        ];
 
-        $scope.$watch('vm.contact', contactChange);
         $scope.$on('templateSelect', templateChange);
+        $scope.$on('contactSelect', contactChangeHandler);
 
         activate();
 
@@ -49,6 +49,7 @@
                     vm.contact = lodash.find(vm.contacts, function (obj) {
                         return obj.id == $state.params.contactId;
                     });
+                    contactChange();
                 }
                 if ($state.params.templateId) {
                     vm.template = lodash.find(vm.templates, function (obj) {
@@ -59,8 +60,15 @@
             });
         }
 
+        function contactChangeHandler(event, contact) {
+            vm.contact = contact;
+            $location.search('contactId', contact.id);
+            contactChange();
+        }
+
         function contactChange() {
             sortTemplates();
+            renderTemplate();
         }
 
         function templateChange(event, template){
@@ -70,11 +78,11 @@
         }
 
         function openContactPicker() {
-            vm.userPicker = true;
+            vm.contactPicker = true;
         }
 
         function closeUserPicker() {
-            vm.userPicker = false;
+            vm.contactPicker = false;
         }
 
         function openTemplatePicker() {
@@ -92,7 +100,9 @@
         }
 
         function renderTemplate(){
-            vm.message.type = vm.template.type;
+            if(vm.template){
+                vm.message.type = vm.template.type;
+            }
 //            TODO: template rendering
         }
 

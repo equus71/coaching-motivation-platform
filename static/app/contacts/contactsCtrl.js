@@ -11,12 +11,12 @@
         var vm = this;
 
         vm.goToContact = toContact;
-        vm.typeFilterValue = null;
         vm.typeFilterOptions = [
             {name: 'Wszystkie', value: null},
-            {name: 'Aktywne', value: 'active'},
-            {name: 'Nieaktywne', value: 'inactive'}
+            {name: 'Aktywne', value: {value: true, key: "isActive"}},
+            {name: 'Nieaktywne', value: {value: false, key: "isActive"}}
         ];
+        vm.typeFilterValue = vm.typeFilterOptions[1].value;
 
         activate();
 

@@ -50,25 +50,7 @@
 </div>
 
 <div class="floating-panel" ng-cloak>
-    <div class="row">
-        <div class="col-xs-10 col-sm-5 pull-right" ng-if="vm.userPicker">
-            <div class="panel panel-primary">
-                <div class="panel-heading">
-                    <h3 class="panel-title">Wybór adresata
-                        <button type="button" class="close" aria-label="Close" ng-click="vm.closeUserPicker()"><span
-                                aria-hidden="true">&times;</span>
-                        </button>
-                    </h3>
-                </div>
-                <div class="panel-body">
-                    user picker
-                </div>
-                <div class="panel-footer">
-                    <button type="button" class="btn btn-default"><i class="fa fa-refresh"></i> Wybierz adresata
-                    </button>
-                </div>
-            </div>
-        </div>
+    <cmp-contact-picker-directive is-open="vm.contactPicker" contacts="vm.contacts"></cmp-contact-picker-directive>
     <cmp-template-picker-directive is-open="vm.templatePicker" templates="vm.templates"></cmp-template-picker-directive>
     </div>
 </div>

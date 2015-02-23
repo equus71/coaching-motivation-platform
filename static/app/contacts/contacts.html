@@ -30,7 +30,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr ng-repeat="contact in vm.contacts | nameTagFilter:filter" ng-click="vm.goToContact(contact.id)">
+                <tr ng-repeat="contact in vm.contacts | nameTagFilter:filter | typeFilter:vm.typeFilterValue" ng-click="vm.goToContact(contact.id)">
                     <td>{{ contact.firstName }}</td>
                     <td>{{ contact.lastName }}</td>
                     <td>

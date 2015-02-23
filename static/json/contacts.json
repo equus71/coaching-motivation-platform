@@ -47,6 +47,19 @@
             "notes": "",
             "isActive": true,
             "messages":[]
+        },
+        {
+            "id": 4,
+            "firstName": "Marta",
+            "lastName": "Maria",
+            "age": 26,
+            "lastContact": "2015-01-20T12:08:20.969Z",
+            "postponed": "2015-01-25T00:08:20.969Z",
+            "notificationsFrequency": 72,
+            "tags": ["warzywa", "trening", "stanowczo", "sms"],
+            "notes": "Jakieś notatki",
+            "isActive": false,
+            "messages":[]
         }
     ]
 }
