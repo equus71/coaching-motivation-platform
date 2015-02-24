@@ -5,9 +5,9 @@
         .module('cmp.message', ['ngLodash'])
         .controller('MessageCtrl', MessageCtrl);
 
-    MessageCtrl.$inject = ['$location', '$q', '$scope', '$state', 'contactsService', 'lodash', 'messageTemplatesService'];
+    MessageCtrl.$inject = ['$location', '$q', '$scope', '$state', 'contactsService', 'lodash', 'messageTemplatesService', 'templatingService'];
 
-    function MessageCtrl($location, $q, $scope, $state, contactsService, lodash, messageTemplatesService) {
+    function MessageCtrl($location, $q, $scope, $state, contactsService, lodash, messageTemplatesService, templatingService) {
         var vm = this;
 
         vm.openContactPicker = openContactPicker;
@@ -21,12 +21,6 @@
         };
         vm.templatePicker = false;
         vm.templates = [];
-//        vm.contactTypeFilterValue = null;
-//        vm.contactTypeFilterOptions = [
-//            {name: 'Wszystkie', value: null},
-//            {name: 'Aktywne', value: 'active'},
-//            {name: 'Nieaktywne', value: 'inactive'}
-//        ];
 
         $scope.$on('templateSelect', templateChange);
         $scope.$on('contactSelect', contactChangeHandler);
@@ -55,7 +49,7 @@
                     vm.template = lodash.find(vm.templates, function (obj) {
                         return obj.id == $state.params.templateId;
                     });
-                    renderTemplate();
+                    vm.message = renderTemplate(vm.message, vm.template, vm.contact);
                 }
             });
         }
@@ -67,14 +61,15 @@
         }
 
         function contactChange() {
-            sortTemplates();
-            renderTemplate();
+            vm.templates = sortTemplates(vm.templates, vm.contact);
+            vm.message = renderTemplate(vm.message, vm.template, vm.contact);
         }
 
         function templateChange(event, template){
             vm.template = template;
+            vm.message.type = template.type;
             $location.search('templateId', template.id);
-            renderTemplate();
+            vm.message = renderTemplate(vm.message, vm.template, vm.contact);
         }
 
         function openContactPicker() {
@@ -93,17 +88,19 @@
             vm.templatePicker = false;
         }
 
-        function sortTemplates() {
-            if (vm.contact && vm.templates) {
-                vm.templates = messageTemplatesService.sortTemplatesByMatch(vm.templates, vm.contact);
+        function sortTemplates(templates, contact) {
+            if (contact && templates) {
+                return messageTemplatesService.sortTemplatesByMatch(templates, contact);
+            }else{
+                return templates;
             }
         }
 
-        function renderTemplate(){
-            if(vm.template){
-                vm.message.type = vm.template.type;
+        function renderTemplate(message, template, contact){
+            if(template && contact){
+                message = templatingService.compileTemplate(message, template, contact);
             }
-//            TODO: template rendering
+            return message;
         }
 
     }
