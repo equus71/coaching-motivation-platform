@@ -13,6 +13,28 @@
         vm.matchingTags = tagService.getMatchingTags;
         vm.fieldValidation = validationService.fieldValidation;
         vm.save = saveTemplate;
+        vm.availableVariables = [
+            {
+                key: "imie",
+                desc: "Imie kontaktu"
+            },
+            {
+                key: "imie_w",
+                desc: "Imie kontaktu w wołaczu"
+            },
+            {
+                key: "nazwisko",
+                desc: "Nazwisko kontaktu"
+            },
+            {
+                key: "tytul",
+                desc: "Tytuł, Pan/Pani"
+            },
+            {
+                key: "tytul_w",
+                desc: "Tytuł w wołaczu"
+            }
+        ];
 
         activate();
 

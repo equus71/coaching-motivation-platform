@@ -20,22 +20,44 @@
             "templateBody": "",
             "templateHeader": ""
         };
+        vm.availableVariables = [
+            {
+                key: "imie",
+                desc: "Imie kontaktu"
+            },
+            {
+                key: "imie_w",
+                desc: "Imie kontaktu w wołaczu"
+            },
+            {
+                key: "nazwisko",
+                desc: "Nazwisko kontaktu"
+            },
+            {
+                key: "tytul",
+                desc: "Tytuł, Pan/Pani"
+            },
+            {
+                key: "tytul_w",
+                desc: "Tytuł w wołaczu"
+            }
+        ];
 
         activate();
 
-        function activate(){
+        function activate() {
             tagService.clearCache();
         }
 
         function saveTemplate() {
-            if(vm.templateForm.$valid){
+            if (vm.templateForm.$valid) {
                 vm.saving = true;
-                messageTemplatesService.createTemplate(vm.template).then(function(){
+                messageTemplatesService.createTemplate(vm.template).then(function () {
                     $state.go('^');
-                }, function(){
+                }, function () {
                     alertService.addAlert('Nie udało się zapisać szablonu.', 'danger');
                 });
-            }else{
+            } else {
                 validationService.markFormFieldsAsTouched(vm.templateForm);
             }
         }

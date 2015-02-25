@@ -60,7 +60,10 @@
     </div>
     <div class="col-xs-12 col-sm-4">
         <div class="well">
-            lista dostępnych zmiennych!
+            <p><strong>Dostępne wewnątrz szablonu zmienne:</strong></p>
+            <p ng-repeat="variable in vm.availableVariables">
+                \{\{ {{ variable.key}} \}\} - <em>{{ variable.desc }}</em>
+            </p>
         </div>
     </div>
 </div>
