@@ -10,12 +10,12 @@
             "templateHeader": "blah"
         },
         {
-            "id": 1,
+            "id": 2,
             "name": "Ćwicz!",
             "type": "SMS",
             "uses": 2,
             "tags": ["motywacja", "sms", "trening"],
-            "templateBody": "blah",
+            "templateBody": "{{ tytul_w }} {{ imie_w }}\nProszę pamiętać o aktywności fizycznej",
             "templateHeader": ""
         },
         {

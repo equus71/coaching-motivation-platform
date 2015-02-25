@@ -16,7 +16,7 @@
         function compileTemplate(message, template, contact) {
             // basing on the contact the context is build
             // TODO: przygotować właściwy kontekst
-            var context = {exp: 'ala ma kota'};
+            var context = prepareMessageContextFromContact(contact);
 
             //Handlebars compile template
             var compiledBodyTemplate = Handlebars.compile(template.templateBody);
@@ -25,7 +25,30 @@
             //context is applied to the template -- the real rendering
             message.body = compiledBodyTemplate(context);
             message.header = compiledHeaderTemplate(context);
+
             return message;
+        }
+
+        function prepareMessageContextFromContact(contact) {
+            var context = {};
+
+            context.imie = contact.firstName;
+//            TODO: dodać odmianę imienia do wołacza
+            context.imie_w = context.imie;
+            context.nazwisko = contact.lastName;
+
+            context.tytul = "";
+            context.tytul_w = "";
+            if (contact.gender === "1") {
+                context.tytul = "Pan";
+                context.tytul_w = "Panie";
+            }
+            if (contact.gender === "2") {
+                context.tytul = "Pani";
+                context.tytul_w = "Pani";
+            }
+
+            return context;
         }
     }
 
