@@ -33,6 +33,18 @@
                            placeholder="Nazwisko">
                 </div>
             </div>
+            <div class="form-group" ng-class="{'has-error': vm.fieldValidation(vm.contactForm.gender)}">
+                <label for="name" class="col-sm-2 control-label">Płeć {{ vm.contactForm.gender }}</label>
+
+                <div class="col-sm-10">
+                    <label class="radio-inline">
+                        <input type="radio" name="contactForm" value="1" ng-model="vm.contact.gender"> pan
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" name="contactForm" value="2" ng-model="vm.contact.gender"> pani
+                    </label>
+                </div>
+            </div>
             <div class="form-group" ng-class="{'has-error': vm.fieldValidation(vm.contactForm.age)}">
                 <label for="type" class="col-sm-2 control-label">Wiek</label>
 
