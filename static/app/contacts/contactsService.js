@@ -31,7 +31,7 @@
                 var contact = lodash.find(data.contacts, function (obj) {
                     return obj.id == contactId
                 });
-                formatDatesToJS(contact);
+                contact = formatDatesToJS(contact);
                 deferred.resolve(contact);
             }).error(function (data) {
                 deferred.reject();
@@ -40,7 +40,7 @@
         }
 
         function saveContact(contact) {
-            formatDatesToJSON(contact);
+            contact = formatDatesToJSON(contact);
             var deferred = $q.defer();
             $http({
                 url: '/save/operation',
@@ -55,7 +55,7 @@
         }
 
         function createContact(contact) {
-            formatDatesToJSON(contact);
+            contact = formatDatesToJSON(contact);
             var deferred = $q.defer();
             $http({
                 url: '/create/operation',
@@ -70,8 +70,16 @@
         }
 
         function formatDatesToJS(contact){
-            contact.postponedDate = new Date(contact.postponed);
-            contact.lastContactDate = new Date(contact.lastContact);
+            if (contact.postponed){
+                contact.postponedDate = new Date(contact.postponed);
+            }else{
+                contact.postponedDate = null;
+            }
+            if (contact.lastContact){
+                contact.lastContactDate = new Date(contact.lastContact);
+            }else{
+                contact.lastContactDate = null;
+            }
             var now = new Date();
             if (contact.postponedDate
                 && contact.postponedDate.getDate() <= now.getDate()
@@ -79,6 +87,8 @@
                 && contact.postponedDate.getFullYear() <= now.getFullYear() ){
                 contact.postponeChecked = true;
             }
+
+            return contact;
         }
 
         function formatDatesToJSON(contact){
@@ -88,6 +98,7 @@
             if(contact.lastContactDate){
                 contact.lastContact = contact.lastContactDate.toJSON();
             }
+            return contact;
         }
     }
 
