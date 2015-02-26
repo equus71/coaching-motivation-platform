@@ -49,6 +49,7 @@
                     vm.template = lodash.find(vm.templates, function (obj) {
                         return obj.id == $state.params.templateId;
                     });
+                    vm.message.type = vm.template.type;
                     vm.message = renderTemplate(vm.message, vm.template, vm.contact);
                 }
             });
