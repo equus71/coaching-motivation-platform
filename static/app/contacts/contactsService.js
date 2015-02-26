@@ -82,9 +82,7 @@
             }
             var now = new Date();
             if (contact.postponedDate
-                && contact.postponedDate.getDate() <= now.getDate()
-                && contact.postponedDate.getMonth() <= now.getMonth()
-                && contact.postponedDate.getFullYear() <= now.getFullYear() ){
+                && contact.postponedDate >= now ){
                 contact.postponeChecked = true;
             }
 
