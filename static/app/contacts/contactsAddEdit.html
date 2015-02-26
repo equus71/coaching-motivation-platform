@@ -58,7 +58,7 @@
                 <label for="lastContact" class="col-sm-2 control-label">Ostatni kontakt</label>
 
                 <div class="col-sm-10">
-                    <input type="text" name="lastContact" class="form-control" value="{{ vm.contact.lastContact | date: dd.MM.yyyy }}"
+                    <input type="text" name="lastContact" class="form-control" value="{{ vm.contact.lastContactDate | date: dd.MM.yyyy }}"
                            placeholder="Brak kontaktu" readonly>
                 </div>
             </div>

@@ -17,6 +17,7 @@
         function getContacts() {
             var deferred = $q.defer();
             $http.get('/static/json/contacts.json').success(function (data, status, headers, config) {
+                lodash.forEach(data.contacts, formatDatesToJS);
                 deferred.resolve(data);
             }).error(function (data) {
                 deferred.reject();
@@ -70,7 +71,7 @@
 
         function formatDatesToJS(contact){
             contact.postponedDate = new Date(contact.postponed);
-            contact.lastContact = new Date(contact.lastContact);
+            contact.lastContactDate = new Date(contact.lastContact);
             var now = new Date();
             if (contact.postponedDate
                 && contact.postponedDate.getDate() <= now.getDate()
@@ -83,6 +84,9 @@
         function formatDatesToJSON(contact){
             if(contact.postponeChecked && contact.postponedDate){
                 contact.postponed = contact.postponedDate.toJSON();
+            }
+            if(contact.lastContactDate){
+                contact.lastContact = contact.lastContactDate.toJSON();
             }
         }
     }
