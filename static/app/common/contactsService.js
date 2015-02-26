@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('cmp.contacts')
+        .module('cmp.common')
         .factory('contactsService', contactsService);
 
     contactsService.$inject = ['$http', '$q', 'lodash'];

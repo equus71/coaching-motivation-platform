@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('cmp.contacts', ['ngLodash'])
+        .module('cmp.contacts', ['cmp.common', 'ngLodash'])
         .controller('ContactsCtrl', ContactsCtrl);
 
     ContactsCtrl.$inject = ['$state', 'contactsService'];

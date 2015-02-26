@@ -1,0 +1,39 @@
+<div class="widget">
+    <div class="widget-header"><i class="fa fa-users"></i> Lista kontaków
+        <div class="pull-right">
+            <a href="#">Manage</a>
+        </div>
+    </div>
+    <div class="medium no-padding">
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Imię</th>
+                    <th class="text-center">Osatni kontakt</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="contact in vm.contacts">
+                    <td>{{ contact.firstName }} {{ contact.lastName }}</td>
+                    <td class="text-center info-cell">{{ contact.lastContactDate | date: dd.MM.yyyy }}</td>
+                    <td class="text-center info-cell">
+                        <cmp-contact-needed-indicator contact="contact"></cmp-contact-needed-indicator>
+                    </td>
+                    <td colspan="2" class="action-cell text-right">
+                        <button class="btn btn-primary btn-sm"><i class="fa fa-send"></i> Napisz</button>
+                        <button class="btn btn-warning btn-sm"><i class="fa fa-clock-o"></i> Odrocz</button>
+                        <button class="btn btn-success btn-sm"><i class="fa fa-check"></i> Wykonano</button>
+                        <button class="btn btn-danger btn-sm"><i class="fa fa-power-off"></i> Deaktywuj</button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <pagination total-items="vm.contacts.length" ng-model="vm.currentPage"
+                items-per-page="10" max-size="5" class="pagination-sm"
+                direction-links="false" boundary-links="true"
+                rotate="false" previous-text></pagination>
+</div>

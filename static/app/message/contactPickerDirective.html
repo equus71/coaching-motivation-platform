@@ -28,10 +28,6 @@
                     </thead>
                     <tbody>
                     <tr ng-repeat="contact in vm.contacts | nameTagFilter:contactFilter | typeFilter:vm.contactTypeFilterValue"
-                        popover-trigger="mouseenter"
-                        popover="{{ contact.contactBody|limitTo:300 }}"
-                        popover-title="Ostatni kontakt"
-                        popover-append-to-body="true"
                         ng-click="vm.preselectContact(contact)"
                         ng-class="{'active': vm.preselectedContact === contact}">
                         <td>{{ contact.firstName }} {{ contact.lastName }}</td>

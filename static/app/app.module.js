@@ -7,6 +7,7 @@
         'cmp.routes',
         'cmp.message',
         'cmp.common',
+        'cmp.dashboard',
         'ngAnimate',
         'ui.router',
         'ui.bootstrap',
