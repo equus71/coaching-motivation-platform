@@ -1,6 +1,7 @@
 (function () {
     'use strict';
 
+    //TODO: fix annotation
     angular.module('cmp.routes', [
             'ui.router',
             'cmp.messageTemplates'
