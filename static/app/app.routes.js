@@ -14,14 +14,14 @@
         $stateProvider
             .state('dashboard', {
                 url: '/',
-                templateUrl: '/static/app/dashboard/dashboard.html',
+                templateUrl: 'dashboard/dashboard.html',
                 data: {
                     displayName: 'Dashboard'
                 }
             })
             .state('contacts', {
                 url: '/contacts',
-                templateUrl: '/static/app/contacts/contacts.html',
+                templateUrl: 'contacts/contacts.html',
                 controller: "ContactsCtrl as vm",
                 data: {
                     displayName: 'Kontakty'
@@ -31,7 +31,7 @@
                 url: '/{contactId:[0-9]{1,8}}',
                 views: {
                     '@': {
-                        templateUrl: '/static/app/contacts/contactsAddEdit.html',
+                        templateUrl: 'contacts/contactsAddEdit.html',
                         controller: "ContactsEditCtrl as vm"
                     }
                 },
@@ -47,7 +47,7 @@
             })
             .state('messageTemplates', {
                 url: '/templates',
-                templateUrl: '/static/app/messageTemplates/messageTemplates.html',
+                templateUrl: 'messageTemplates/messageTemplates.html',
                 controller: "MessageTemplatesCtrl as vm",
                 data: {
                     displayName: 'Szablony'
@@ -57,7 +57,7 @@
                 url: '/{templateId:[0-9]{1,8}}',
                 views: {
                     '@': {
-                        templateUrl: '/static/app/messageTemplates/messageTemplatesAddEdit.html',
+                        templateUrl: 'messageTemplates/messageTemplatesAddEdit.html',
                         controller: "MessageTemplatesEditCtrl as vm"
                     }
                 },
@@ -69,7 +69,7 @@
                 url: '/add',
                 views: {
                     '@': {
-                        templateUrl: '/static/app/messageTemplates/messageTemplatesAddEdit.html',
+                        templateUrl: 'messageTemplates/messageTemplatesAddEdit.html',
                         controller: "MessageTemplatesAddCtrl as vm"
                     }
                 },
@@ -79,7 +79,7 @@
             })
             .state('message', {
                 url: '/message?contactId&templateId',
-                templateUrl: '/static/app/message/message.html',
+                templateUrl: 'message/message.html',
                 controller: "MessageCtrl as vm",
                 reloadOnSearch: false,
                 data: {

@@ -16,7 +16,7 @@
             controller: ControllerFunc,
             controllerAs: 'vm',
             bindToController: true,
-            templateUrl: '/static/app/message/contactPickerDirective.html'
+            templateUrl: 'message/contactPickerDirective.html'
         };
 
         ControllerFunc.$inject = ['$scope'];

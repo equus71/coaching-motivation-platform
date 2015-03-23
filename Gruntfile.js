@@ -9,13 +9,13 @@ module.exports = function (grunt) {
             },
             app: {
                 src: ['static/app/*.js', 'static/app/**/*.js'],
-                dest: 'static/build/project.js'
+                dest: 'static/build/js/app.js'
             }
         },
         uglify: {
-            release: {
+            app: {
                 files: {
-                    'static/build/project.min.js': ['static/build/project.annotated.js']
+                    'static/build/project.min.js': ['static/build/js/app.annotated.js']
                 }
             }
         },
@@ -23,11 +23,11 @@ module.exports = function (grunt) {
             options: {
                 singleQuotes: true
             },
-            release: {
+            app: {
                 files: [
                     {
                         expand: true,
-                        src: ['static/build/project.js'],
+                        src: ['static/build/js/app.js'],
                         ext: '.annotated.js',
                         extDot: 'last'
                     }
@@ -35,7 +35,7 @@ module.exports = function (grunt) {
             }
         },
         "bower-install-simple": {
-            "release": {
+            "app": {
                 options: {
                     production: true
                 }
@@ -46,7 +46,17 @@ module.exports = function (grunt) {
                 }
             }
         },
-        clean: ["static/build/"]
+        ngtemplates: {
+            options: {
+              module: "cmp"
+            },
+            app: {
+                cwd: 'static/app',
+                src: '**/*.html',
+                dest: 'static/build/assets/app.templates.js'
+            }
+        },
+        clean: ["static/build/js"]
     });
 
     grunt.loadNpmTasks('grunt-angular-builder');
@@ -54,8 +64,10 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-ng-annotate');
     grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks("grunt-bower-install-simple");
+    grunt.loadNpmTasks('grunt-angular-templates');
 
     grunt.registerTask('release', ['clean', "bower-install-simple", 'angular-builder', 'ngAnnotate', 'uglify']);
     grunt.registerTask('debug', ['clean', 'angular-builder']);
+    grunt.registerTask('templates', ['ngtemplates']);
 
 };

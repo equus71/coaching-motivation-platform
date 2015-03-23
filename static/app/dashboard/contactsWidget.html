@@ -10,7 +10,7 @@
                 <thead>
                 <tr>
                     <th>Imię</th>
-                    <th class="text-center">Osatni kontakt</th>
+                    <th class="text-center">Ostatni kontakt</th>
                     <th></th>
                 </tr>
                 </thead>
@@ -22,18 +22,18 @@
                         <cmp-contact-needed-indicator contact="contact"></cmp-contact-needed-indicator>
                     </td>
                     <td colspan="2" class="action-cell text-right">
-                        <button class="btn btn-primary btn-sm"><i class="fa fa-send"></i> Napisz</button>
-                        <button class="btn btn-warning btn-sm"><i class="fa fa-clock-o"></i> Odrocz</button>
-                        <button class="btn btn-success btn-sm"><i class="fa fa-check"></i> Wykonano</button>
-                        <button class="btn btn-danger btn-sm"><i class="fa fa-power-off"></i> Deaktywuj</button>
+                        <button type="button" class="btn btn-primary btn-sm" ng-click="vm.writeToContact(contact)"><i class="fa fa-send"></i> Napisz</button>
+                        <button type="button" class="btn btn-warning btn-sm" ng-click="vm.postponeContact(contact)"><i class="fa fa-clock-o"></i> Odrocz</button>
+                        <button type="button" class="btn btn-success btn-sm" ng-click="vm.markContactedNow(contact)"><i class="fa fa-check"></i> Wykonano</button>
+                        <button type="button" class="btn btn-danger btn-sm" ng-click="vm.deactivateContact(contact)"><i class="fa fa-power-off"></i> Deaktywuj</button>
                     </td>
                 </tr>
                 </tbody>
             </table>
-        </div>
-    </div>
-    <pagination total-items="vm.contacts.length" ng-model="vm.currentPage"
-                items-per-page="10" max-size="5" class="pagination-sm"
+            <pagination total-items="vm.contacts.length" ng-model="vm.currentPage"
+                items-per-page="10" max-size="5" class="pagination-sm center-block"
                 direction-links="false" boundary-links="true"
                 rotate="false" previous-text></pagination>
+        </div>
+    </div>
 </div>

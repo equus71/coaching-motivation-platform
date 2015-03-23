@@ -12,7 +12,8 @@
             getContacts: getContacts,
             getContact: getContact,
             saveContact: saveContact,
-            createContact: createContact
+            createContact: createContact,
+            deactivateContact: deactivateContact
         };
         function getContacts() {
             var deferred = $q.defer();
@@ -97,6 +98,18 @@
                 contact.lastContact = contact.lastContactDate.toJSON();
             }
             return contact;
+        }
+
+        function deactivateContact(contact){
+            var deferred = $q.defer();
+            contact.isActive = false;
+            saveContact(contact).then(function(){
+                deferred.resolve(contact);
+            }, function(){
+                deferred.reject(contact);
+            });
+
+            return deferred.promise;
         }
     }
 

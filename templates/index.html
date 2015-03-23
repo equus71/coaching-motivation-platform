@@ -210,11 +210,14 @@
 {% endverbatim %}
 
 {% if is_production %}
-<script src="{% static 'build/project.min.js' %}"
+{#    TODO: add separate target to produce app.min.js #}
+<script src="{% static 'build/js/app.min.js' %}"
         type="text/javascript"></script>
 {% else %}
-<script src="{% static 'build/project.js' %}"
+<script src="{% static 'build/js/app.js' %}"
         type="text/javascript"></script>
 {% endif %}
+<script src="{% static 'build/assets/app.templates.js' %}"
+        type="text/javascript"></script>
 </body>
 </html>
