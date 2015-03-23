@@ -17,17 +17,7 @@
   ],
   "dependencies": {
     "rdash-ui": "1.0.*",
-    "angular": "1.3.*",
-    "angular-cookies": "1.3.*",
-    "angular-animate": "1.3.*",
-    "angular-bootstrap": "latest",
-    "angular-ui-router": "latest",
-    "bootstrap": "~3.2.0",
-    "font-awesome": "~4.1.0",
     "ng-lodash": "~0.1.0",
-    "lodash": "~3.1.0",
-    "angular-utils-ui-breadcrumbs": "~0.2.1",
-    "ng-tags-input": "2.1.1",
-    "handlebars": "latest"
+    "angular-utils-ui-breadcrumbs": "~0.2.1"
   }
 }

@@ -2,6 +2,7 @@ from django.contrib.auth.models import User, Group
 from django.views import generic
 from django.views.generic import TemplateView
 from rest_framework import viewsets
+from coaching_motivation_platform import settings
 from coaching_motivation_platform.quickstart.serializers import UserSerializer, GroupSerializer
 
 
@@ -30,3 +31,8 @@ class PartialGroupView(TemplateView):
 
 class IndexView(TemplateView):
     template_name = 'index.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(TemplateView, self).get_context_data(**kwargs)
+        context['is_production'] = settings.PRODUCTION
+        return context

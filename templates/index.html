@@ -7,18 +7,35 @@
     <meta name="description" content=""/>
 
     {% load staticfiles %}
-    <link rel="stylesheet" href="{% static 'bootstrap/dist/css/bootstrap.min.css' %}"
-          type="text/css" media="screen, handheld">
-    <link rel="stylesheet" href="{% static 'font-awesome/css/font-awesome.min.css' %}"
-          type="text/css" media="screen, handheld">
-    <link rel="stylesheet" href="{% static 'rdash-ui/dist/css/rdash.min.css' %}"
-          type="text/css" media="screen, handheld">
-    <link rel="stylesheet" href="{% static 'assets/css/stylesheet.css' %}"
-          type="text/css" media="screen, handheld">
-    <link rel="stylesheet" href="{% static 'ng-tags-input/ng-tags-input.min.css' %}"
-          type="text/css" media="screen, handheld">
-    <link rel="stylesheet" href="{% static 'ng-tags-input/ng-tags-input.bootstrap.min.css' %}"
-          type="text/css" media="screen, handheld">
+
+    {% if is_production %}
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.4/css/bootstrap.min.css"
+              type="text/css" media="screen, handheld">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css"
+              type="text/css" media="screen, handheld">
+        <link rel="stylesheet" href="{% static 'rdash-ui/dist/css/rdash.css' %}"
+              type="text/css" media="screen, handheld">
+        <link rel="stylesheet" href="{% static 'assets/css/stylesheet.css' %}"
+              type="text/css" media="screen, handheld">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ng-tags-input/2.2.0/ng-tags-input.min.css"
+              type="text/css" media="screen, handheld">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ng-tags-input/2.2.0/ng-tags-input.bootstrap.min.css"
+              type="text/css" media="screen, handheld">
+    {% else %}
+        <link rel="stylesheet" href="{% static 'bootstrap/dist/css/bootstrap.min.css' %}"
+              type="text/css" media="screen, handheld">
+        <link rel="stylesheet" href="{% static 'font-awesome/css/font-awesome.min.css' %}"
+              type="text/css" media="screen, handheld">
+        <link rel="stylesheet" href="{% static 'rdash-ui/dist/css/rdash.css' %}"
+              type="text/css" media="screen, handheld">
+        <link rel="stylesheet" href="{% static 'assets/css/stylesheet.css' %}"
+              type="text/css" media="screen, handheld">
+        <link rel="stylesheet" href="{% static 'ng-tags-input/build/ng-tags-input.min.css' %}"
+              type="text/css" media="screen, handheld">
+        <link rel="stylesheet" href="{% static 'ng-tags-input/build/ng-tags-input.bootstrap.min.css' %}"
+              type="text/css" media="screen, handheld">
+    {% endif %}
+
 </head>
 <body>
 <div id="page-wrapper" ng-class="{'open': vm.isSidebarOpened}" ng-cloak ng-controller="MasterCtrl as vm">
@@ -136,25 +153,26 @@
 <!-- End Page Wrapper -->
 </div>
 <!-- Placed at the end of the document so the pages load faster -->
-{% if False %}
-    <script src="{% static 'angular/angular.min.js' %}" type="text/javascript"></script>
-    <script src="{% static 'angular-cookies/angular-cookies.min.js' %}"
+{% if is_production %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.15/angular.min.js"
             type="text/javascript"></script>
-    <script src="{% static 'angular-animate/angular-animate.min.js' %}"
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.15/angular-cookies.min.js"
             type="text/javascript"></script>
-    <script src="{% static 'angular-ui-router/release/angular-ui-router.min.js' %}"
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.15/angular-animate.min.js"
             type="text/javascript"></script>
-    <script src="{% static 'angular-bootstrap/ui-bootstrap-tpls.min.js' %}"
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.13/angular-ui-router.min.js"
+            type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.12.1/ui-bootstrap-tpls.min.js"
             type="text/javascript"></script>
     <script src="{% static 'angular-utils-ui-breadcrumbs/uiBreadcrumbs.js' %}"
             type="text/javascript"></script>
-    <script src="{% static 'lodash/lodash.min.js' %}"
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.5.0/lodash.min.js"
             type="text/javascript"></script>
     <script src="{% static 'ng-lodash/build/ng-lodash.min.js' %}"
             type="text/javascript"></script>
-    <script src="{% static 'ng-tags-input/ng-tags-input.min.js' %}"
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ng-tags-input/2.2.0/ng-tags-input.min.js"
             type="text/javascript"></script>
-    <script src="{% static 'handlebars/handlebars.min.js' %}"
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.0/handlebars.min.js"
             type="text/javascript"></script>
 {% else %}
     <script src="{% static 'angular/angular.js' %}" type="text/javascript"></script>
@@ -164,21 +182,23 @@
             type="text/javascript"></script>
     <script src="{% static 'angular-ui-router/release/angular-ui-router.js' %}"
             type="text/javascript"></script>
-    <script src="{% static 'angular-bootstrap/ui-bootstrap-tpls.js' %}"
+    <script src="{% static 'angular-bootstrap/dist/ui-bootstrap-tpls.js' %}"
             type="text/javascript"></script>
     <script src="{% static 'angular-utils-ui-breadcrumbs/uiBreadcrumbs.js' %}"
             type="text/javascript"></script>
-    <script src="{% static 'lodash/lodash.js' %}"
+    <script src="{% static 'lodash/index.js' %}"
             type="text/javascript"></script>
     <script src="{% static 'ng-lodash/build/ng-lodash.js' %}"
             type="text/javascript"></script>
-    <script src="{% static 'ng-tags-input/ng-tags-input.js' %}"
+    <script src="{% static 'ng-tags-input/build/ng-tags-input.js' %}"
             type="text/javascript"></script>
-    <script src="{% static 'handlebars/handlebars.js' %}"
+    <script src="{% static 'handlebars/dist/handlebars.js' %}"
             type="text/javascript"></script>
 {% endif %}
+
 <script src="{% static 'assets/js/angular-locale_pl-pl.js' %}"
             type="text/javascript"></script>
+
 {% verbatim %}
 <script type="text/ng-template" id="directives/uiBreadcrumbs/uiBreadcrumbs.tpl.html">
 <ol class="breadcrumb">
@@ -188,55 +208,13 @@
 </ol>
 </script>
 {% endverbatim %}
-<script src="{% static 'app/app.module.js' %}"
+
+{% if is_production %}
+<script src="{% static 'build/project.min.js' %}"
         type="text/javascript"></script>
-<script src="{% static 'app/app.routes.js' %}"
+{% else %}
+<script src="{% static 'build/project.js' %}"
         type="text/javascript"></script>
-<script src="{% static 'app/common/common.js' %}"
-        type="text/javascript"></script>
-<script src="{% static 'app/messageTemplates/messageTemplatesCtrl.js' %}"
-        type="text/javascript"></script>
-<script src="{% static 'app/messageTemplates/messageTemplatesEditCtrl.js' %}"
-        type="text/javascript"></script>
-<script src="{% static 'app/messageTemplates/messageTemplatesAddCtrl.js' %}"
-        type="text/javascript"></script>
-<script src="{% static 'app/messageTemplates/messageTemplatesService.js' %}"
-        type="text/javascript"></script>
-<script src="{% static 'app/contacts/contactsCtrl.js' %}"
-        type="text/javascript"></script>
-<script src="{% static 'app/common/contactsService.js' %}"
-        type="text/javascript"></script>
-<script src="{% static 'app/contacts/contactsEditCtrl.js' %}"
-        type="text/javascript"></script>
-<script src="{% static 'app/message/messageCtrl.js' %}"
-        type="text/javascript"></script>
-<script src="{% static 'app/message/templatePickerDirective.js' %}"
-        type="text/javascript"></script>
-<script src="{% static 'app/message/contactPickerDirective.js' %}"
-        type="text/javascript"></script>
-<script src="{% static 'app/message/templatingService.js' %}"
-        type="text/javascript"></script>
-<script src="{% static 'app/dashboard/dashboardCtrl.js' %}"
-        type="text/javascript"></script>
-<script src="{% static 'app/dashboard/contactsWidget.js' %}"
-        type="text/javascript"></script>
-<script src="{% static 'app/common/masterCtrl.js' %}"
-        type="text/javascript"></script>
-<script src="{% static 'app/common/nameTagFilter.js' %}"
-        type="text/javascript"></script>
-<script src="{% static 'app/common/tagColorService.js' %}"
-        type="text/javascript"></script>
-<script src="{% static 'app/common/typeSelectDirective.js' %}"
-        type="text/javascript"></script>
-<script src="{% static 'app/common/typeFilter.js' %}"
-        type="text/javascript"></script>
-<script src="{% static 'app/common/tagService.js' %}"
-        type="text/javascript"></script>
-<script src="{% static 'app/common/validationService.js' %}"
-        type="text/javascript"></script>
-<script src="{% static 'app/common/alertService.js' %}"
-        type="text/javascript"></script>
-<script src="{% static 'app/common/contactNeededIndicator.js' %}"
-        type="text/javascript"></script>
+{% endif %}
 </body>
 </html>
