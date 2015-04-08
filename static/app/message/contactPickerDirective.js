@@ -43,7 +43,7 @@
 
             function selectContact() {
                 var promptModal = $modal.open({
-                    template: '<div><div class="modal-header"><button type="button" class="close" ng-click="$dismiss()">x</button><div>Zmiana kontaktu</div></div><div class="modal-body">Zmiana kontaktu spowoduje ponowne odrysowanie szablonu. Utacisz wszystkie zmiany w istniejącej wiadomości. Czy na pewno zmienić kontakt?<p><button type="button" class="btn btn-warning" ng-click="$close()">Tak</button> <button type="button" class="btn btn-default" ng-click="$dismiss()">Nie</button></p></div></div>'
+                    templateUrl: "message/contactPickerModal.html"
                 });
                 promptModal.result.then(function(){
                     vm.isOpen = false;
