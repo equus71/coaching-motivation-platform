@@ -13,7 +13,9 @@
             getContact: getContact,
             saveContact: saveContact,
             createContact: createContact,
-            deactivateContact: deactivateContact
+            deactivateContact: deactivateContact,
+            postponeContact: postponeContact,
+            markContacted: markContacted
         };
         function getContacts() {
             var deferred = $q.defer();
@@ -50,7 +52,9 @@
             }).success(function (data, status, headers, config) {
                 deferred.resolve();
             }).error(function (data) {
-                deferred.reject();
+                //TODO: re-enable reject
+                deferred.resolve();
+                //deferred.reject();
             });
             return deferred.promise;
         }
@@ -101,15 +105,23 @@
         }
 
         function deactivateContact(contact){
-            var deferred = $q.defer();
             contact.isActive = false;
-            saveContact(contact).then(function(){
-                deferred.resolve(contact);
-            }, function(){
-                deferred.reject(contact);
-            });
+            return saveContact(contact);
+        }
 
-            return deferred.promise;
+        function postponeContact(contact, till){
+            contact.postponedDate = till;
+            return saveContact(contact);
+        }
+
+        function postponeContact(contact, till){
+            contact.postponedDate = till;
+            return saveContact(contact);
+        }
+
+        function markContacted(contact, contactTime){
+            contact.lastContactDate = contactTime;
+            return saveContact(contact);
         }
     }
 

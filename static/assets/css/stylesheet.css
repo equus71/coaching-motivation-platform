@@ -73,4 +73,30 @@ ol.breadcrumb {
 .at-view-plain-fade-out.ng-leave-active {
   opacity: 0; }
 
+.smooth-ng-repeat.ng-move,
+.smooth-ng-repeat.ng-enter,
+.smooth-ng-repeat.ng-leave {
+  -webkit-transition: all linear 0.5s;
+  transition: all linear 0.5s; }
+
+.smooth-ng-repeat.ng-leave.ng-leave-active,
+.smooth-ng-repeat.ng-move,
+.smooth-ng-repeat.ng-enter {
+  -webkit-transform: translate3d(-25%, 0, 0);
+  transform: translate3d(-25%, 0, 0);
+  visibility: visible;
+  opacity: 0; }
+
+.smooth-ng-repeat.ng-leave,
+.smooth-ng-repeat.ng-move.ng-move-active,
+.smooth-ng-repeat.ng-enter.ng-enter-active {
+  -webkit-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
+  opacity: 1; }
+
+.alerts-container.row > div {
+  margin-bottom: 0; }
+.alerts-container.row .alert:last-child {
+  margin-bottom: 15px; }
+
 /*# sourceMappingURL=stylesheet.css.map */

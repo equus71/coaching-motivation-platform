@@ -15,11 +15,11 @@
             templateUrl: 'dashboard/contactsWidget.html'
         };
 
-        ControllerFunc.$inject = ['$modal', '$state', 'contactsService'];
+        ControllerFunc.$inject = ['$modal', '$state', 'alertService', 'contactsService', 'lodash'];
 
         return directive;
 
-        function ControllerFunc($modal, $state, contactsService) {
+        function ControllerFunc($modal, $state, alertService, contactsService, lodash) {
             var vm = this;
 
             vm.contacts = [];
@@ -29,29 +29,47 @@
             vm.deactivateContact = deactivateContact;
             vm.currentPage = 1;
 
-            contactsService.getContacts().then(function(data){
+            contactsService.getContacts().then(function (data) {
                 vm.contacts = data.contacts;
             });
 
-            function writeToContact(contact){
+            function writeToContact(contact) {
                 $state.go('message', {'contactId': contact.id});
             }
 
-            function postponeContact(contact){
-
-            }
-
-            function markContactedNow(contact){
-
-            }
-
-            function deactivateContact(contact){
-                var promptModal = $modal.open({
-                    template: '<div><div class="modal-header"><button type="button" class="close" ng-click="$dismiss()">x</button><div>Deaktywacja kontaktu</div></div><div class="modal-body">Deaktywacja kontaktu spowoduje, że kontakt nie będzie pojawiać się na listach z przypomnieniami. Deaktywować kontakt? <p><button type="button" class="btn btn-warning" ng-click="$close()">Tak</button> <button type="button" class="btn btn-default" ng-click="$dismiss()">Nie</button></p></div></div>'
+            function postponeContact(contact) {
+                var tomorrow = new Date(new Date().getTime() + 24 * 60 * 60 * 1000);
+                contactsService.postponeContact(contact, tomorrow).then(function () {
+                    lodash.remove(vm.contacts, function (obj) {
+                        return obj == contact;
+                    });
+                    alertService.addAlert('Kontakt odroczony do jutra.', 'success', 3000);
+                    //    TODO: add undo
                 });
-                promptModal.result.then(function(){
-                    contactsService.deactivateContact(contact).then(function(){
-                        //TODO: handling
+            }
+
+            function markContactedNow(contact) {
+                var now = new Date();
+                contactsService.markContacted(contact, now).then(function () {
+                    lodash.remove(vm.contacts, function (obj) {
+                        return obj == contact;
+                    });
+                    alertService.addAlert('Kontakt oznaczony jako obsłużony.', 'success', 3000);
+                    //    TODO: add undo
+                });
+            }
+
+            function deactivateContact(contact) {
+                var promptModal = $modal.open({
+                    templateUrl: 'dashboard/deactiveContactModal.html'
+                });
+                promptModal.result.then(function () {
+                    contactsService.deactivateContact(contact).then(function () {
+                        lodash.remove(vm.contacts, function (obj) {
+                            return obj == contact;
+                        });
+                        alertService.addAlert('Kontakt deaktywowany.', 'success', 3000);
+                        //    TODO: add undo
                     });
                 });
             }
