@@ -9,13 +9,13 @@
             <table class="table">
                 <thead>
                 <tr>
-                    <th>Imię</th>
+                    <th>Imię </th>
                     <th class="text-center">Ostatni kontakt</th>
                     <th></th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr ng-repeat="contact in vm.contacts" class="smooth-ng-repeat">
+                <tr ng-repeat="contact in vm.contacts | offsetFilter: vm.pageSize * (vm.currentPage - 1) | limitTo: vm.pageSize" class="smooth-ng-repeat">
                     <td>{{ contact.firstName }} {{ contact.lastName }}</td>
                     <td class="text-center info-cell">{{ contact.lastContactDate | date: dd.MM.yyyy }}</td>
                     <td class="text-center info-cell">
@@ -30,10 +30,12 @@
                 </tr>
                 </tbody>
             </table>
-            <pagination total-items="vm.contacts.length" ng-model="vm.currentPage"
-                items-per-page="10" max-size="5" class="pagination-sm center-block"
-                direction-links="false" boundary-links="true"
-                rotate="false" previous-text></pagination>
         </div>
+    </div>
+    <div class="widget-footer row">
+        <pagination total-items="vm.contacts.length" ng-model="vm.currentPage"
+                items-per-page="vm.pageSize" max-size="5" class="pagination-sm center-block"
+                direction-links="false" boundary-links="true"
+                rotate="false" previous-text="Następny"></pagination>
     </div>
 </div>
