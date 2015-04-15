@@ -28,7 +28,7 @@
             vm.markContactedNow = markContactedNow;
             vm.deactivateContact = deactivateContact;
             vm.currentPage = 1;
-            vm.pageSize = 2;
+            vm.pageSize = 10;
 
             contactsService.getContacts().then(function (data) {
                 vm.contacts = data.contacts;
