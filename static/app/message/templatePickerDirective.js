@@ -43,7 +43,7 @@
 
             function selectTemplate() {
                 var promptModal = $modal.open({
-                    templateUrl: 'message/templatePickerDirective.html'
+                    templateUrl: 'message/templatePickerModal.html'
                 });
                 promptModal.result.then(function(){
                     vm.isOpen = false;
