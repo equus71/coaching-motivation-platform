@@ -9,23 +9,23 @@
             <table class="table">
                 <thead>
                 <tr>
-                    <th>Imię </th>
+                    <th>Imię</th>
                     <th class="text-center">Ostatni kontakt</th>
                     <th></th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr ng-repeat="contact in vm.contacts | offsetFilter: vm.pageSize * (vm.currentPage - 1) | limitTo: vm.pageSize" class="smooth-ng-repeat">
+                <tr ng-repeat="contact in vmc.contacts | offsetFilter: vmc.pageSize * (vmc.currentPage - 1) | limitTo: vmc.pageSize" class="smooth-ng-repeat">
                     <td>{{ contact.firstName }} {{ contact.lastName }}</td>
                     <td class="text-center info-cell">{{ contact.lastContactDate | date: dd.MM.yyyy }}</td>
                     <td class="text-center info-cell">
                         <cmp-contact-needed-indicator contact="contact"></cmp-contact-needed-indicator>
                     </td>
                     <td colspan="2" class="action-cell text-right">
-                        <button type="button" class="btn btn-primary btn-sm" ng-click="vm.writeToContact(contact)"><i class="fa fa-send"></i> Napisz</button>
-                        <button type="button" class="btn btn-warning btn-sm" ng-click="vm.postponeContact(contact)"><i class="fa fa-clock-o"></i> Odrocz</button>
-                        <button type="button" class="btn btn-success btn-sm" ng-click="vm.markContactedNow(contact)"><i class="fa fa-check"></i> Wykonano</button>
-                        <button type="button" class="btn btn-danger btn-sm" ng-click="vm.deactivateContact(contact)"><i class="fa fa-power-off"></i> Deaktywuj</button>
+                        <button type="button" class="btn btn-primary btn-sm" ng-click="vmc.writeToContact(contact)"><i class="fa fa-send"></i> Napisz</button>
+                        <button type="button" class="btn btn-warning btn-sm" ng-click="vmc.postponeContact(contact)"><i class="fa fa-clock-o"></i> Odrocz</button>
+                        <button type="button" class="btn btn-success btn-sm" ng-click="vmc.markContactedNow(contact)"><i class="fa fa-check"></i> Wykonano</button>
+                        <button type="button" class="btn btn-danger btn-sm" ng-click="vmc.deactivateContact(contact)"><i class="fa fa-power-off"></i> Deaktywuj</button>
                     </td>
                 </tr>
                 </tbody>
@@ -33,8 +33,8 @@
         </div>
     </div>
     <div class="widget-footer row">
-        <pagination total-items="vm.contacts.length" ng-model="vm.currentPage"
-                items-per-page="vm.pageSize" max-size="5" class="pagination-sm center-block"
+        <pagination total-items="vmc.contacts.length" ng-model="vmc.currentPage"
+                items-per-page="vmc.pageSize" max-size="5" class="pagination-sm center-block"
                 direction-links="false" boundary-links="true"
                 rotate="false" previous-text="Następny"></pagination>
     </div>

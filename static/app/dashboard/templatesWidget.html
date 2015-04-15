@@ -1,0 +1,39 @@
+<div class="widget">
+    <div class="widget-header"><i class="fa fa-puzzle-piece"></i> Szablony
+        <div class="pull-right">
+            <a ui-sref="messageTemplates">edytuj</a>
+        </div>
+    </div>
+    <div class="medium no-padding">
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Nazwa</th>
+                    <th>Typ</th>
+                    <th class="text-center" style="width: 100px">Użyto</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="template in vmt.templates | offsetFilter: vmt.pageSize * (vmt.currentPage - 1) | limitTo: vmt.pageSize"
+                    class="smooth-ng-repeat">
+                    <td>{{ template.name }}</td>
+                    <td>{{ template.type }}</td>
+                    <td class="info-cell text-center">
+                        {{ template.uses }}
+                    </td>
+                    <td class="action-cell text-center narrow">
+                        <a class="btn btn-primary btn-sm" ui-sref="message({templateId: template.id})"><i class="fa fa-send"></i> Napisz</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+        <div class="widget-footer row">
+        <pagination total-items="vmt.templates.length" ng-model="vmt.currentPage"
+                    items-per-page="vmt.pageSize" max-size="5" class="pagination-sm center-block"
+                    direction-links="false" boundary-links="true"
+                    rotate="false" previous-text="Następny"></pagination>
+    </div>
+</div>

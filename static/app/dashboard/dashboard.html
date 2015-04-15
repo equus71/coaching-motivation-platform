@@ -61,59 +61,7 @@
         <cmp-contacts-widget></cmp-contacts-widget>
     </div>
     <div class="col-lg-6">
-        <div class="widget">
-            <div class="widget-header"><i class="fa fa-puzzle-piece"></i> Szablony
-                <div class="pull-right">
-                    <input type="text" placeholder="Search" class="form-control input-sm"/>
-                </div>
-            </div>
-            <div class="medium no-padding">
-                <div class="table-responsive">
-                    <table class="table">
-                        <thead>
-                        <tr>
-                            <th>Nazwa</th>
-                            <th>Typ</th>
-                            <th class="text-center" style="width: 100px">Użyto</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <td>Przypomninie o śniadaniu II</td>
-                            <td>Email</td>
-                            <td class="info-cell text-center">
-                                22
-                            </td>
-                            <td class="action-cell text-center narrow">
-                                <button class="btn btn-primary btn-sm"><i class="fa fa-send"></i> Napisz</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Ćwicz!</td>
-                            <td>SMS</td>
-                            <td class="info-cell text-center">
-                                11
-                            </td>
-                            <td class="action-cell text-right narrow">
-                                <button class="btn btn-primary btn-sm"><i class="fa fa-send"></i> Napisz</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Pamiętaj o warzywach</td>
-                            <td>Email</td>
-                            <td class="info-cell text-center">
-                                0
-                            </td>
-                            <td class="action-cell text-right narrow">
-                                <a class="btn btn-primary btn-sm" ui-sref="message({contactId:vm.contact.id})"><i
-                                        class="fa fa-send"></i> Napisz</a>
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
+        <cmp-templates-widget></cmp-templates-widget>
     </div>
 </div>
 

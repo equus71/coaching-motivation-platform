@@ -10,7 +10,7 @@
         var directive = {
             restrict: 'E',
             controller: ControllerFunc,
-            controllerAs: 'vm',
+            controllerAs: 'vmc',
             bindToController: true,
             templateUrl: 'dashboard/contactsWidget.html'
         };
