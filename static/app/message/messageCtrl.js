@@ -21,6 +21,8 @@
         };
         vm.templatePicker = false;
         vm.templates = [];
+        vm.receiverEmail = '';
+        vm.receiverPhone = '';
 
         $scope.$on('templateSelect', templateChange);
         $scope.$on('contactSelect', contactChangeHandler);
@@ -64,6 +66,8 @@
         function contactChange() {
             vm.templates = sortTemplates(vm.templates, vm.contact);
             vm.message = renderTemplate(vm.message, vm.template, vm.contact);
+            vm.receiverEmail = vm.contact.email || '';
+            vm.receiverPhone = vm.contact.phone || '';
         }
 
         function templateChange(event, template){

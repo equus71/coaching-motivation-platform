@@ -1,69 +1,95 @@
 {
-    "contacts": [
+  "contacts": [
+    {
+      "id": 1,
+      "firstName": "Anna",
+      "lastName": "Maria",
+      "email": "test@test.com",
+      "phone": "",
+      "gender": "2",
+      "age": 56,
+      "lastContact": "2015-02-15T11:08:20.969Z",
+      "postponed": "2015-02-15T00:08:20.969Z",
+      "notificationsFrequency": 72,
+      "tags": [
+        "śniadanie",
+        "przypomnienie",
+        "luźno"
+      ],
+      "notes": "",
+      "isActive": true,
+      "messages": [
         {
-            "id": 1,
-            "firstName": "Anna",
-            "lastName": "Maria",
-            "gender": "2",
-            "age": 56,
-            "lastContact": "2015-02-15T11:08:20.969Z",
-            "postponed": "2015-02-15T00:08:20.969Z",
-            "notificationsFrequency": 72,
-            "tags": ["śniadanie", "przypomnienie", "luźno"],
-            "notes": "",
-            "isActive": true,
-            "messages":[
-                {
-                    "type": "SMS",
-                    "body": "Pamiętaj o kanapkach",
-                    "header": "",
-                    "state": "SEND",
-                    "timestamp": "2015-02-15T00:08:20.969Z",
-                    "deliveryDate": "2015-02-15T00:08:20.969Z"
-                }
-            ]
-        },
-        {
-            "id": 2,
-            "firstName": "Hanna",
-            "lastName": "Maria",
-            "gender": "2",
-            "age": 45,
-            "lastContact": "2015-01-15T19:08:20.969Z",
-            "postponed": "2015-02-15T00:08:20.969Z",
-            "notificationsFrequency": 48,
-            "tags": ["kolacje", "przekąski", "uprzejmie"],
-            "notes": "",
-            "isActive": true,
-            "messages":[]
-        },
-        {
-            "id": 3,
-            "firstName": "Marian",
-            "lastName": "Mariański",
-            "gender": "1",
-            "age": 23,
-            "lastContact": "2015-01-24T12:08:20.969Z",
-            "postponed": "2015-05-15T00:08:20.969Z",
-            "notificationsFrequency": 24,
-            "tags": ["warzywa", "motywacja", "stanowczo", "sms"],
-            "notes": "",
-            "isActive": true,
-            "messages":[]
-        },
-        {
-            "id": 4,
-            "firstName": "Marta",
-            "lastName": "Maria",
-            "gender": "2",
-            "age": 26,
-            "lastContact": "2015-01-20T12:08:20.969Z",
-            "postponed": "2015-01-25T00:08:20.969Z",
-            "notificationsFrequency": 72,
-            "tags": ["warzywa", "trening", "stanowczo", "sms"],
-            "notes": "Jakieś notatki",
-            "isActive": false,
-            "messages":[]
+          "type": "SMS",
+          "body": "Pamiętaj o kanapkach",
+          "header": "",
+          "state": "SEND",
+          "timestamp": "2015-02-15T00:08:20.969Z",
+          "deliveryDate": "2015-02-15T00:08:20.969Z"
         }
-    ]
+      ]
+    },
+    {
+      "id": 2,
+      "firstName": "Hanna",
+      "lastName": "Maria",
+      "email": "",
+      "phone": "123 56 78 12",
+      "gender": "2",
+      "age": 45,
+      "lastContact": "2015-01-15T19:08:20.969Z",
+      "postponed": "2015-02-15T00:08:20.969Z",
+      "notificationsFrequency": 48,
+      "tags": [
+        "kolacje",
+        "przekąski",
+        "uprzejmie"
+      ],
+      "notes": "",
+      "isActive": true,
+      "messages": []
+    },
+    {
+      "id": 3,
+      "firstName": "Marian",
+      "lastName": "Mariański",
+      "email": "test@test.com",
+      "phone": "123 56 78 12",
+      "gender": "1",
+      "age": 23,
+      "lastContact": "2015-01-24T12:08:20.969Z",
+      "postponed": "2015-05-15T00:08:20.969Z",
+      "notificationsFrequency": 24,
+      "tags": [
+        "warzywa",
+        "motywacja",
+        "stanowczo",
+        "sms"
+      ],
+      "notes": "",
+      "isActive": true,
+      "messages": []
+    },
+    {
+      "id": 4,
+      "firstName": "Marta",
+      "lastName": "Maria",
+      "email": "test@test.com",
+      "phone": "123 56 78 12",
+      "gender": "2",
+      "age": 26,
+      "lastContact": "2015-01-20T12:08:20.969Z",
+      "postponed": "2015-01-25T00:08:20.969Z",
+      "notificationsFrequency": 72,
+      "tags": [
+        "warzywa",
+        "trening",
+        "stanowczo",
+        "sms"
+      ],
+      "notes": "Jakieś notatki",
+      "isActive": false,
+      "messages": []
+    }
+  ]
 }

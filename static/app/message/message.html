@@ -9,7 +9,6 @@
                 <option value="SMS">SMS</option>
                 <option value="EMAIL">Email</option>
             </select>
-
             <div class="pull-right">
                 <a class="btn btn-primary" ng-click="vm.send()"><i class="fa fa-send"></i> Wyślij</a>
             </div>
@@ -19,6 +18,14 @@
 
 <div class="row" ng-cloak>
     <div class="col-sm-8">
+        <div class="form-group" ng-if="vm.message.type == 'EMAIL'">
+            <label for="receiverEmail" class="control-label">Email odbiorcy</label>
+            <input type="text" class="form-control" name="receiverEmail" ng-show="vm.message.type == 'EMAIL'" ng-model="vm.receiverEmail" />
+        </div>
+        <div class="form-group" ng-if="vm.message.type == 'SMS'">
+            <label for="receiverPhone" class="control-label">Telefon odbiorcy</label>
+            <input type="text" class="form-control" name="receiverPhone" ng-show="vm.message.type == 'SMS'" ng-model="vm.receiverPhone" />
+        </div>
         <div class="form-group" ng-if="vm.message.type == 'EMAIL'">
             <label for="messageHeader" class="control-label">Tytuł wiadomości</label>
             <input type="text" ng-maxlength="65536" ng-required="true" ng-model="vm.message.header"
@@ -36,6 +43,8 @@
             <p>
                 <cmp-tag tags="vm.contact.tags" limit="36"></cmp-tag>
             </p>
+            <div>Email: {{ vm.contact.email }}</div>
+            <div>Telefon: {{ vm.contact.phone }}</div>
             <div>
                 <small><strong>NOTATKI:</strong></small>
             </div>
@@ -52,5 +61,4 @@
 <div class="floating-panel" ng-cloak>
     <cmp-contact-picker-directive is-open="vm.contactPicker" contacts="vm.contacts"></cmp-contact-picker-directive>
     <cmp-template-picker-directive is-open="vm.templatePicker" templates="vm.templates"></cmp-template-picker-directive>
-    </div>
 </div>
