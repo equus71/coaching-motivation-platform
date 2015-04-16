@@ -18,6 +18,6 @@ Technology
 
 to be described
 
-Licence
+License
 ---------
 GNU AFFERO GENERAL PUBLIC LICENSE 3.0
