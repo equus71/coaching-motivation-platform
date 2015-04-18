@@ -36,7 +36,7 @@
                     <td>
                         <cmp-tag tags="contact.tags"></cmp-tag>
                     </td>
-                    <td class="text-center">{{ contact.lastContactDate | date: dd.MM.yyyy}}</td>
+                    <td class="text-center">{{ contact.lastContactDate | date: 'dd MMM yyyy' }}</td>
                     <td class="text-center">
                         {{ (contact.notificationsFrequency / 24) + 'd' }}
                     </td>

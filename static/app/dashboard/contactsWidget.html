@@ -17,7 +17,7 @@
                 <tbody>
                 <tr ng-repeat="contact in vmc.contacts | offsetFilter: vmc.pageSize * (vmc.currentPage - 1) | limitTo: vmc.pageSize" class="smooth-ng-repeat">
                     <td>{{ contact.firstName }} {{ contact.lastName }}</td>
-                    <td class="text-center info-cell">{{ contact.lastContactDate | date: dd.MM.yyyy }}</td>
+                    <td class="text-center info-cell">{{ contact.lastContactDate | date: 'dd MMM yyyy' }}</td>
                     <td class="text-center info-cell">
                         <cmp-contact-needed-indicator contact="contact"></cmp-contact-needed-indicator>
                     </td>
