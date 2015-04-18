@@ -8,6 +8,7 @@
         'cmp.message',
         'cmp.common',
         'cmp.dashboard',
+        'cmp.queue',
         'ngAnimate',
         'ui.router',
         'ui.bootstrap',

@@ -88,6 +88,8 @@
             })
             .state('queue', {
                 url: '/queue',
+                templateUrl: 'queue/queue.html',
+                controller: "QueueCtrl as vm",
                 data: {
                     displayName: 'Kolejka wiadomości do wysłania'
                 }

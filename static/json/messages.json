@@ -1,0 +1,16 @@
+{
+  "messages":[
+    {
+      "id": 1,
+      "type": "EMAIL",
+      "recipientName": "Anna Anna",
+      "recipientEmail": "anna@wt.pl",
+      "recipientPhone": "",
+      "recipientPhone": "",
+      "body": "Witaj Anno, \nmam nadzieję, że z Twoją dietą wszystko w porządku.",
+      "header": "Tytuł",
+      "creationDate": "2015-03-20T00:08:20.969Z",
+      "sendAtDate": "2015-05-15T00:08:20.969Z"
+    }
+  ]
+}
