@@ -41,6 +41,15 @@
             })
             .state('contacts.add', {
                 url: '/add',
+                views: {
+                    '@': {
+                        templateUrl: 'contacts/contactsAddEdit.html',
+                        controller: "ContactsAddCtrl as vm"
+                    },
+                    'sideView':{
+                        template: 'blah'
+                    }
+                },
                 data: {
                     displayName: 'Dodaj nowy'
                 }
