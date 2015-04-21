@@ -5,9 +5,9 @@
         .module('cmp.message', ['ngLodash'])
         .controller('MessageCtrl', MessageCtrl);
 
-    MessageCtrl.$inject = ['$location', '$q', '$scope', '$state', 'contactsService', 'lodash', 'messageTemplatesService', 'templatingService'];
+    MessageCtrl.$inject = ['$location', '$q', '$scope', '$state', 'alertService', 'contactsService', 'lodash', 'messageTemplatesService', 'templatingService', 'undoService'];
 
-    function MessageCtrl($location, $q, $scope, $state, contactsService, lodash, messageTemplatesService, templatingService) {
+    function MessageCtrl($location, $q, $scope, $state, alertService, contactsService, lodash, messageTemplatesService, templatingService, undoService) {
         var vm = this;
 
         vm.openContactPicker = openContactPicker;
@@ -58,9 +58,23 @@
         }
 
         function contactChangeHandler(event, contact) {
+            var undo = undoService.undoOperation(vm, null,
+                {
+                    contact: vm.contact,
+                    message: lodash.cloneDeep(vm.message),
+                    receiverPhone: vm.receiverPhone,
+                    receiverEmail: vm.receiverEmail
+                });
+
             vm.contact = contact;
             $location.search('contactId', contact.id);
             contactChange();
+
+            undo.callbacks.push(function (vm) {
+                $location.search('contactId', vm.contact.id);
+                vm.templates = sortTemplates(vm.templates, vm.contact);
+            });
+            alertService.addAlert('Adresat wiadomości został zmieniony.', 'success', 15000, undo);
         }
 
         function contactChange() {
@@ -70,11 +84,19 @@
             vm.receiverPhone = vm.contact.phone || '';
         }
 
-        function templateChange(event, template){
+        function templateChange(event, template) {
+            var undo = undoService.undoOperation(vm, null, {
+                template: vm.template,
+                message: lodash.cloneDeep(vm.message)
+            });
             vm.template = template;
             vm.message.type = template.type;
             $location.search('templateId', template.id);
             vm.message = renderTemplate(vm.message, vm.template, vm.contact);
+            undo.callbacks.push(function (vm) {
+                $location.search('templateId', vm.template.id);
+            });
+            alertService.addAlert('Szablon wiadomości został zmieniony.', 'success', 15000, undo);
         }
 
         function openContactPicker() {
@@ -96,13 +118,13 @@
         function sortTemplates(templates, contact) {
             if (contact && templates) {
                 return messageTemplatesService.sortTemplatesByMatch(templates, contact);
-            }else{
+            } else {
                 return templates;
             }
         }
 
-        function renderTemplate(message, template, contact){
-            if(template && contact){
+        function renderTemplate(message, template, contact) {
+            if (template && contact) {
                 message = templatingService.compileTemplate(message, template, contact);
             }
             return message;

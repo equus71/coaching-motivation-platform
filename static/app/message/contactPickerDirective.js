@@ -42,13 +42,8 @@
             }
 
             function selectContact() {
-                var promptModal = $modal.open({
-                    templateUrl: "message/contactPickerModal.html"
-                });
-                promptModal.result.then(function(){
-                    vm.isOpen = false;
-                    $scope.$emit('contactSelect', vm.preselectedContact);
-                });
+                vm.isOpen = false;
+                $scope.$emit('contactSelect', vm.preselectedContact);
             }
 
             function closeContactPicker() {

@@ -15,11 +15,11 @@
             templateUrl: 'dashboard/contactsWidget.html'
         };
 
-        ControllerFunc.$inject = ['$modal', '$state', 'alertService', 'contactsService', 'lodash'];
+        ControllerFunc.$inject = ['$state', 'alertService', 'contactsService', 'lodash'];
 
         return directive;
 
-        function ControllerFunc($modal, $state, alertService, contactsService, lodash) {
+        function ControllerFunc($state, alertService, contactsService, lodash) {
             var vm = this;
 
             vm.contacts = [];
@@ -40,40 +40,70 @@
 
             function postponeContact(contact) {
                 var tomorrow = new Date(new Date().getTime() + 24 * 60 * 60 * 1000);
-                contactsService.postponeContact(contact, tomorrow).then(function () {
+                var result = contactsService.postponeContact(contact, tomorrow);
+                result.then(function () {
+                    //TODO: mark contact with new state & resort list
                     lodash.remove(vm.contacts, function (obj) {
                         return obj == contact;
                     });
-                    alertService.addAlert('Kontakt odroczony do jutra.', 'success', 3000);
-                    //    TODO: add undo
+                    result.undo.callbacks.push(addContactBackToContacts);
+                    alertService.addAlert('Kontakt odroczony do jutra.', 'success', 15000, result.undo);
                 });
             }
 
             function markContactedNow(contact) {
                 var now = new Date();
-                contactsService.markContacted(contact, now).then(function () {
+                var result = contactsService.markContacted(contact, now);
+                result.then(function () {
+                    //TODO: mark contact with new state & resort list
                     lodash.remove(vm.contacts, function (obj) {
                         return obj == contact;
                     });
-                    alertService.addAlert('Kontakt oznaczony jako obsłużony.', 'success', 3000);
-                    //    TODO: add undo
+                    result.undo.callbacks.push(addContactBackToContacts);
+                    alertService.addAlert('Kontakt oznaczony jako obsłużony.', 'success', 15000, result.undo);
                 });
             }
 
             function deactivateContact(contact) {
-                var promptModal = $modal.open({
-                    templateUrl: 'dashboard/deactiveContactModal.html'
-                });
-                promptModal.result.then(function () {
-                    contactsService.deactivateContact(contact).then(function () {
-                        lodash.remove(vm.contacts, function (obj) {
-                            return obj == contact;
-                        });
-                        alertService.addAlert('Kontakt deaktywowany.', 'success', 3000);
-                        //    TODO: add undo
+                var result = contactsService.deactivateContact(contact);
+                result.then(function () {
+                    lodash.remove(vm.contacts, function (obj) {
+                        return obj == contact;
                     });
+                    result.undo.callbacks.push(addContactBackToContacts);
+                    alertService.addAlert('Kontakt deaktywowany.', 'success', 15000, result.undo);
                 });
             }
+
+            function addContactBackToContacts(contact) {
+                vm.contacts.push(contact);
+                vm.contacts = lodash.sortBy(vm.contacts, evaluateContactPosition)
+            }
+
+            function evaluateContactPosition(contact) {
+                    if (!contact.isActive) {
+                        //last not active contact
+                        return 40;
+                    } else {
+                        //postponed contact does not need to be contacted but should be indicated
+                        if (contact.postponedDate > new Date()) {
+                            //second postponed contacts
+                            return 20;
+
+                        } else {
+                            //if last contact was more than notificationFrequency behind last time then it should be indicated
+                            var nextContact = contact.lastContactDate || new Date();
+                            nextContact.setHours(nextContact.getHours() + contact.notificationsFrequency);
+                            if (nextContact < new Date()) {
+                                //first contact needed
+                                return 10;
+                            } else {
+                                //third ok contact
+                                return 30;
+                            }
+                        }
+                    }
+                }
         }
     }
 

@@ -42,13 +42,8 @@
             }
 
             function selectTemplate() {
-                var promptModal = $modal.open({
-                    templateUrl: 'message/templatePickerModal.html'
-                });
-                promptModal.result.then(function(){
-                    vm.isOpen = false;
-                    $scope.$emit('templateSelect', vm.preselectedTemplate);
-                });
+                vm.isOpen = false;
+                $scope.$emit('templateSelect', vm.preselectedTemplate);
             }
 
             function closeTemplatePicker() {

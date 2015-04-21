@@ -17,12 +17,14 @@
 
         return as;
 
-        function addAlert(text, type, timeout) {
+        function addAlert(text, type, timeout, undo) {
             var timeout = timeout || 0;
 
             var alert = {
                 text: text,
-                type: type
+                type: type,
+                undo: undo,
+                undoAlert: undoAlert
             };
 
             alerts.push(alert);
@@ -46,6 +48,11 @@
             lodash.remove(alerts, function(obj){
                 return obj === alert;
             });
+        }
+
+        function undoAlert(){
+            removeAlert(this);
+            this.undo();
         }
 
     }

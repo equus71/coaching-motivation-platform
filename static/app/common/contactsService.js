@@ -5,10 +5,10 @@
         .module('cmp.common')
         .factory('contactsService', contactsService);
 
-    contactsService.$inject = ['$http', '$q', 'lodash'];
+    contactsService.$inject = ['$http', '$q', 'lodash', 'undoService'];
 
-    function contactsService($http, $q, lodash) {
-        return{
+    function contactsService($http, $q, lodash, undoService) {
+        return {
             getContacts: getContacts,
             getContact: getContact,
             saveContact: saveContact,
@@ -44,17 +44,20 @@
 
         function saveContact(contact) {
             contact = formatDatesToJSON(contact);
+            var contactId = contact.id;
             var deferred = $q.defer();
             $http({
-                url: '/save/operation',
+                url: '/static/json/contacts.json',
                 method: 'PUT',
                 data: contact
             }).success(function (data, status, headers, config) {
-                deferred.resolve();
+                var contact = lodash.find(data.contacts, function (obj) {
+                    return obj.id == contactId
+                });
+                contact = formatDatesToJS(contact);
+                deferred.resolve(contact);
             }).error(function (data) {
-                //TODO: re-enable reject
-                deferred.resolve();
-                //deferred.reject();
+                deferred.reject();
             });
             return deferred.promise;
         }
@@ -63,66 +66,85 @@
             contact = formatDatesToJSON(contact);
             var deferred = $q.defer();
             $http({
-                url: '/create/operation',
+                url: '/static/json/contacts.json',
                 method: 'POST',
                 data: contact
             }).success(function (data, status, headers, config) {
-                deferred.resolve();
+                var contact = data.contacts[0];
+                contact = formatDatesToJS(contact);
+                deferred.resolve(contact);
             }).error(function (data) {
                 deferred.reject();
             });
-            return deferred.promise ;
+            return deferred.promise;
         }
 
-        function formatDatesToJS(contact){
-            if (contact.postponed){
+        function formatDatesToJS(contact) {
+            if (contact.postponed) {
                 contact.postponedDate = new Date(contact.postponed);
-            }else{
+            } else {
                 contact.postponedDate = null;
             }
-            if (contact.lastContact){
+            if (contact.lastContact) {
                 contact.lastContactDate = new Date(contact.lastContact);
-            }else{
+            } else {
                 contact.lastContactDate = null;
             }
             var now = new Date();
-            if (contact.postponedDate
-                && contact.postponedDate >= now ){
+            if (contact.postponedDatei
+                && contact.postponedDate >= now) {
                 contact.postponeChecked = true;
             }
 
             return contact;
         }
 
-        function formatDatesToJSON(contact){
-            if(contact.postponeChecked && contact.postponedDate){
+        function formatDatesToJSON(contact) {
+            if (contact.postponeChecked && contact.postponedDate) {
                 contact.postponed = contact.postponedDate.toJSON();
             }
-            if(contact.lastContactDate){
+            if (contact.lastContactDate) {
                 contact.lastContact = contact.lastContactDate.toJSON();
             }
             return contact;
         }
 
-        function deactivateContact(contact){
+        function deactivateContact(contact) {
+            var undoPatch = {
+                isActive: contact.isActive
+            };
             contact.isActive = false;
-            return saveContact(contact);
+
+            var result = saveContact(contact);
+            result.undo = undoService.undoOperation(contact, saveContact, undoPatch);
+
+            return result;
         }
 
-        function postponeContact(contact, till){
+        function postponeContact(contact, till) {
+            var undoPatch = {
+                postponedDate: contact.postponedDate
+            };
             contact.postponedDate = till;
-            return saveContact(contact);
+
+            var result = saveContact(contact);
+            result.undo = undoService.undoOperation(contact, saveContact, undoPatch);
+
+            return result;
         }
 
-        function postponeContact(contact, till){
-            contact.postponedDate = till;
-            return saveContact(contact);
-        }
-
-        function markContacted(contact, contactTime){
+        function markContacted(contact, contactTime) {
+            var undoPatch = {
+                lastContactDate: contact.lastContactDate
+            };
             contact.lastContactDate = contactTime;
-            return saveContact(contact);
+
+            var result = saveContact(contact);
+            result.undo = undoService.undoOperation(contact, saveContact, undoPatch);
+
+            return result;
         }
+
     }
 
 })();

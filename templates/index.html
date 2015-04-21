@@ -130,10 +130,11 @@
             <!-- End Header Bar -->
 
             {% verbatim %}
-            <div class="row alerts-container">
-                <div class="col-xs-12">
+            <div class="alerts-container">
+                <div class="container">
                     <alert data-ng-repeat="alert in vm.alerts" type="{{ alert.type }}"
                            close="vm.closeAlert($index)" class="smooth-ng-repeat">{{ alert.text }}
+                        <a class="btn-link" ng-click="alert.undoAlert()" ng-if="alert.undo"> <i class="fa fa-undo"></i> cofnij</a>
                     </alert>
                 </div>
             </div>

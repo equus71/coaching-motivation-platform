@@ -97,9 +97,13 @@ ol.breadcrumb {
   transform: translate3d(0, 0, 0);
   opacity: 1; }
 
-.alerts-container.row > div {
-  margin-bottom: 0; }
-.alerts-container.row .alert:last-child {
-  margin-bottom: 15px; }
+.alerts-container {
+  position: fixed;
+  bottom: 15px;
+  z-index: 100; }
+  .alerts-container > div {
+    margin-bottom: 0; }
+  .alerts-container .alert:last-child {
+    margin-bottom: 15px; }
 
 /*# sourceMappingURL=stylesheet.css.map */
