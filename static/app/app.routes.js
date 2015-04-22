@@ -105,10 +105,16 @@
             })
             .state('queue.edit', {
                 url: '/{messageId:[0-9]{1,8}}',
+                views: {
+                    '@': {
+                        templateUrl: 'queue/queueEdit.html',
+                        controller: "QueueEditCtrl as vm"
+                    }
+                },
                 data: {
                     displayName: 'Edytuj'
                 }
-            })
+            });
     }
 
 })();

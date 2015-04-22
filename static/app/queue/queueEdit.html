@@ -1,0 +1,87 @@
+<div class="row" ng-cloak>
+    <div class="col-xs-12">
+        <div class="pull-left">
+            <a class="btn btn-default" ui-sref="^"><i class="fa fa-chevron-left"></i> Cofnij</a>
+        </div>
+        <div class="pull-right">
+            <a class="btn btn-danger" ng-click="vm.delete()"><i class="fa fa-trash-o"></i> Skasuj</a>
+            <a class="btn btn-success" ng-click="vm.save()"><i class="fa fa-save"></i> Zapisz</a>
+        </div>
+    </div>
+</div>
+
+<div class="row" ng-cloak>
+    <div class="col-xs-12 col-sm-8">
+        <form class="form-horizontal" name="vm.messageForm">
+            <div class="form-group">
+                <label for="type" class="col-sm-2 control-label">Typ</label>
+
+                <div class="col-sm-10">
+                    <select name="type" class="form-control" ng-model="vm.message.type">
+                        <option>EMAIL</option>
+                        <option>SMS</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group" ng-class="{'has-error': vm.fieldValidation(vm.messageForm.name)}">
+                <label for="name" class="col-sm-2 control-label">Odbiorca </label>
+
+                <div class="col-sm-10">
+                    <input type="text" name="name" class="form-control" ng-model="vm.message.recipientName"
+                           cmp-is-focused
+                           ng-maxlength="64" ng-required="true"
+                           placeholder="Imię i nazwisko odbiorcy">
+                </div>
+            </div>
+            <div class="form-group" ng-class="{'has-error': vm.fieldValidation(vm.messageForm.email)}" ng-if="vm.message.type == 'EMAIL'">
+                <label for="email" class="col-sm-2 control-label">Email </label>
+
+                <div class="col-sm-10">
+                    <input type="email" name="email" class="form-control" ng-model="vm.message.recipientEmail"
+                           cmp-is-focused
+                           ng-maxlength="256"
+                           placeholder="Email">
+                </div>
+            </div>
+            <div class="form-group" ng-class="{'has-error': vm.fieldValidation(vm.messageForm.phone)}" ng-if="vm.message.type == 'SMS'">
+                <label for="phone" class="col-sm-2 control-label">Telefon </label>
+
+                <div class="col-sm-10">
+                    <input type="text" name="phone" class="form-control" ng-model="vm.message.recipientPhone"
+                           cmp-is-focused
+                           ng-maxlength="16"
+                           placeholder="Telefon">
+                </div>
+            </div>
+            <div class="form-group" ng-class="{'has-error': vm.fieldValidation(vm.messageForm.sendAt)}">
+                <label for="sendAt" class="col-sm-2 control-label">Data wysyłki</label>
+
+                <div class="col-sm-10">
+                    <input type="date" class="form-control" ng-model="vm.message.sendAt" name="sendAt"
+                                min="2015-01-01" required="true" />
+                </div>
+            </div>
+            <div class="form-group" ng-class="{'has-error': vm.fieldValidation(vm.messageForm.header)}" ng-if="vm.message.type == 'EMAIL'">
+                <label for="header" class="col-sm-2 control-label">Tytuł wiadomości</label>
+
+                <div class="col-sm-10">
+                    <input type="text" name="header" class="form-control" ng-model="vm.message.header"
+                           cmp-is-focused
+                           ng-maxlength="16"
+                           placeholder="Telefon">
+                </div>
+            </div>
+            <div class="form-group" ng-class="{'has-error': vm.fieldValidation(vm.messageForm.body)}">
+                <label for="body" class="col-sm-2 control-label">Treść wiadomości </label>
+                <div class="col-sm-10">
+                    <textarea ng-maxlength="65536" ng-required="true" ng-model="vm.message.body" class="form-control"
+                              name="body" rows="16" cmp-is-focused></textarea>
+                </div>
+            </div>
+
+        </form>
+    </div>
+    <div class="col-sm-4" ng-if="vm.contact">
+        <cmp-notes contact="vm.contact"></cmp-notes>
+    </div>
+</div>
