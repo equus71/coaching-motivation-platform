@@ -77,7 +77,7 @@
 
             function addContactBackToContacts(contact) {
                 vm.contacts.push(contact);
-                vm.contacts = lodash.sortBy(vm.contacts, evaluateContactPosition)
+                vm.contacts = lodash.sortBy(vm.contacts, evaluateContactPosition);
             }
 
             function evaluateContactPosition(contact) {
