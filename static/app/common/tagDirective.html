@@ -1,0 +1,1 @@
+<span><span ng-repeat="tag in tags|limitTo:limit"><span class="label label-info" ng-style="{'background-color': tagColor(tag)}">{{ tag }}</span> </span> <span ng-if="::tags.length > limit" class="label label-info" tooltip="{{ tags.slice(limit).join() }}">+{{ (tags.length - limit) }}</span></span>
