@@ -6,7 +6,7 @@
 
     function offsetFilter(){
         return function(input, start){
-            var start = parseInt(start, 10);
+            start = parseInt(start, 10);
             if (input) {
                 return input.slice(start);
             }else{
