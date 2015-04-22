@@ -100,7 +100,9 @@ ol.breadcrumb {
 .alerts-container {
   position: fixed;
   bottom: 15px;
-  z-index: 100; }
+  z-index: 100;
+  left: 0;
+  right: 0; }
   .alerts-container > div {
     margin-bottom: 0; }
   .alerts-container .alert:last-child {
