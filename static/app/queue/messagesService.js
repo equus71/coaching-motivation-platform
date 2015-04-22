@@ -29,7 +29,7 @@
             var deferred = $q.defer();
             $http.get('/static/json/messages.json').success(function (data, status, headers, config) {
                 var message = lodash.find(data.messages, function (obj) {
-                    return obj.id == messageId
+                    return obj.id == messageId;
                 });
                 message = formatDatesToJS(message);
                 deferred.resolve(message);

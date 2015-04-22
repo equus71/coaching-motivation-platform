@@ -29,7 +29,7 @@
             var deferred = $q.defer();
             $http.get('/static/json/messageTemplates.json').success(function (data, status, headers, config) {
                 deferred.resolve(lodash.find(data.templates, function (obj) {
-                    return obj.id == templateId
+                    return obj.id == templateId;
                 }));
             }).error(function (data) {
                 deferred.reject();
@@ -78,7 +78,7 @@
                             }else{
                                 return sum;
                             }
-                        })
+                        });
                 }).reverse();
         }
     }
