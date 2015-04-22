@@ -5,6 +5,7 @@
         .directive('cmpIsFocused', cmpIsFocused)
         .directive('cmpTag', cmpTag);
 
+    //TODO: extract directives from here
     function cmpIsFocused() {
         var directive = {
             require: "ngModel",
