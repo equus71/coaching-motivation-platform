@@ -12,13 +12,26 @@
             scope: {
                 contact: '='
             },
-            link: linkFunc,
+            controller: directiveController,
+            controllerAs: 'vm',
             templateUrl: 'common/notesDirective.html'
         };
+
+        directiveController.$inject = ['contactsService'];
+
         return directive;
 
-        function linkFunc(scope, element, attrs) {
-            //TODO: write save notes logic
+        function directiveController(contactsService) {
+            var vm = this;
+
+            vm.saveNotes = saveNotes;
+
+            function saveNotes(contact){
+                vm.inProgress = true;
+                contactsService.saveContact(contact).then(function(){
+                    vm.inProgress = false;
+                });
+            }
         }
     }
 })();
