@@ -38,23 +38,7 @@
         </div>
     </div>
     <div class="col-sm-4" ng-if="vm.contact">
-        <div class="well">
-            <div>{{ vm.contact.firstName }} {{ vm.contact.lastName }} (lat {{ vm.contact.age }})</div>
-            <p>
-                <cmp-tag tags="vm.contact.tags" limit="36"></cmp-tag>
-            </p>
-            <div>Email: {{ vm.contact.email }}</div>
-            <div>Telefon: {{ vm.contact.phone }}</div>
-            <div>
-                <small><strong>NOTATKI:</strong></small>
-            </div>
-            <textarea ng-maxlength="65536" maxlength="65536" ng-model="vm.contact.notes"
-                      class="form-control" name="notes" rows="12" cmp-is-focused></textarea>
-
-            <div class="help-block">
-                <button class="btn btn-success" ng-click="vm.save()"><i class="fa fa-save"></i> Zapisz notatki</button>
-            </div>
-        </div>
+        <cmp-notes contact="vm.contact"></cmp-notes>
     </div>
 </div>
 
