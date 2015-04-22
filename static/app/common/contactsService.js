@@ -32,7 +32,7 @@
             var deferred = $q.defer();
             $http.get('/static/json/contacts.json').success(function (data, status, headers, config) {
                 var contact = lodash.find(data.contacts, function (obj) {
-                    return obj.id == contactId
+                    return obj.id == contactId;
                 });
                 contact = formatDatesToJS(contact);
                 deferred.resolve(contact);
@@ -52,7 +52,7 @@
                 data: contact
             }).success(function (data, status, headers, config) {
                 var contact = lodash.find(data.contacts, function (obj) {
-                    return obj.id == contactId
+                    return obj.id == contactId;
                 });
                 contact = formatDatesToJS(contact);
                 deferred.resolve(contact);
@@ -91,8 +91,7 @@
                 contact.lastContactDate = null;
             }
             var now = new Date();
-            if (contact.postponedDatei
-                && contact.postponedDate >= now) {
+            if (contact.postponedDate && contact.postponedDate >= now) {
                 contact.postponeChecked = true;
             }
 
