@@ -12,6 +12,7 @@
 
         vm.alerts = alertService.getAlerts();
         vm.closeAlert = alertService.closeAlert;
+        vm.undoAlert = alertService.undoAlert;
         vm.toggleSidebar = toggleSidebar;
         vm.isSidebarOpened = false;
 

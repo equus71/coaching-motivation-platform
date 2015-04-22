@@ -12,19 +12,19 @@
         var as = {
             addAlert: addAlert,
             getAlerts: getAlerts,
-            closeAlert: closeAlert
+            closeAlert: closeAlert,
+            undoAlert: undoAlert
         };
 
         return as;
 
         function addAlert(text, type, timeout, undo) {
-            var timeout = timeout || 0;
+            timeout = timeout || 0;
 
             var alert = {
                 text: text,
                 type: type,
-                undo: undo,
-                undoAlert: undoAlert
+                undo: undo
             };
 
             alerts.push(alert);
@@ -50,9 +50,9 @@
             });
         }
 
-        function undoAlert(){
-            removeAlert(this);
-            this.undo();
+        function undoAlert(alert){
+            removeAlert(alert);
+            alert.undo();
         }
 
     }

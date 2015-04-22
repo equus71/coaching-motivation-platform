@@ -134,7 +134,7 @@
                 <div class="container">
                     <alert data-ng-repeat="alert in vm.alerts" type="{{ alert.type }}"
                            close="vm.closeAlert($index)" class="smooth-ng-repeat">{{ alert.text }}
-                        <a class="btn-link" ng-click="alert.undoAlert()" ng-if="alert.undo"> <i class="fa fa-undo"></i> cofnij</a>
+                        <a class="btn-link" ng-click="vm.undoAlert(alert)" ng-if="alert.undo"> <i class="fa fa-undo"></i> cofnij</a>
                     </alert>
                 </div>
             </div>
