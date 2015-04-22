@@ -15,7 +15,6 @@
 
         function compileTemplate(message, template, contact) {
             // basing on the contact the context is build
-            // TODO: przygotować właściwy kontekst
             var context = prepareMessageContextFromContact(contact);
 
             //Handlebars compile template
@@ -33,8 +32,8 @@
             var context = {};
 
             context.imie = contact.firstName;
-//            TODO: dodać odmianę imienia do wołacza
-            context.imie_w = context.imie;
+
+            context.imie_w = contact.firstNameDeclension;
             context.nazwisko = contact.lastName;
 
             context.tytul = "";

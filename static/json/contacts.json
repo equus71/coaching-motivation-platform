@@ -3,6 +3,7 @@
     {
       "id": 1,
       "firstName": "Anna",
+      "firstNameDeclension": "Anno",
       "lastName": "Maria",
       "email": "test@test.com",
       "phone": "",
@@ -32,6 +33,7 @@
     {
       "id": 2,
       "firstName": "Hanna",
+      "firstNameDeclension": "Hanno",
       "lastName": "Maria",
       "email": "",
       "phone": "123 56 78 12",
@@ -52,6 +54,7 @@
     {
       "id": 3,
       "firstName": "Marian",
+      "firstNameDeclension": "Marianie",
       "lastName": "Mariański",
       "email": "test@test.com",
       "phone": "123 56 78 12",
@@ -73,6 +76,7 @@
     {
       "id": 4,
       "firstName": "Marta",
+      "firstNameDeclension": "Marto",
       "lastName": "Maria",
       "email": "test@test.com",
       "phone": "123 56 78 12",
