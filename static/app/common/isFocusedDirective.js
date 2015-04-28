@@ -26,7 +26,7 @@
                 scope.$apply(function () {
                     ngModel.$focused = false;
                 });
-            })
+            });
         }
     }
 })();
