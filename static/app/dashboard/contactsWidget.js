@@ -46,12 +46,10 @@
             function postponeContact(contact) {
                 var tomorrow = new Date(new Date().getTime() + 24 * 60 * 60 * 1000);
                 var result = contactsService.postponeContact(contact, tomorrow);
-                result.then(function () {
-                    //TODO: mark contact with new state & resort list
-                    lodash.remove(vm.contacts, function (obj) {
-                        return obj == contact;
-                    });
-                    result.undo.callbacks.push(addContactBackToContacts);
+                result.then(function (data) {
+                    updateContactsWithContact(data);
+
+                    result.undo.callbacks.push(updateContactData);
                     alertService.addAlert('Kontakt odroczony do jutra.', 'success', 15000, result.undo);
                 });
             }
@@ -59,12 +57,10 @@
             function markContactedNow(contact) {
                 var now = new Date();
                 var result = contactsService.markContacted(contact, now);
-                result.then(function () {
-                    //TODO: mark contact with new state & resort list
-                    lodash.remove(vm.contacts, function (obj) {
-                        return obj == contact;
-                    });
-                    result.undo.callbacks.push(addContactBackToContacts);
+                result.then(function (data) {
+                    updateContactsWithContact(data);
+
+                    result.undo.callbacks.push(updateContactData);
                     alertService.addAlert('Kontakt oznaczony jako obsłużony.', 'success', 15000, result.undo);
                 });
             }
@@ -83,6 +79,21 @@
             function addContactBackToContacts(contact) {
                 vm.contacts.push(contact);
                 vm.contacts = contactsService.sortContacts(vm.contacts);
+            }
+
+            function updateContactData(contact) {
+                updateContactsWithContact(contact);
+                vm.contacts = contactsService.sortContacts(vm.contacts);
+            }
+
+            function updateContactsWithContact(contact) {
+                var contactIndex = lodash.findIndex(vm.contacts, function (obj) {
+                    return obj.id == contact.id;
+                });
+
+                if (contactIndex !== -1) {
+                    vm.contacts[contactIndex] = contact;
+                }
             }
 
         }

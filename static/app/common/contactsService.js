@@ -116,6 +116,9 @@
             if (contact.lastContactDate) {
                 contact.lastContact = contact.lastContactDate.toJSON();
             }
+            if (contact.lastContactDate === null){
+                contact.lastContact = null;
+            }
             return contact;
         }
 
