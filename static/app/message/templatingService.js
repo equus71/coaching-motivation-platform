@@ -38,11 +38,11 @@
 
             context.tytul = "";
             context.tytul_w = "";
-            if (contact.gender === "1") {
+            if (contact.gender == "1") {
                 context.tytul = "Pan";
                 context.tytul_w = "Panie";
             }
-            if (contact.gender === "2") {
+            if (contact.gender == "2") {
                 context.tytul = "Pani";
                 context.tytul_w = "Pani";
             }

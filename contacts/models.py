@@ -1,9 +1,11 @@
 import datetime
 from django.db import models
 from django.utils import timezone
+from contacts.nameForm import get_name_declension
 
 
 MESSAGE_TYPE = (('EMAIL', 'EMAIL'), ('SMS', 'SMS'))
+
 
 class Contact(models.Model):
     firstName = models.CharField(max_length=200)
@@ -37,6 +39,10 @@ class Contact(models.Model):
             return 'CONTACT_NEEDED'
         else:
             return 'CONTACT_OK'
+
+    @property
+    def firstNameDeclension(self):
+        return get_name_declension(self.firstName)
 
 
 class Message(models.Model):
