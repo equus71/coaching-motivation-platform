@@ -13,6 +13,7 @@
         vm.matchingTags = tagService.getMatchingTags;
         vm.fieldValidation = validationService.fieldValidation;
         vm.save = saveTemplate;
+        vm.formattedTags = [];
         vm.availableVariables = [
             {
                 key: "imie",
@@ -41,6 +42,7 @@
         function activate() {
             messageTemplatesService.getTemplate($state.params.templateId).then(function (data) {
                 vm.template = data;
+                vm.formattedTags = tagService.generateFormattedTags(vm.template.tags);
             });
             tagService.clearCache();
         }
@@ -48,6 +50,7 @@
         function saveTemplate() {
             if (vm.templateForm.$valid) {
                 vm.saving = true;
+                vm.template.tags = tagService.getPlainTags(vm.formattedTags);
                 messageTemplatesService.saveTemplate(vm.template).then(function () {
                     $state.go('^');
                 }, function () {

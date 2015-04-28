@@ -13,6 +13,7 @@
         vm.matchingTags = tagService.getMatchingTags;
         vm.save = saveTemplate;
         vm.fieldValidation = validationService.fieldValidation;
+        vm.formattedTags = [];
         vm.template = {
             "name": "",
             "type": "EMAIL",
@@ -52,6 +53,7 @@
         function saveTemplate() {
             if (vm.templateForm.$valid) {
                 vm.saving = true;
+                vm.template.tags = tagService.getPlainTags(vm.formattedTags);
                 messageTemplatesService.createTemplate(vm.template).then(function () {
                     $state.go('^');
                 }, function () {

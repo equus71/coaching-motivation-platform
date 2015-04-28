@@ -9,7 +9,9 @@
     function tagService($http, $q, lodash) {
         var ts = {
             getMatchingTags: getMatchingTags,
-            clearCache: clearCache
+            clearCache: clearCache,
+            generateFormattedTags: generateFormattedTags,
+            getPlainTags: getPlainTags
         };
 
         var tags;
@@ -26,34 +28,50 @@
                 tagsGetPromise = getTags();
             }
             var deferred = $q.defer();
-            tagsGetPromise.then(function(data){
+            tagsGetPromise.then(function (data) {
                 tags = data;
                 deferred.resolve(getMatchingTagsFromCollection(tags, tagNamePart));
-            }, function(){
+            }, function () {
                 deferred.reject();
             });
             return deferred.promise;
         }
 
-        function getMatchingTagsFromCollection(tagsCollection, tagNamePart){
+        function getMatchingTagsFromCollection(tagsCollection, tagNamePart) {
             return lodash.filter(tagsCollection, function (obj) {
-                    return obj.indexOf(tagNamePart) >= 0;
-                })
+                return obj.indexOf(tagNamePart) >= 0;
+            })
         }
 
         function getTags() {
             var deferred = $q.defer();
-            $http.get('/static/json/tags.json').success(function(data, status, headers, config){
+            $http.get('/static/json/tags.json').success(function (data, status, headers, config) {
                 deferred.resolve(data);
-            }).error(function(data){
+            }).error(function (data) {
                 deferred.reject();
             });
             return deferred.promise;
         }
 
-        function clearCache(){
+        function clearCache() {
             tags = undefined;
             tagsGetPromise = undefined;
+        }
+
+        function generateFormattedTags(tags) {
+            var formattedTags = [];
+            lodash.forEach(tags, function (tag) {
+                formattedTags.push({text: tag});
+            });
+            return formattedTags;
+        }
+
+        function getPlainTags(formattedTags) {
+            var plainTags = [];
+            lodash.forEach(formattedTags, function (tag) {
+                plainTags.push(tag.text);
+            });
+            return plainTags;
         }
 
     }

@@ -21,7 +21,7 @@
         function activate() {
             contactsService.getContact($state.params.contactId).then(function (data) {
                 vm.contact = data;
-                vm.formattedTags = generateFormattedTags(vm.contact);
+                vm.formattedTags = tagService.generateFormattedTags(vm.contact.tags);
             });
             tagService.clearCache();
         }
@@ -29,7 +29,7 @@
         function saveContact() {
             if (vm.contactForm.$valid) {
                 vm.saving = true;
-                vm.contact.tags = getPlainTags(vm.formattedTags);
+                vm.contact.tags = tagService.getPlainTags(vm.formattedTags);
                 contactsService.saveContact(vm.contact).then(function () {
                     $state.go('^');
                 }, function () {
@@ -38,22 +38,6 @@
             } else {
                 validationService.markFormFieldsAsTouched(vm.contactForm);
             }
-        }
-
-        function generateFormattedTags(contact) {
-            var formattedTags = [];
-            lodash.forEach(contact.tags, function(tag) {
-                formattedTags.push({text:tag});
-            });
-            return formattedTags;
-        }
-
-        function getPlainTags(formattedTags) {
-            var plainTags = [];
-            lodash.forEach(formattedTags, function(tag) {
-                plainTags.push(tag.text);
-            });
-            return plainTags;
         }
 
     }

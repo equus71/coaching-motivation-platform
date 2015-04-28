@@ -21,12 +21,14 @@
             vm.contact = {
                 newContact: true
             };
+            vm.formattedTags = [];
             tagService.clearCache();
         }
 
         function saveContact() {
             if (vm.contactForm.$valid) {
                 vm.saving = true;
+                vm.contact.tags = tagService.getPlainTags(vm.formattedTags);
                 contactsService.createContact(vm.contact).then(function () {
                     $state.go('^');
                 }, function () {
