@@ -18,8 +18,8 @@
         function activate() {
             messagesService.getMessage($state.params.messageId).then(function (data) {
                 vm.message = data;
-                if(vm.message.contactId){
-                    contactsService.getContact(vm.message.contactId).then(function (data){
+                if(vm.message.contact){
+                    contactsService.getContact(vm.message.contact).then(function (data){
                         vm.contact = data;
                     })
                 }

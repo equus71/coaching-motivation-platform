@@ -33,7 +33,7 @@
             vm.loading = true;
             var contactsPromise = contactsService.getContacts();
             contactsPromise.then(function (data) {
-                vm.contacts = data.contacts;
+                vm.contacts = data;
             });
             var templatesPromise = messageTemplatesService.getTemplates();
             templatesPromise.then(function (data) {

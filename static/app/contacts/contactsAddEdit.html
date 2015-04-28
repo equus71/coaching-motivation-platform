@@ -91,16 +91,8 @@
                 <div class="col-sm-10 col-sm-offset-2" ng-if="vm.contact.postponeChecked">
                     Przypomnij o kontakcie po
                     <p class="input-group input-calendar">
-                        <input type="date" class="form-control" ng-model="vm.contact.postponedDate"
+                        <input type="date" class="form-control" ng-model="vm.contact.postponedDate" name="postponed"
                                 min="2015-01-01" required="true" />
-                       <!-- <input type="text" class="form-control" ng-model="vm.contact.postponed" datepicker-popup="{{ 'dd.MM.yyyy' }}"
-                               is-open="opened" min-date="'01.01.2015'"
-                               ng-required="true" close-text="Zamknij" current-text="Dziś" clear-text="Wyczyść"/>
-                        <span class="input-group-btn">
-                        <button type="button" class="btn btn-default"
-                                ng-click="$event.preventDefault();$event.stopPropagation();opened = true;"><i
-                                class="fa fa-calendar"></i></button>
-                        </span> -->
                     </p>
                 </div>
             </div>
@@ -126,7 +118,7 @@
                 <label for="tags" class="col-sm-2 control-label">Tagi</label>
 
                 <div class="col-sm-10">
-                    <tags-input ng-model="vm.contact.tags" placeholder="Dodaj tagi opisujące cech i potrzeby danej osoby">
+                    <tags-input ng-model="vm.formattedTags" placeholder="Dodaj tagi opisujące cech i potrzeby danej osoby">
                         <auto-complete source="vm.matchingTags($query)"></auto-complete>
                     </tags-input>
                 </div>
@@ -149,13 +141,6 @@
         </form>
     </div>
     <div class="col-xs-12 col-sm-4" ng-if="!vm.contact.newContact">
-        <div class="well">
-            <a class="btn btn-primary btn-sm pull-right" ui-sref="message({contactId:vm.contact.id})"><i class="fa fa-send"></i> Napisz</a>
-            <p><small><strong>WYSŁANE:</strong></small></p>
-            <ul class="list-unstyled">
-                <li ng-repeat="message in vm.contact.messages">{{ message.deliveryDate }}<strong>{{ message.header }}</strong> - {{ message.body |limitTo:80 }} </li>
-            </ul>
-
-        </div>
+        <cmp-contact-messages contact="vm.contact"></cmp-contact-messages>
     </div>
 </div>

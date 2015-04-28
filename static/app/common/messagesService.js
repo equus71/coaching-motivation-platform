@@ -10,14 +10,26 @@
     function messagesService($http, $q, lodash) {
         return {
             getMessages: getMessages,
+            getContactsMessages: getContactsMessages,
             getMessage: getMessage,
             saveMessage: saveMessage,
             createMessage: createMessage
         };
         function getMessages() {
             var deferred = $q.defer();
-            $http.get('/static/json/messages.json').success(function (data, status, headers, config) {
-                lodash.forEach(data.messages, formatDatesToJS);
+            $http.get('/api/v1/messages/').success(function (data, status, headers, config) {
+                lodash.forEach(data, formatDatesToJS);
+                deferred.resolve(data);
+            }).error(function (data) {
+                deferred.reject();
+            });
+            return deferred.promise;
+        }
+
+        function getContactsMessages(contact) {
+            var deferred = $q.defer();
+            $http.get('/api/v1/contacts/' + contact.id + '/messages/').success(function (data, status, headers, config) {
+                lodash.forEach(data, formatDatesToJS);
                 deferred.resolve(data);
             }).error(function (data) {
                 deferred.reject();
@@ -27,10 +39,8 @@
 
         function getMessage(messageId) {
             var deferred = $q.defer();
-            $http.get('/static/json/messages.json').success(function (data, status, headers, config) {
-                var message = lodash.find(data.messages, function (obj) {
-                    return obj.id == messageId;
-                });
+            $http.get('/api/v1/messages/' + messageId + '/').success(function (data, status, headers, config) {
+                var message = data;
                 message = formatDatesToJS(message);
                 deferred.resolve(message);
             }).error(function (data) {

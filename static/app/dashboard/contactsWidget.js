@@ -30,9 +30,14 @@
             vm.currentPage = 1;
             vm.pageSize = 10;
 
-            contactsService.getContacts().then(function (data) {
-                vm.contacts = data.contacts;
-            });
+            activate();
+
+            function activate() {
+                contactsService.getContacts(true).then(function (data) {
+                    vm.contacts = data;
+                    vm.contacts = contactsService.sortContacts(vm.contacts);
+                });
+            }
 
             function writeToContact(contact) {
                 $state.go('message', {'contactId': contact.id});
@@ -77,33 +82,9 @@
 
             function addContactBackToContacts(contact) {
                 vm.contacts.push(contact);
-                vm.contacts = lodash.sortBy(vm.contacts, evaluateContactPosition);
+                vm.contacts = contactsService.sortContacts(vm.contacts);
             }
 
-            function evaluateContactPosition(contact) {
-                    if (!contact.isActive) {
-                        //last not active contact
-                        return 40;
-                    } else {
-                        //postponed contact does not need to be contacted but should be indicated
-                        if (contact.postponedDate > new Date()) {
-                            //second postponed contacts
-                            return 20;
-
-                        } else {
-                            //if last contact was more than notificationFrequency behind last time then it should be indicated
-                            var nextContact = contact.lastContactDate || new Date();
-                            nextContact.setHours(nextContact.getHours() + contact.notificationsFrequency);
-                            if (nextContact < new Date()) {
-                                //first contact needed
-                                return 10;
-                            } else {
-                                //third ok contact
-                                return 30;
-                            }
-                        }
-                    }
-                }
         }
     }
 

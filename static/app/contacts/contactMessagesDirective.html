@@ -1,0 +1,13 @@
+<div class="well">
+    <a class="btn btn-primary btn-sm pull-right" ui-sref="message({contactId:contact.id})"><i class="fa fa-send"></i>
+        Napisz</a>
+
+    <p>
+        <small><strong>WYSŁANE:</strong></small>
+    </p>
+    <ul class="list-unstyled">
+        <li ng-repeat="message in messages">{{ message.deliveryDate }}<strong>{{ message.header }}</strong>
+            - {{ message.body |limitTo:80 }} </li>
+    </ul>
+
+</div>

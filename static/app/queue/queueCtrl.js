@@ -22,7 +22,7 @@
 
         function activate() {
             messagesService.getMessages().then(function (data) {
-                vm.messages = data.messages;
+                vm.messages = data;
             })
         }
 

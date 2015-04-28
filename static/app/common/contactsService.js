@@ -15,12 +15,22 @@
             createContact: createContact,
             deactivateContact: deactivateContact,
             postponeContact: postponeContact,
-            markContacted: markContacted
+            markContacted: markContacted,
+            sortContacts: sortContacts
         };
-        function getContacts() {
+        
+        function getContacts(isActive) {
             var deferred = $q.defer();
-            $http.get('/static/json/contacts.json').success(function (data, status, headers, config) {
-                lodash.forEach(data.contacts, formatDatesToJS);
+            var url = '/api/v1/contacts/';
+            if (isActive !== undefined) {
+                if (isActive) {
+                    url += '?isActive=True';
+                } else {
+                    url += '?isActive=False';
+                }
+            }
+            $http.get(url).success(function (data, status, headers, config) {
+                lodash.forEach(data, formatDatesToJS);
                 deferred.resolve(data);
             }).error(function (data) {
                 deferred.reject();
@@ -30,10 +40,8 @@
 
         function getContact(contactId) {
             var deferred = $q.defer();
-            $http.get('/static/json/contacts.json').success(function (data, status, headers, config) {
-                var contact = lodash.find(data.contacts, function (obj) {
-                    return obj.id == contactId;
-                });
+            $http.get('/api/v1/contacts/' + contactId + '/').success(function (data, status, headers, config) {
+                var contact = data;
                 contact = formatDatesToJS(contact);
                 deferred.resolve(contact);
             }).error(function (data) {
@@ -47,13 +55,11 @@
             var contactId = contact.id;
             var deferred = $q.defer();
             $http({
-                url: '/static/json/contacts.json',
+                url: '/api/v1/contacts/' + contactId + '/',
                 method: 'PUT',
                 data: contact
             }).success(function (data, status, headers, config) {
-                var contact = lodash.find(data.contacts, function (obj) {
-                    return obj.id == contactId;
-                });
+                var contact = data;
                 contact = formatDatesToJS(contact);
                 deferred.resolve(contact);
             }).error(function (data) {
@@ -66,11 +72,11 @@
             contact = formatDatesToJSON(contact);
             var deferred = $q.defer();
             $http({
-                url: '/static/json/contacts.json',
+                url: '/api/v1/contacts/',
                 method: 'POST',
                 data: contact
             }).success(function (data, status, headers, config) {
-                var contact = data.contacts[0];
+                var contact = data;
                 contact = formatDatesToJS(contact);
                 deferred.resolve(contact);
             }).error(function (data) {
@@ -101,6 +107,11 @@
         function formatDatesToJSON(contact) {
             if (contact.postponeChecked && contact.postponedDate) {
                 contact.postponed = contact.postponedDate.toJSON();
+            } else {
+                if (!contact.postponeChecked && contact.postponed) {
+                    //remove postponed if unchecked
+                    contact.postponed = null;
+                }
             }
             if (contact.lastContactDate) {
                 contact.lastContact = contact.lastContactDate.toJSON();
@@ -125,6 +136,7 @@
                 postponedDate: contact.postponedDate
             };
             contact.postponedDate = till;
+            contact.postponeChecked = true;
 
             var result = saveContact(contact);
             result.undo = undoService.undoOperation(contact, saveContact, undoPatch);
@@ -142,6 +154,30 @@
             result.undo = undoService.undoOperation(contact, saveContact, undoPatch);
 
             return result;
+        }
+
+        function sortContacts(contacts) {
+            contacts = lodash.sortBy(contacts, 'lastContactDate');
+            contacts = lodash.sortBy(contacts, evaluateContactPosition);
+            return contacts;
+        }
+
+        function evaluateContactPosition(contact) {
+            if (contact.state === 'CONTACT_NEEDED') {
+                return 10;
+            }
+            if (contact.state === 'POSTPONED') {
+                return 20;
+            }
+            if (contact.state === 'CONTACT_OK') {
+                return 30;
+            }
+            if (contact.state === 'DISABLED') {
+                return 40;
+            }
+
+            //unknown order
+            return 100;
         }
 
     }

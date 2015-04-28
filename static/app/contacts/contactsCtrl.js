@@ -22,7 +22,8 @@
 
         function activate() {
             contactsService.getContacts().then(function (data) {
-                vm.contacts = data.contacts;
+                vm.contacts = data;
+                vm.contacts = contactsService.sortContacts(vm.contacts);
             });
         }
 
