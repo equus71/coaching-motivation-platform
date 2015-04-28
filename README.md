@@ -6,7 +6,7 @@ An app done in intention to support my wife actions as a nutritionist. The CMP s
 State
 ---------
 
-The application is currently on the design stage.
+The application is currently on the early development stage.
 
 Usage
 ---------
@@ -16,7 +16,12 @@ to be described
 Technology
 ---------
 
-to be described
+Application is relaying on the:
+* Django + Django Rest Framework
+* AngularJS
+* Bootstrap
+* rdash-ui
+* and many other awesome libraries
 
 License
 ---------
