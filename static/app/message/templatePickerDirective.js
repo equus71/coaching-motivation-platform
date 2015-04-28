@@ -4,9 +4,9 @@
     angular.module('cmp.message')
         .directive('cmpTemplatePickerDirective', cmpTemplatePickerDirective);
 
-    cmpTemplatePickerDirective.$inject = ['$modal'];
+    cmpTemplatePickerDirective.$inject = [];
 
-    function cmpTemplatePickerDirective($modal) {
+    function cmpTemplatePickerDirective() {
         var directive = {
             restrict: 'E',
             scope: {
@@ -49,8 +49,6 @@
             function closeTemplatePicker() {
                 vm.isOpen = false;
             }
-
-
         }
     }
 

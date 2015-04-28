@@ -4,9 +4,9 @@
     angular.module('cmp.message')
         .directive('cmpContactPickerDirective', cmpContactPickerDirective);
 
-    cmpContactPickerDirective.$inject = ['$modal'];
+    cmpContactPickerDirective.$inject = [];
 
-    function cmpContactPickerDirective($modal) {
+    function cmpContactPickerDirective() {
         var directive = {
             restrict: 'E',
             scope: {
@@ -34,7 +34,7 @@
                 {name: 'Aktywne', value: {value: true, key: "isActive"}},
                 {name: 'Nieaktywne', value: {value: false, key: "isActive"}}
             ];
-            vm.contactTypeFilterValue =  vm.contactTypeFilterOptions[1].value;
+            vm.contactTypeFilterValue = vm.contactTypeFilterOptions[1].value;
             vm.preselectContact = preselectContact;
 
             function preselectContact(contact) {
@@ -49,8 +49,6 @@
             function closeContactPicker() {
                 vm.isOpen = false;
             }
-
-
         }
     }
 
