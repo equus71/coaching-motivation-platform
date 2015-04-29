@@ -1,21 +1,24 @@
 import json
 from rest_framework import serializers
 from rest_framework.exceptions import ValidationError
+from contacts.models import Tag
 
 
 class TagListField(serializers.Field):
     """
-    Field serializing list of the tags to the JSON string representation
+    Field serializing list of the Yags to the list of their names and serializing back names to the ids of the Tags
     """
 
     def to_representation(self, value):
-        try:
-            return json.loads(value)
-        except ValueError:
-            return []
+        all_tags = value.all()
+        all_tags_list = []
+        for tag in all_tags:
+            all_tags_list.append(tag.name)
+        return all_tags_list
 
     def to_internal_value(self, data):
-        try:
-            return json.dumps(data)
-        except ValueError:
-            raise ValidationError('Incorrect format.')
+        tags = []
+        for tag_name in data:
+            tag, created = Tag.objects.get_or_create(name=tag_name)
+            tags.append(tag.id)
+        return tags

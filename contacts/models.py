@@ -7,6 +7,10 @@ from contacts.nameForm import get_name_declension
 MESSAGE_TYPE = (('EMAIL', 'EMAIL'), ('SMS', 'SMS'))
 
 
+class Tag(models.Model):
+    name = models.CharField(max_length=40, unique=True)
+
+
 class Contact(models.Model):
     firstName = models.CharField(max_length=200)
     lastName = models.CharField(max_length=200)
@@ -17,7 +21,7 @@ class Contact(models.Model):
     age = models.IntegerField()
     gender = models.IntegerField()
     notificationsFrequency = models.IntegerField()
-    tags = models.CharField(max_length=4096, blank=True, null=True)
+    tags = models.ManyToManyField(Tag)
     isActive = models.BooleanField(default=True)
 
     def __unicode__(self):
