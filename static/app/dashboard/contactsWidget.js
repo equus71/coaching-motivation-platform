@@ -48,6 +48,7 @@
                 var result = contactsService.postponeContact(contact, tomorrow);
                 result.then(function (data) {
                     updateContactsWithContact(data);
+                    vm.contacts = contactsService.sortContacts(vm.contacts);
 
                     result.undo.callbacks.push(updateContactData);
                     alertService.addAlert('Kontakt odroczony do jutra.', 'success', 15000, result.undo);
@@ -59,6 +60,7 @@
                 var result = contactsService.markContacted(contact, now);
                 result.then(function (data) {
                     updateContactsWithContact(data);
+                    vm.contacts = contactsService.sortContacts(vm.contacts);
 
                     result.undo.callbacks.push(updateContactData);
                     alertService.addAlert('Kontakt oznaczony jako obsłużony.', 'success', 15000, result.undo);
