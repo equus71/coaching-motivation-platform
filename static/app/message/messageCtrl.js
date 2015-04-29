@@ -34,6 +34,7 @@
             var contactsPromise = contactsService.getContacts();
             contactsPromise.then(function (data) {
                 vm.contacts = data;
+                vm.contacts = contactsService.sortContacts(vm.contacts);
             });
             var templatesPromise = messageTemplatesService.getTemplates();
             templatesPromise.then(function (data) {
