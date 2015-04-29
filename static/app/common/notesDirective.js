@@ -25,6 +25,7 @@
             var vm = this;
 
             vm.saveNotes = saveNotes;
+            //TODO: add some save_needed control
 
             function saveNotes(contact){
                 vm.inProgress = true;
