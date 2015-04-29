@@ -8,6 +8,11 @@
                 <input type="search" name="filter" ng-model="filter" placeholder="Filtruj wiadmości"
                        class="form-control"/>
             </div>
+            <div class="pull-right">
+                <a type="button" class="btn btn-primary" ui-sref="message"><i
+                        class="fa fa-send"></i> Napisz nową
+                </a>
+            </div>
         </div>
     </div>
 </div>
@@ -26,7 +31,8 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr ng-repeat="message in vm.messages| messageFilter:filter | typeFilter:vm.typeFilterValue" ng-click="vm.goToMessage(message.id)">
+                <tr ng-repeat="message in vm.messages| messageFilter:filter | typeFilter:vm.typeFilterValue"
+                    ng-click="vm.goToMessage(message.id)">
                     <td>{{ message.recipientName }}</td>
                     <td>
                         {{ message.body | limitTo: 50 }}
