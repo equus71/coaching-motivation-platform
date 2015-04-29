@@ -2,9 +2,9 @@ from django.views.generic import TemplateView
 from rest_framework import viewsets, permissions, mixins
 
 from coaching_motivation_platform import settings
-from contacts.models import Contact, Message
+from contacts.models import Contact, Message, Tag
 from contacts.serializers import ContactSerializer, ContactMessagesSerializer, \
-    MessageDetailsSerializer
+    MessageDetailsSerializer, TagSerializer
 
 
 class IndexView(TemplateView):
@@ -54,6 +54,16 @@ class MessageViewSet(mixins.ListModelMixin,
                      viewsets.GenericViewSet):
     queryset = Message.objects.all()
     serializer_class = MessageDetailsSerializer
+
+    def get_permissions(self):
+        # TODO: add permission for authenticated users
+        return (permissions.AllowAny(),)
+
+
+class TagViewSet(mixins.ListModelMixin,
+                 viewsets.GenericViewSet):
+    queryset = Tag.objects.all()
+    serializer_class = TagSerializer
 
     def get_permissions(self):
         # TODO: add permission for authenticated users

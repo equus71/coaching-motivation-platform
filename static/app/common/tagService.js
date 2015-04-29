@@ -45,7 +45,7 @@
 
         function getTags() {
             var deferred = $q.defer();
-            $http.get('/static/json/tags.json').success(function (data, status, headers, config) {
+            $http.get('/api/v1/tags/').success(function (data, status, headers, config) {
                 deferred.resolve(data);
             }).error(function (data) {
                 deferred.reject();

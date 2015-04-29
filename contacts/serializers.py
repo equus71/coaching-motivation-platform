@@ -1,5 +1,6 @@
 from django.contrib.auth.models import User, Group
 from rest_framework import serializers
+from rest_framework.serializers import BaseSerializer
 from contacts.fields import TagListField
 from contacts.models import Contact, Message
 
@@ -31,7 +32,6 @@ class MessageDetailsSerializer(serializers.ModelSerializer):
 
 class ContactSerializer(serializers.ModelSerializer):
     tags = TagListField()
-    # TODO: add state computing to the serializer
 
     class Meta:
         model = Contact
@@ -44,4 +44,18 @@ class ContactSerializer(serializers.ModelSerializer):
         # return Contact.objects.create(**validated_data)
 
 
+class TagSerializer(serializers.BaseSerializer):
+    """
+    Dummy serializer making from the tag a plain string representing given tag
+    """
+    def to_internal_value(self, data):
+        raise NotImplementedError('This serializer is read-only')
 
+    def create(self, validated_data):
+        raise NotImplementedError('This serializer is read-only')
+
+    def update(self, instance, validated_data):
+        raise NotImplementedError('This serializer is read-only')
+
+    def to_representation(self, data):
+        return data.name
