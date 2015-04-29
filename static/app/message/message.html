@@ -18,6 +18,7 @@
 
 <div class="row" ng-cloak>
     <div class="col-sm-8">
+        <!-- TODO: add sending date -->
         <div class="form-group" ng-if="vm.message.type == 'EMAIL'">
             <label for="receiverEmail" class="control-label">Email odbiorcy</label>
             <input type="text" class="form-control" name="receiverEmail" ng-show="vm.message.type == 'EMAIL'" ng-model="vm.receiverEmail" />
