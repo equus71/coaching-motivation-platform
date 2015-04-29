@@ -40,8 +40,12 @@ class Contact(models.Model):
         else:
             return 'CONTACT_OK'
 
+    # noinspection PyPep8Naming
     @property
     def firstNameDeclension(self):
+        """
+        :return: firstName in the declension for calling somebody
+        """
         return get_name_declension(self.firstName)
 
 
