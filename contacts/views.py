@@ -1,5 +1,7 @@
 from django.views.generic import TemplateView
 from rest_framework import viewsets, permissions, mixins
+from rest_framework.response import Response
+from rest_framework.views import APIView
 
 from coaching_motivation_platform import settings
 from contacts.models import Contact, Message, Tag, MessageTemplate
@@ -70,14 +72,30 @@ class TagViewSet(mixins.ListModelMixin,
         return (permissions.AllowAny(),)
 
 
-class MessageTemplatesSet(mixins.CreateModelMixin,
-                          mixins.ListModelMixin,
-                          mixins.RetrieveModelMixin,
-                          mixins.UpdateModelMixin,
-                          viewsets.GenericViewSet):
+class MessageTemplatesViewSet(mixins.CreateModelMixin,
+                              mixins.ListModelMixin,
+                              mixins.RetrieveModelMixin,
+                              mixins.UpdateModelMixin,
+                              viewsets.GenericViewSet):
     queryset = MessageTemplate.objects.all()
     serializer_class = MessageTemplateSerializer
 
     def get_permissions(self):
         # TODO: add permission for authenticated users
         return (permissions.AllowAny(),)
+
+
+class StatsView(APIView):
+    """
+    View returning basic stats about system
+    """
+    # TODO: add permission for authenticated users
+    permission_classes = (permissions.AllowAny,)
+
+    def get(self, request, format=None):
+        return Response({"stats": {
+            "activeClients": 16,
+            "contactNeeded": 5,
+            "templates": 25,
+            "inMsgQueue": 34
+        }})
