@@ -23,6 +23,7 @@ class Contact(models.Model):
     notificationsFrequency = models.IntegerField()
     tags = models.ManyToManyField(Tag)
     isActive = models.BooleanField(default=True)
+    notes = models.CharField(max_length=4096, blank=True, null=True)
 
     def __unicode__(self):
         return '{0} {1}'.format(self.firstName, self.lastName)

@@ -37,7 +37,7 @@ class ContactSerializer(serializers.ModelSerializer):
         model = Contact
 
         fields = ('id', 'firstName', 'lastName', 'email', 'phone', 'postponed', 'lastContact', 'gender', 'age',
-                  'notificationsFrequency', 'isActive', 'tags', 'state', 'firstNameDeclension')
+                  'notificationsFrequency', 'isActive', 'tags', 'state', 'firstNameDeclension', 'notes')
         read_only_fields = ('id',)
 
         # def create(self, validated_data):
