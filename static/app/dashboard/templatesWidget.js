@@ -27,7 +27,7 @@
             vm.pageSize = 10;
 
             messageTemplatesService.getTemplates().then(function (data) {
-                vm.templates = data.templates;
+                vm.templates = data;
             });
 
         }

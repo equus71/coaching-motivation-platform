@@ -37,7 +37,7 @@
             });
             var templatesPromise = messageTemplatesService.getTemplates();
             templatesPromise.then(function (data) {
-                vm.templates = data.templates;
+                vm.templates = data;
             });
             $q.all([contactsPromise, templatesPromise]).then(function () {
                 vm.loading = false;

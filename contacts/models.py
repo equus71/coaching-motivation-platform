@@ -63,3 +63,16 @@ class Message(models.Model):
     header = models.CharField(max_length=256)
     creationDate = models.DateTimeField()
     sendAtDate = models.DateTimeField()
+
+
+class MessageTemplate(models.Model):
+    name = models.CharField(max_length=64)
+    type = models.CharField(choices=MESSAGE_TYPE, max_length=10)
+    tags = models.ManyToManyField(Tag)
+    templateBody = models.CharField(max_length=65536)
+    templateHeader = models.CharField(max_length=256, blank=True, null=True)
+
+    # TODO: add real uses counter
+    @property
+    def uses(self):
+        return 42

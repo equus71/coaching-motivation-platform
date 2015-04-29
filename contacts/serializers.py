@@ -2,7 +2,7 @@ from django.contrib.auth.models import User, Group
 from rest_framework import serializers
 from rest_framework.serializers import BaseSerializer
 from contacts.fields import TagListField
-from contacts.models import Contact, Message
+from contacts.models import Contact, Message, MessageTemplate
 
 
 class ContactMessagesSerializer(serializers.ModelSerializer):
@@ -59,3 +59,13 @@ class TagSerializer(serializers.BaseSerializer):
 
     def to_representation(self, data):
         return data.name
+
+
+class MessageTemplateSerializer(serializers.ModelSerializer):
+    tags = TagListField()
+
+    class Meta:
+        model = MessageTemplate
+
+        fields = ('id', 'name', 'type', 'templateHeader', 'templateBody', 'tags', 'uses')
+        read_only_fields = ('id', 'contact')

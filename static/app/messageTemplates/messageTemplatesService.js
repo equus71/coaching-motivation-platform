@@ -17,7 +17,7 @@
         };
         function getTemplates() {
             var deferred = $q.defer();
-            $http.get('/static/json/messageTemplates.json').success(function (data, status, headers, config) {
+            $http.get('/api/v1/messageTemplates/').success(function (data, status, headers, config) {
                 deferred.resolve(data);
             }).error(function (data) {
                 deferred.reject();
@@ -27,10 +27,8 @@
 
         function getTemplate(templateId) {
             var deferred = $q.defer();
-            $http.get('/static/json/messageTemplates.json').success(function (data, status, headers, config) {
-                deferred.resolve(lodash.find(data.templates, function (obj) {
-                    return obj.id == templateId;
-                }));
+            $http.get('/api/v1/messageTemplates/' + templateId + '/').success(function (data, status, headers, config) {
+                deferred.resolve(data);
             }).error(function (data) {
                 deferred.reject();
             });
@@ -40,11 +38,11 @@
         function saveTemplate(template) {
             var deferred = $q.defer();
             $http({
-                url: '/save/operation',
+                url: '/api/v1/messageTemplates/' + template.id + '/',
                 method: 'PUT',
                 data: template
             }).success(function (data, status, headers, config) {
-                deferred.resolve();
+                deferred.resolve(data);
             }).error(function (data) {
                 deferred.reject();
             });
@@ -54,11 +52,11 @@
         function createTemplate(template) {
             var deferred = $q.defer();
             $http({
-                url: '/create/operation',
+                url: '/api/v1/messageTemplates/',
                 method: 'POST',
                 data: template
             }).success(function (data, status, headers, config) {
-                deferred.resolve();
+                deferred.resolve(data);
             }).error(function (data) {
                 deferred.reject();
             });
