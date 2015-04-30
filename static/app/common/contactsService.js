@@ -136,7 +136,8 @@
 
         function postponeContact(contact, till) {
             var undoPatch = {
-                postponedDate: contact.postponedDate
+                postponedDate: contact.postponedDate,
+                postponeChecked: contact.postponeChecked
             };
             contact.postponedDate = till;
             contact.postponeChecked = true;
