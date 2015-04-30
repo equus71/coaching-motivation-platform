@@ -19,7 +19,8 @@
 
         function activate() {
             vm.contact = {
-                newContact: true
+                newContact: true,
+                isActive: true
             };
             vm.formattedTags = [];
             tagService.clearCache();
