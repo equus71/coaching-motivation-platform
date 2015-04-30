@@ -13,8 +13,8 @@
 
             <div class="form-group left-margin" ng-class="{'has-error': vm.fieldValidation(vm.messageForm.sendAtDate) || vm.fieldValidation(vm.messageForm.sendAtTime) }">
                 <label for="sendAtDate" class="control-label">Data wysyłki</label>
-                <input type="date" class="form-control" name="sendAtDate" ng-model="vm.message.sendAtDate" ng-required="true"/>
-                <input type="time" class="form-control" name="sendAtTime" ng-model="vm.message.sendAtDate" ng-required="true"/>
+                <input type="date" class="form-control" name="sendAtDate" ng-model="vm.message.sendAt" ng-required="true"/>
+                <input type="time" class="form-control" name="sendAtTime" ng-model="vm.message.sendAt" ng-required="true"/>
             </div>
 
             <div class="pull-right">

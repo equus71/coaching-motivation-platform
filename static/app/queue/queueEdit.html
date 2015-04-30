@@ -4,8 +4,8 @@
             <a class="btn btn-default" ui-sref="^"><i class="fa fa-chevron-left"></i> Cofnij</a>
         </div>
         <div class="pull-right">
-            <a class="btn btn-danger" ng-click="vm.delete()"><i class="fa fa-trash-o"></i> Skasuj</a>
-            <a class="btn btn-success" ng-click="vm.save()"><i class="fa fa-save"></i> Zapisz</a>
+            <a class="btn btn-danger" ng-click="vm.deleteMessage()"><i class="fa fa-trash-o"></i> Skasuj</a>
+            <a class="btn btn-success" ng-click="vm.saveMessage()"><i class="fa fa-save"></i> Zapisz</a>
         </div>
     </div>
 </div>
@@ -33,7 +33,8 @@
                            placeholder="Imię i nazwisko odbiorcy">
                 </div>
             </div>
-            <div class="form-group" ng-class="{'has-error': vm.fieldValidation(vm.messageForm.email)}" ng-if="vm.message.type == 'EMAIL'">
+            <div class="form-group" ng-class="{'has-error': vm.fieldValidation(vm.messageForm.email)}"
+                 ng-if="vm.message.type == 'EMAIL'">
                 <label for="email" class="col-sm-2 control-label">Email </label>
 
                 <div class="col-sm-10">
@@ -43,7 +44,8 @@
                            placeholder="Email">
                 </div>
             </div>
-            <div class="form-group" ng-class="{'has-error': vm.fieldValidation(vm.messageForm.phone)}" ng-if="vm.message.type == 'SMS'">
+            <div class="form-group" ng-class="{'has-error': vm.fieldValidation(vm.messageForm.phone)}"
+                 ng-if="vm.message.type == 'SMS'">
                 <label for="phone" class="col-sm-2 control-label">Telefon </label>
 
                 <div class="col-sm-10">
@@ -55,13 +57,17 @@
             </div>
             <div class="form-group" ng-class="{'has-error': vm.fieldValidation(vm.messageForm.sendAt)}">
                 <label for="sendAt" class="col-sm-2 control-label">Data wysyłki</label>
-
-                <div class="col-sm-10">
+                <div class="col-sm-3">
                     <input type="date" class="form-control" ng-model="vm.message.sendAt" name="sendAt"
-                                min="2015-01-01" required="true" />
+                           min="2015-01-01" required="true"/>
+                </div>
+                <div class="col-sm-3">
+                    <input type="time" class="form-control" name="sendAtTime" ng-model="vm.message.sendAt"
+                           ng-required="true"/>
                 </div>
             </div>
-            <div class="form-group" ng-class="{'has-error': vm.fieldValidation(vm.messageForm.header)}" ng-if="vm.message.type == 'EMAIL'">
+            <div class="form-group" ng-class="{'has-error': vm.fieldValidation(vm.messageForm.header)}"
+                 ng-if="vm.message.type == 'EMAIL'">
                 <label for="header" class="col-sm-2 control-label">Tytuł wiadomości</label>
 
                 <div class="col-sm-10">
@@ -73,6 +79,7 @@
             </div>
             <div class="form-group" ng-class="{'has-error': vm.fieldValidation(vm.messageForm.body)}">
                 <label for="body" class="col-sm-2 control-label">Treść wiadomości </label>
+
                 <div class="col-sm-10">
                     <textarea ng-maxlength="65536" ng-required="true" ng-model="vm.message.body" class="form-control"
                               name="body" rows="16" cmp-is-focused></textarea>
