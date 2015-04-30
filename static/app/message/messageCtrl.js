@@ -56,6 +56,10 @@
                     vm.message = renderTemplate(vm.message, vm.template, vm.contact);
                 }
             });
+
+            vm.sendAtDate = new Date();//default: now
+            vm.sendAtDate.setMilliseconds(0);
+            vm.sendAtDate.setSeconds(0);
         }
 
         function contactChangeHandler(event, contact) {

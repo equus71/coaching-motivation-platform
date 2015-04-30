@@ -9,6 +9,13 @@
                 <option value="SMS">SMS</option>
                 <option value="EMAIL">Email</option>
             </select>
+
+            <div class="form-group left-margin" ng-if="vm.message.type == 'EMAIL'">
+                <label for="receiverEmail" class="control-label">Data wysyłki</label>
+                <input type="date" class="form-control" name="sendAtDate" ng-model="vm.sendAtDate"/>
+                <input type="time" class="form-control" name="sendAtTime" ng-model="vm.sendAtDate"/>
+            </div>
+
             <div class="pull-right">
                 <a class="btn btn-primary" ng-click="vm.send()"><i class="fa fa-send"></i> Wyślij</a>
             </div>
@@ -21,11 +28,13 @@
         <!-- TODO: add sending date -->
         <div class="form-group" ng-if="vm.message.type == 'EMAIL'">
             <label for="receiverEmail" class="control-label">Email odbiorcy</label>
-            <input type="text" class="form-control" name="receiverEmail" ng-show="vm.message.type == 'EMAIL'" ng-model="vm.receiverEmail" />
+            <input type="text" class="form-control " name="receiverEmail" ng-show="vm.message.type == 'EMAIL'"
+                   ng-model="vm.receiverEmail"/>
         </div>
         <div class="form-group" ng-if="vm.message.type == 'SMS'">
             <label for="receiverPhone" class="control-label">Telefon odbiorcy</label>
-            <input type="text" class="form-control" name="receiverPhone" ng-show="vm.message.type == 'SMS'" ng-model="vm.receiverPhone" />
+            <input type="text" class="form-control" name="receiverPhone" ng-show="vm.message.type == 'SMS'"
+                   ng-model="vm.receiverPhone"/>
         </div>
         <div class="form-group" ng-if="vm.message.type == 'EMAIL'">
             <label for="messageHeader" class="control-label">Tytuł wiadomości</label>
