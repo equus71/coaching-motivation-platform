@@ -5,24 +5,27 @@
         .module('cmp.message', ['ngLodash'])
         .controller('MessageCtrl', MessageCtrl);
 
-    MessageCtrl.$inject = ['$location', '$q', '$scope', '$state', 'alertService', 'contactsService', 'lodash', 'messageTemplatesService', 'templatingService', 'undoService'];
+    MessageCtrl.$inject = ['$location', '$q', '$scope', '$state', 'alertService', 'contactsService', 'lodash', 'messageTemplatesService', 'messagesService', 'templatingService', 'undoService', 'validationService'];
 
-    function MessageCtrl($location, $q, $scope, $state, alertService, contactsService, lodash, messageTemplatesService, templatingService, undoService) {
+    function MessageCtrl($location, $q, $scope, $state, alertService, contactsService, lodash, messageTemplatesService, messagesService, templatingService, undoService, validationService) {
         var vm = this;
 
         vm.openContactPicker = openContactPicker;
         vm.closeUserPicker = closeUserPicker;
         vm.openTemplatePicker = openTemplatePicker;
         vm.closeTemplatePicker = closeTemplatePicker;
+        vm.sendMessage = sendMessage;
+        vm.fieldValidation = validationService.fieldValidation;
         vm.message = {
             type: 'EMAIL',
             header: '',
-            body: ''
+            body: '',
+            recipientEmail: '',
+            recipientPhone: '',
+            recipientName: ''
         };
         vm.templatePicker = false;
         vm.templates = [];
-        vm.receiverEmail = '';
-        vm.receiverPhone = '';
 
         $scope.$on('templateSelect', templateChange);
         $scope.$on('contactSelect', contactChangeHandler);
@@ -57,14 +60,27 @@
                 }
             });
 
-            vm.sendAtDate = new Date();//default: now
-            vm.sendAtDate.setMilliseconds(0);
-            vm.sendAtDate.setSeconds(0);
+            vm.message.sendAtDate = new Date();//default: now
+            vm.message.sendAtDate.setMilliseconds(0);
+            vm.message.sendAtDate.setSeconds(0);
         }
 
-        function sendMessage(){
-            if(vm.messageForm.$valid){
-
+        function sendMessage() {
+            if (vm.messageForm.$valid) {
+                if (vm.contact) {
+                    vm.message.recipientName = vm.contact.firstName + ' ' + vm.contact.lastName;
+                    vm.message.contact = vm.contact.id;
+                }
+                if (vm.template){
+                    vm.message.template = vm.template.id;
+                }
+                messagesService.createMessage(vm.message).then(function () {
+                    $state.go('dashboard');
+                }, function () {
+                    alertService.addAlert('Nie udało się zapisać wiadomości.', 'danger', 30000);
+                });
+            } else {
+                validationService.markFormFieldsAsTouched(vm.messageForm);
             }
         }
 
@@ -73,8 +89,8 @@
                 {
                     contact: vm.contact,
                     message: lodash.cloneDeep(vm.message),
-                    receiverPhone: vm.receiverPhone,
-                    receiverEmail: vm.receiverEmail
+                    recipientPhone: vm.message.recipientPhone,
+                    recipientEmail: vm.message.recipientEmail
                 });
 
             vm.contact = contact;
@@ -91,8 +107,8 @@
         function contactChange() {
             vm.templates = sortTemplates(vm.templates, vm.contact);
             vm.message = renderTemplate(vm.message, vm.template, vm.contact);
-            vm.receiverEmail = vm.contact.email || '';
-            vm.receiverPhone = vm.contact.phone || '';
+            vm.message.recipientEmail = vm.contact.email || '';
+            vm.message.recipientPhone = vm.contact.phone || '';
         }
 
         function templateChange(event, template) {

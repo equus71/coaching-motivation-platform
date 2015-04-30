@@ -5,6 +5,7 @@ from contacts.nameForm import get_name_declension
 
 
 MESSAGE_TYPE = (('EMAIL', 'EMAIL'), ('SMS', 'SMS'))
+MESSAGE_STATE = (('SEND', 'SEND'), ('QUEUED', 'QUEUED'))
 
 
 class Tag(models.Model):
@@ -54,18 +55,6 @@ class Contact(models.Model):
         return get_name_declension(self.firstName)
 
 
-class Message(models.Model):
-    type = models.CharField(choices=MESSAGE_TYPE, max_length=10)
-    recipientName = models.CharField(max_length=100)
-    contact = models.ForeignKey(Contact, related_name='messages')
-    recipientEmail = models.EmailField(blank=True, null=True)
-    recipientPhone = models.CharField(max_length=16, blank=True, null=True)
-    body = models.CharField(max_length=65536)
-    header = models.CharField(max_length=256)
-    creationDate = models.DateTimeField()
-    sendAtDate = models.DateTimeField()
-
-
 class MessageTemplate(models.Model):
     name = models.CharField(max_length=64)
     type = models.CharField(choices=MESSAGE_TYPE, max_length=10)
@@ -73,7 +62,20 @@ class MessageTemplate(models.Model):
     templateBody = models.CharField(max_length=65536)
     templateHeader = models.CharField(max_length=256, blank=True, null=True)
 
-    # TODO: add real uses counter
     @property
     def uses(self):
-        return 42
+        return self.messages.count()
+
+
+class Message(models.Model):
+    type = models.CharField(choices=MESSAGE_TYPE, max_length=10)
+    recipientName = models.CharField(max_length=100)
+    contact = models.ForeignKey(Contact, related_name='messages')
+    template = models.ForeignKey(MessageTemplate, related_name='messages', null=True)
+    recipientEmail = models.EmailField(blank=True, null=True)
+    recipientPhone = models.CharField(max_length=16, blank=True, null=True)
+    body = models.CharField(max_length=65536)
+    header = models.CharField(max_length=256, blank=True, null=True)
+    creationDate = models.DateTimeField(auto_now_add=True)
+    sendAtDate = models.DateTimeField()
+    state = models.CharField(choices=MESSAGE_STATE, max_length=10, default='QUEUED')

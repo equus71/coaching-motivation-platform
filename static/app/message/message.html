@@ -1,4 +1,4 @@
-<form name="messageForm">
+<form name="vm.messageForm">
 <div class="row" ng-cloak>
     <div class="col-xs-12">
         <div class="form-inline">
@@ -11,14 +11,14 @@
                 <option value="EMAIL">Email</option>
             </select>
 
-            <div class="form-group left-margin">
-                <label for="receiverEmail" class="control-label">Data wysyłki</label>
-                <input type="date" class="form-control" name="sendAtDate" ng-model="vm.sendAtDate"/>
-                <input type="time" class="form-control" name="sendAtTime" ng-model="vm.sendAtDate"/>
+            <div class="form-group left-margin" ng-class="{'has-error': vm.fieldValidation(vm.messageForm.sendAtDate) || vm.fieldValidation(vm.messageForm.sendAtTime) }">
+                <label for="sendAtDate" class="control-label">Data wysyłki</label>
+                <input type="date" class="form-control" name="sendAtDate" ng-model="vm.message.sendAtDate" ng-required="true"/>
+                <input type="time" class="form-control" name="sendAtTime" ng-model="vm.message.sendAtDate" ng-required="true"/>
             </div>
 
             <div class="pull-right">
-                <a class="btn btn-primary" ng-click="vm.send()"><i class="fa fa-send"></i> Wyślij</a>
+                <a class="btn btn-primary" ng-click="vm.sendMessage()"><i class="fa fa-send"></i> Wyślij</a>
             </div>
         </div>
     </div>
@@ -26,23 +26,25 @@
 
 <div class="row" ng-cloak>
     <div class="col-sm-8">
-        <!-- TODO: add sending date -->
-        <div class="form-group" ng-if="vm.message.type == 'EMAIL'">
-            <label for="receiverEmail" class="control-label">Email odbiorcy</label>
-            <input type="text" class="form-control " name="receiverEmail" ng-show="vm.message.type == 'EMAIL'"
-                   ng-model="vm.receiverEmail"/>
+        <div class="form-group" ng-if="vm.message.type == 'EMAIL'"
+                ng-class="{'has-error': vm.fieldValidation(vm.messageForm.recipientEmail)}">
+            <label for="recipientEmail" class="control-label">Email odbiorcy</label>
+            <input type="text" class="form-control" name="recipientEmail" ng-show="vm.message.type == 'EMAIL'"
+                   ng-model="vm.message.recipientEmail" ng-required="true"/>
         </div>
-        <div class="form-group" ng-if="vm.message.type == 'SMS'">
-            <label for="receiverPhone" class="control-label">Telefon odbiorcy</label>
-            <input type="text" class="form-control" name="receiverPhone" ng-show="vm.message.type == 'SMS'"
-                   ng-model="vm.receiverPhone"/>
+        <div class="form-group" ng-if="vm.message.type == 'SMS'"
+             ng-class="{'has-error': vm.fieldValidation(vm.messageForm.recipientPhone)}">
+            <label for="recipientPhone" class="control-label">Telefon odbiorcy</label>
+            <input type="text" class="form-control" name="recipientPhone" ng-show="vm.message.type == 'SMS'"
+                   ng-model="vm.message.recipientPhone" ng-required="true"/>
         </div>
-        <div class="form-group" ng-if="vm.message.type == 'EMAIL'">
+        <div class="form-group" ng-if="vm.message.type == 'EMAIL'"
+             ng-class="{'has-error': vm.fieldValidation(vm.messageForm.messageHeader)}">
             <label for="messageHeader" class="control-label">Tytuł wiadomości</label>
             <input type="text" ng-maxlength="65536" ng-required="true" ng-model="vm.message.header"
                    class="form-control" name="messageHeader" cmp-is-focused/>
         </div>
-        <div class="form-group">
+        <div class="form-group" ng-class="{'has-error': vm.fieldValidation(vm.messageForm.messageBody)}">
             <label for="messageBody" class="control-label">Treść wiadomości</label>
             <textarea ng-maxlength="65536" ng-required="true" ng-model="vm.message.body"
                       class="form-control" name="messageBody" rows="16" cmp-is-focused></textarea>

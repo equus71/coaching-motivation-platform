@@ -13,8 +13,8 @@ class ContactMessagesSerializer(serializers.ModelSerializer):
     class Meta:
         model = Message
 
-        fields = ('id', 'body', 'header', 'creationDate', 'sendAtDate')
-        read_only_fields = ('id',)
+        fields = ('id', 'body', 'header', 'creationDate', 'sendAtDate', 'state')
+        read_only_fields = ('id', 'state')
 
 
 class MessageDetailsSerializer(serializers.ModelSerializer):
@@ -26,8 +26,16 @@ class MessageDetailsSerializer(serializers.ModelSerializer):
         model = Message
 
         fields = ('id', 'contact', 'recipientName', 'recipientPhone', 'recipientEmail', 'type', 'body', 'header',
-                  'creationDate', 'sendAtDate')
-        read_only_fields = ('id', 'contact')
+                  'creationDate', 'sendAtDate', 'state', 'template')
+        read_only_fields = ('id', 'contact', 'creationDate', 'state', 'template')
+
+
+class MessageCreateSerializer(serializers.ModelSerializer):
+    """
+    Message creation serializer
+    """
+    class Meta(MessageDetailsSerializer.Meta):
+        read_only_fields = ('id', 'creationDate', 'state')
 
 
 class ContactSerializer(serializers.ModelSerializer):

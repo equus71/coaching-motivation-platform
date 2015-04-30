@@ -53,7 +53,7 @@
             var deferred = $q.defer();
             message = formatDatesToJSON(message);
             $http({
-                url: '/save/operation',
+                url: '/api/v1/messages/' + message.id + '/',
                 method: 'PUT',
                 data: message
             }).success(function (data, status, headers, config) {
@@ -68,7 +68,7 @@
             var deferred = $q.defer();
             message = formatDatesToJSON(message);
             $http({
-                url: '/create/operation',
+                url: '/api/v1/messages/',
                 method: 'POST',
                 data: message
             }).success(function (data, status, headers, config) {

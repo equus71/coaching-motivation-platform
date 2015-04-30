@@ -6,7 +6,7 @@ from rest_framework.views import APIView
 from coaching_motivation_platform import settings
 from contacts.models import Contact, Message, Tag, MessageTemplate
 from contacts.serializers import ContactSerializer, ContactMessagesSerializer, \
-    MessageDetailsSerializer, TagSerializer, MessageTemplateSerializer
+    MessageDetailsSerializer, TagSerializer, MessageTemplateSerializer, MessageCreateSerializer
 
 
 class IndexView(TemplateView):
@@ -53,13 +53,31 @@ class ContactMessagesViewSet(mixins.ListModelMixin,
 
 class MessageViewSet(mixins.ListModelMixin,
                      mixins.RetrieveModelMixin,
+                     mixins.DestroyModelMixin,
+                     mixins.UpdateModelMixin,
+                     mixins.CreateModelMixin,
                      viewsets.GenericViewSet):
-    queryset = Message.objects.all()
-    serializer_class = MessageDetailsSerializer
+    queryset = Message.objects.filter(state="QUEUED")
 
     def get_permissions(self):
         # TODO: add permission for authenticated users
         return (permissions.AllowAny(),)
+
+    def get_serializer_class(self):
+        if self.action == u'create':
+            return MessageCreateSerializer
+        return MessageDetailsSerializer
+
+    def perform_create(self, serializer):
+        serializer.save()
+
+
+class MessageCreateViewSet(mixins.CreateModelMixin,
+                           viewsets.GenericViewSet):
+    queryset = Message.objects.all()
+    serializer_class = MessageCreateSerializer
+    # TODO: add permission for authenticated users
+    permission_classes = (permissions.AllowAny,)
 
 
 class TagViewSet(mixins.ListModelMixin,
@@ -94,8 +112,9 @@ class StatsView(APIView):
 
     def get(self, request, format=None):
         return Response({"stats": {
-            "activeClients": 16,
+            "activeClients": Contact.objects.filter(isActive=True).count(),
+            # TODO: contact needed computation
             "contactNeeded": 5,
-            "templates": 25,
-            "inMsgQueue": 34
+            "templates": MessageTemplate.objects.count(),
+            "inMsgQueue": Message.objects.filter(state="QUEUED").count()
         }})
