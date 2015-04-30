@@ -54,14 +54,16 @@
                 </div>
             </div>
             <div class="form-group" ng-class="{'has-error': vm.fieldValidation(vm.contactForm.gender)}">
-                <label for="name" class="col-sm-2 control-label">Płeć {{ vm.contactForm.gender }}</label>
+                <label for="gender" class="col-sm-2 control-label">Płeć</label>
 
                 <div class="col-sm-10">
                     <label class="radio-inline">
-                        <input type="radio" name="contactForm" value="1" ng-model="vm.contact.gender"> pan
+                        <input type="radio" name="gender" value="1" ng-model="vm.contact.gender"
+                                ng-required="true"> pan
                     </label>
                     <label class="radio-inline">
-                        <input type="radio" name="contactForm" value="2" ng-model="vm.contact.gender"> pani
+                        <input type="radio" name="gender" value="2" ng-model="vm.contact.gender"
+                                ng-required="true"> pani
                     </label>
                 </div>
             </div>
