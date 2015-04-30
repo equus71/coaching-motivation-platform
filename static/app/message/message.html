@@ -1,3 +1,4 @@
+<form name="messageForm">
 <div class="row" ng-cloak>
     <div class="col-xs-12">
         <div class="form-inline">
@@ -10,7 +11,7 @@
                 <option value="EMAIL">Email</option>
             </select>
 
-            <div class="form-group left-margin" ng-if="vm.message.type == 'EMAIL'">
+            <div class="form-group left-margin">
                 <label for="receiverEmail" class="control-label">Data wysyłki</label>
                 <input type="date" class="form-control" name="sendAtDate" ng-model="vm.sendAtDate"/>
                 <input type="time" class="form-control" name="sendAtTime" ng-model="vm.sendAtDate"/>
@@ -56,3 +57,4 @@
     <cmp-contact-picker-directive is-open="vm.contactPicker" contacts="vm.contacts"></cmp-contact-picker-directive>
     <cmp-template-picker-directive is-open="vm.templatePicker" templates="vm.templates"></cmp-template-picker-directive>
 </div>
+</form>

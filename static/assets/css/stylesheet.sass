@@ -84,28 +84,44 @@ ol.breadcrumb
 .at-view-plain-fade-out.ng-leave-active
   opacity: 0
 
-.smooth-ng-repeat.ng-move,
-.smooth-ng-repeat.ng-enter,
-.smooth-ng-repeat.ng-leave
+[ng-repeat].animated.ng-move,
+[ng-repeat].animated.ng-enter,
+[ng-repeat].animated.ng-leave
   -webkit-transition: all linear 0.5s
   transition: all linear 0.5s
 
 
-.smooth-ng-repeat.ng-leave.ng-leave-active,
-.smooth-ng-repeat.ng-move,
-.smooth-ng-repeat.ng-enter
+[ng-repeat].animated.fade-in-from-left.ng-leave.ng-leave-active,
+[ng-repeat].animated.fade-in-from-left.ng-move,
+[ng-repeat].animated.fade-in-from-left.ng-enter
   -webkit-transform: translate3d(-25%, 0, 0)
   transform: translate3d(-25%, 0, 0)
   visibility: visible
   opacity: 0
 
-
-.smooth-ng-repeat.ng-leave,
-.smooth-ng-repeat.ng-move.ng-move-active,
-.smooth-ng-repeat.ng-enter.ng-enter-active
+[ng-repeat].animated.fade-in-from-left.ng-leave,
+[ng-repeat].animated.fade-in-from-left.ng-move.ng-move-active,
+[ng-repeat].animated.fade-in-from-left.ng-enter.ng-enter-active
   -webkit-transform: translate3d(0, 0, 0)
   transform: translate3d(0, 0, 0)
   opacity: 1
+
+
+[ng-repeat].animated.fade-in-from-bottom.ng-leave.ng-leave-active,
+[ng-repeat].animated.fade-in-from-bottom.ng-move,
+[ng-repeat].animated.fade-in-from-bottom.ng-enter
+  -webkit-transform: translate3d(0, 50px, 0)
+  transform: translate3d(0, 50px, 0)
+  visibility: visible
+  opacity: 0
+
+[ng-repeat].animated.fade-in-from-bottom.ng-leave,
+[ng-repeat].animated.fade-in-from-bottom.ng-move.ng-move-active,
+[ng-repeat].animated.fade-in-from-bottom.ng-enter.ng-enter-active
+  -webkit-transform: translate3d(0, 0, 0)
+  transform: translate3d(0, 0, 0)
+  opacity: 1
+
 
 .alerts-container
   position: fixed
@@ -115,6 +131,8 @@ ol.breadcrumb
   right: 0
   > div
     margin-bottom: 0
+    > div
+      box-shadow: 1px 1px 4px rgba(0,0,0,0.5)
   .alert:last-child
     margin-bottom: 15px
 

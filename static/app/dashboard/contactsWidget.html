@@ -1,7 +1,7 @@
 <div class="widget">
     <div class="widget-header"><i class="fa fa-users"></i> Lista kontaków
         <div class="pull-right">
-            <a ui-sref="contacts">edytuj</a>
+            <a ui-sref="contacts.add">dodaj</a>
         </div>
     </div>
     <div class="medium no-padding">
@@ -15,7 +15,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr ng-repeat="contact in vmc.contacts | offsetFilter: vmc.pageSize * (vmc.currentPage - 1) | limitTo: vmc.pageSize" class="smooth-ng-repeat">
+                <tr ng-repeat="contact in vmc.contacts | offsetFilter: vmc.pageSize * (vmc.currentPage - 1) | limitTo: vmc.pageSize" class="animated fade-in-from-left">
                     <td>{{ contact.firstName }} {{ contact.lastName }}</td>
                     <td class="text-center info-cell">{{ contact.lastContactDate | date: 'dd MMM yyyy' }}</td>
                     <td class="text-center info-cell">

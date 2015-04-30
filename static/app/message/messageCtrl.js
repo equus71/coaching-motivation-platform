@@ -62,6 +62,12 @@
             vm.sendAtDate.setSeconds(0);
         }
 
+        function sendMessage(){
+            if(vm.messageForm.$valid){
+
+            }
+        }
+
         function contactChangeHandler(event, contact) {
             var undo = undoService.undoOperation(vm, null,
                 {
