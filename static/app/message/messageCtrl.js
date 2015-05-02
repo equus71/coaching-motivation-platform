@@ -60,9 +60,9 @@
                 }
             });
 
-            vm.message.sendAtDate = new Date();//default: now
-            vm.message.sendAtDate.setMilliseconds(0);
-            vm.message.sendAtDate.setSeconds(0);
+            vm.message.sendAt = new Date();//default: now
+            vm.message.sendAt.setMilliseconds(0);
+            vm.message.sendAt.setSeconds(0);
         }
 
         function sendMessage() {
