@@ -39,10 +39,11 @@
                     </td>
                     <td class="text-center">{{ message.type }}</td>
                     <td class="text-center">
-                        {{ message.sendAt | date: 'hh:mm dd MMM yyyy' }}
+
+                        {{ message.sendAt | date: 'HH:mm dd MMM yyyy' }}
                     </td>
                     <td class="text-center">
-                        {{ message.creation | date: 'hh:mm dd MMM yyyy' }}
+                        {{ message.creation | date: 'HH:mm dd MMM yyyy' }}
                     </td>
                 </tr>
                 </tbody>
