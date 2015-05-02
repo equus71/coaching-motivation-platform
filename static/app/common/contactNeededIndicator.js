@@ -42,6 +42,13 @@
                             scope.classes = {'fa-check': true, 'text-success': true};
                             scope.tooltipText = "Ostatni kontakt: "
                             + (scope.contact.lastContactDate ? $filter('date')(scope.contact.lastContactDate, "dd.MM.yyyy") : "brak");
+                        } else {
+                            if (scope.contact.state === 'CONTACT_PLANNED'){
+                                scope.classes = {'fa-calendar': true, 'text-primary': true};
+                                scope.tooltipText = "Kontakt zaplanowany na: "
+                            + (scope.contact.plannedContactDate ? $filter('date')(scope.contact.plannedContactDate, "dd.MM.yyyy") : "brak");
+
+                            }
                         }
                     }
                 }

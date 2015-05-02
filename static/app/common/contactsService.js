@@ -100,6 +100,11 @@
             if (contact.postponedDate && contact.postponedDate >= now) {
                 contact.postponeChecked = true;
             }
+            if (contact.plannedContact) {
+                contact.plannedContactDate = new Date(contact.plannedContact);
+            } else {
+                contact.plannedContactDate = null;
+            }
 
             return contact;
         }
@@ -172,6 +177,9 @@
             }
             if (contact.state === 'POSTPONED') {
                 return 20;
+            }
+            if (contact.state === 'CONTACT_PLANNED') {
+                return 25;
             }
             if (contact.state === 'CONTACT_OK') {
                 return 30;

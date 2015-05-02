@@ -1,4 +1,5 @@
 import datetime
+from django.core.exceptions import ObjectDoesNotExist
 from django.db import models
 from django.utils import timezone
 from contacts.nameForm import get_name_declension
@@ -38,6 +39,9 @@ class Contact(models.Model):
             return 'DISABLED'
         elif self.postponed and self.postponed > timezone.now():
             return 'POSTPONED'
+        # TODO: consider long term contact planned
+        elif self.plannedContact:
+            return 'CONTACT_PLANNED'
         elif self.lastContact and self.lastContact + datetime.timedelta(hours=self.notificationsFrequency) \
                 < timezone.now():
             return 'CONTACT_NEEDED'
@@ -45,6 +49,20 @@ class Contact(models.Model):
             return 'CONTACT_NEEDED'
         else:
             return 'CONTACT_OK'
+
+    # noinspection PyPep8Naming
+    @property
+    def plannedContact(self):
+        try:
+            latest = Message.objects.filter(contact=self.id,
+                                            state='QUEUED').earliest('sendAtDate')
+        except ObjectDoesNotExist:
+            return None
+
+        if latest:
+            return latest.sendAtDate
+
+        return None
 
     # noinspection PyPep8Naming
     @property
