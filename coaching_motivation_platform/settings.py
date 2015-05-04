@@ -102,7 +102,7 @@ TEMPLATE_DIRS = (
     os.path.join(BASE_DIR, 'templates').replace('\\', '/'),
 )
 
-PRODUCTION = False
+PRODUCTION = os.environ.get('PRODUCTION', False)
 
 LOGGING = {
     'version': 1,
