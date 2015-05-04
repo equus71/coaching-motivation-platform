@@ -15,7 +15,7 @@ module.exports = function (grunt) {
         uglify: {
             app: {
                 files: {
-                    'static/build/project.min.js': ['static/build/js/app.annotated.js']
+                    'static/build/js/app.min.js': ['static/build/js/app.annotated.js']
                 }
             }
         },
@@ -48,7 +48,7 @@ module.exports = function (grunt) {
         },
         ngtemplates: {
             options: {
-              module: "cmp"
+                module: "cmp"
             },
             app: {
                 cwd: 'static/app',
@@ -56,7 +56,10 @@ module.exports = function (grunt) {
                 dest: 'static/build/assets/app.templates.js'
             }
         },
-        clean: ["static/build/js"]
+        clean: {
+            app: ["static/build/js"],
+            partials: ["static/build/js/app.js", "static/build/js/app.annotated.js"]
+        }
     });
 
     grunt.loadNpmTasks('grunt-angular-builder');
@@ -66,8 +69,9 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks("grunt-bower-install-simple");
     grunt.loadNpmTasks('grunt-angular-templates');
 
-    grunt.registerTask('release', ['clean', "bower-install-simple", 'angular-builder', 'ngAnnotate', 'uglify']);
-    grunt.registerTask('debug', ['clean', 'angular-builder']);
+    grunt.registerTask('release', ['clean:app', "bower-install-simple", 'angular-builder', 'ngAnnotate', 'uglify',
+        'clean:partials']);
+    grunt.registerTask('debug', ['clean:app', 'angular-builder']);
     grunt.registerTask('templates', ['ngtemplates']);
 
 };
