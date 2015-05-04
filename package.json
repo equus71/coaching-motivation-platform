@@ -7,7 +7,7 @@
     "Grzegorz Biziel <grzegorz.biziel@gmail.com>"
   ],
   "contributors": [],
-  "license": "MIT",
+  "license": "AGPL 3.0",
   "ignore": [
     "**/.*",
     "node_modules",
@@ -25,7 +25,9 @@
     "font-awesome": "~4.1.0",
     "lodash": "~3.1.0",
     "ng-tags-input": "2.1.1",
-    "handlebars": "latest",
+    "handlebars": "latest"
+  },
+  "dependencies": {
     "grunt": "~0.4.5",
     "grunt-angular-builder": "~1.0.0-beta3",
     "grunt-contrib-uglify": "~0.8.0",
@@ -34,5 +36,7 @@
     "grunt-bower-install-simple": "~1.1.0",
     "grunt-angular-templates": "~0.5.7"
   },
-  "dependencies": {}
+  "scripts": {
+    "postinstall": "bower install && grunt release && grunt templates"
+  }
 }

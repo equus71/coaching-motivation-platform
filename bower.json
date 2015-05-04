@@ -7,7 +7,7 @@
     "Grzegorz Biziel <grzegorz.biziel@gmail.com>"
   ],
   "contributors": [],
-  "license": "MIT",
+  "license": "AGPL 3.0",
   "ignore": [
     "**/.*",
     "node_modules",
