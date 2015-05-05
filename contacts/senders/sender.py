@@ -1,4 +1,6 @@
+from coaching_motivation_platform import settings
 from contacts.senders.mail_sender import MailSender
+from contacts.senders.sms_sender import PromoSmsSender
 
 
 def get_sender_for_message(message):
@@ -9,8 +11,9 @@ def get_sender_for_message(message):
 
 
 def get_sms_sender_for_message(message):
-    # TODO: make sms sender
-    return MailSender()
+    if settings.SMS_SENDER == 'PROMOSMS':
+        return PromoSmsSender()
+    raise Exception(message="SMS sender not defined")
 
 
 def get_email_sender_for_message(message):
