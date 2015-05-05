@@ -48,6 +48,7 @@
             <label for="messageBody" class="control-label">Treść wiadomości</label>
             <textarea ng-maxlength="65536" ng-required="true" ng-model="vm.message.body"
                       class="form-control" name="messageBody" rows="16" cmp-is-focused></textarea>
+            <!-- TODO: add character counter for smses -->
         </div>
     </div>
     <div class="col-sm-4" ng-if="vm.contact">

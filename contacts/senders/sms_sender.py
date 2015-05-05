@@ -6,6 +6,7 @@ from coaching_motivation_platform import settings
 
 
 class PromoSmsSender(object):
+    # TODO: add cfg for longer smses
 
     def prepare_initial_settings(self):
         promosms_request_dict = {
