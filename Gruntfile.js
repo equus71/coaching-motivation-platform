@@ -71,7 +71,7 @@ module.exports = function (grunt) {
 
     grunt.registerTask('release', ['clean:app', "bower-install-simple", 'angular-builder', 'ngAnnotate', 'uglify',
         'clean:partials']);
-    grunt.registerTask('heroku:production', ['clean:app', "bower-install-simple", 'angular-builder', 'ngAnnotate', 'uglify',
+    grunt.registerTask('heroku', ['clean:app', "bower-install-simple", 'angular-builder', 'ngAnnotate', 'uglify',
         'clean:partials', 'ngtemplates']);
     grunt.registerTask('debug', ['clean:app', 'angular-builder']);
     grunt.registerTask('templates', ['ngtemplates']);
