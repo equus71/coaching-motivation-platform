@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('cmp.queue')
+        .module('cmp.common')
         .factory('messagesService', messagesService);
 
     messagesService.$inject = ['$http', '$q', 'lodash'];
