@@ -2,12 +2,12 @@
     'use strict';
 
     angular
-        .module('cmp.common')
-        .controller('MasterCtrl', MasterCtrl);
+        .module('cmp.board', [])
+        .controller('BoardCtrl', BoardCtrl);
 
-    MasterCtrl.$inject = ['alertService'];
+    BoardCtrl.$inject = ['alertService'];
 
-    function MasterCtrl(alertService) {
+    function BoardCtrl(alertService) {
         var vm = this;
 
         vm.alerts = alertService.getAlerts();

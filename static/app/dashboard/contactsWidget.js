@@ -40,7 +40,7 @@
             }
 
             function writeToContact(contact) {
-                $state.go('message', {'contactId': contact.id});
+                $state.go('board.message', {'contactId': contact.id});
             }
 
             function postponeContact(contact) {

@@ -1,0 +1,79 @@
+<div id="page-wrapper" ng-class="{'open': vm.isSidebarOpened}">
+
+    <!-- Sidebar -->
+    <div id="sidebar-wrapper">
+        <ul class="sidebar">
+            <li class="sidebar-main">
+                <a ng-click="vm.toggleSidebar()" class="sidebar-toggler">
+                    <small>NAWIGACJA</small>
+                    <span class="menu-icon glyphicon glyphicon-transfer"></span>
+                </a>
+            </li>
+            <li class="sidebar-list">
+                <a ui-sref="board.dashboard">Dashboard <span class="menu-icon fa fa-tachometer"></span></a>
+            </li>
+            <li class="sidebar-list">
+                <a ui-sref="board.contacts">Kontakty <span class="menu-icon fa fa-users"></span></a>
+            </li>
+            <li class="sidebar-list">
+                <a ui-sref="board.messageTemplates">Szablony <span class="menu-icon fa fa-puzzle-piece"></span></a>
+            </li>
+            <li class="sidebar-list">
+                <a ui-sref="board.queue">Wiadomości <span class="menu-icon fa fa-envelope"></span></a>
+            </li>
+        </ul>
+        <div class="sidebar-footer">
+            <div class="col-xs-6">
+                <a href="https://github.com/equus71/coaching-motivation-platform" target="_blank">
+                    Github
+                </a>
+            </div>
+            <div class="col-xs-6">
+                <a href="" target="_blank">
+                    About
+                </a>
+            </div>
+        </div>
+    </div>
+    <!-- End Sidebar -->
+
+    <div id="content-wrapper">
+        <div class="page-content">
+
+            <!-- Header Bar -->
+            <div class="row header">
+                <div class="col-xs-12">
+                    <cmp-user-account></cmp-user-account>
+                    <div class="meta">
+                        <div class="page">
+                            Centrum motywacji i coachingu
+                        </div>
+                        <div class="breadcrumb-links">
+                            <ui-breadcrumbs displayname-property="data.displayName">
+                            </ui-breadcrumbs>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- End Header Bar -->
+
+            <div class="alerts-container">
+                <div class="container">
+                    <alert data-ng-repeat="alert in vm.alerts" type="{{ alert.type }}"
+                           close="vm.closeAlert($index)" class="animated fade-in-from-bottom">{{ alert.text }}
+                        <a class="btn-link" ng-click="vm.undoAlert(alert)" ng-if="alert.undo"> <i class="fa fa-undo"></i> cofnij</a>
+                    </alert>
+                </div>
+            </div>
+
+            <!-- Main Content -->
+            <div class="master-container">
+                <div ui-view class="at-view-plain-fade-in at-view-plain-fade-out">
+
+                </div>
+            </div>
+        </div>
+        <!-- End Page Content -->
+    </div>
+    <!-- End Content Wrapper -->
+</div>

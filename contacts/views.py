@@ -27,9 +27,7 @@ class ContactViewSet(mixins.CreateModelMixin,
     serializer_class = ContactSerializer
     filter_fields = ('isActive',)
 
-    def get_permissions(self):
-        # TODO: add permission for authenticated users
-        return (permissions.AllowAny(),)
+    permission_classes = (permissions.IsAuthenticated,)
 
     def perform_create(self, serializer):
         serializer.save()
@@ -39,9 +37,7 @@ class ContactMessagesViewSet(mixins.ListModelMixin,
                              viewsets.GenericViewSet):
     serializer_class = ContactMessagesSerializer
 
-    def get_permissions(self):
-        # TODO: add permission for authenticated users
-        return (permissions.AllowAny(),)
+    permission_classes = (permissions.IsAuthenticated,)
 
     def get_queryset(self):
         """
@@ -59,9 +55,7 @@ class MessageViewSet(mixins.ListModelMixin,
                      viewsets.GenericViewSet):
     queryset = Message.objects.filter(state="QUEUED")
 
-    def get_permissions(self):
-        # TODO: add permission for authenticated users
-        return (permissions.AllowAny(),)
+    permission_classes = (permissions.IsAuthenticated,)
 
     def get_serializer_class(self):
         if self.action == u'create':
@@ -76,8 +70,7 @@ class MessageCreateViewSet(mixins.CreateModelMixin,
                            viewsets.GenericViewSet):
     queryset = Message.objects.all()
     serializer_class = MessageCreateSerializer
-    # TODO: add permission for authenticated users
-    permission_classes = (permissions.AllowAny,)
+    permission_classes = (permissions.IsAuthenticated,)
 
 
 class TagViewSet(mixins.ListModelMixin,
@@ -85,9 +78,7 @@ class TagViewSet(mixins.ListModelMixin,
     queryset = Tag.objects.all()
     serializer_class = TagSerializer
 
-    def get_permissions(self):
-        # TODO: add permission for authenticated users
-        return (permissions.AllowAny(),)
+    permission_classes = (permissions.IsAuthenticated,)
 
 
 class MessageTemplatesViewSet(mixins.CreateModelMixin,
@@ -98,17 +89,14 @@ class MessageTemplatesViewSet(mixins.CreateModelMixin,
     queryset = MessageTemplate.objects.all()
     serializer_class = MessageTemplateSerializer
 
-    def get_permissions(self):
-        # TODO: add permission for authenticated users
-        return (permissions.AllowAny(),)
+    permission_classes = (permissions.IsAuthenticated,)
 
 
 class StatsView(APIView):
     """
     View returning basic stats about system
     """
-    # TODO: add permission for authenticated users
-    permission_classes = (permissions.AllowAny,)
+    permission_classes = (permissions.IsAuthenticated,)
 
     def get(self, request, format=None):
         return Response({"stats": {

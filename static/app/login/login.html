@@ -1,0 +1,45 @@
+<div class="login-pg">
+    <div class="container main">
+        <div class="row">
+            <div class="col-sm-6 col-sm-offset-3">
+                <div class="widget">
+                    <div class="widget-header">
+                        <h3>Centrum motywacji i coachingu</h3>
+                        <i class="fa fa-users"></i> Logowanie do systemu
+                    </div>
+                    <div class="widget-body">
+                        <form name="vm.loginForm">
+                            <div class="form-group">
+                                <label for="username">Nazwa użytkownika</label>
+                                <input type="text" class="form-control" id="username"
+                                       ng-model="vm.username"
+                                       placeholder="Nazwa użytkownika" ng-required="true">
+                            </div>
+                            <div class="form-group">
+                                <label for="password">Hasło</label>
+                                <input type="password" class="form-control" id="password"
+                                       ng-model="vm.password"
+                                       placeholder="Hasło" ng-required="true">
+                            </div>
+                            <div class="form-group row">
+                                <button class="btn btn-default pull-right"
+                                        ng-click="vm.login()">Zaloguj</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row text-center">
+            <div class="copyright">
+                fork on
+                <a href="https://github.com/equus71/coaching-motivation-platform" target="_blank">
+                    <i class="fa fa-github"></i> Github
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

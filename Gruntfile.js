@@ -4,7 +4,8 @@ module.exports = function (grunt) {
         'angular-builder': {
             options: {
                 mainModule: 'cmp',
-                externalModules: ['ngLodash', 'ui.router', 'ngAnimate', 'ui.bootstrap', 'angularUtils.directives.uiBreadcrumbs',
+                externalModules: ['ngLodash', 'ui.router', 'ngAnimate', 'ngCookies',
+                    'ui.bootstrap', 'angularUtils.directives.uiBreadcrumbs',
                     'ngTagsInput']
             },
             app: {

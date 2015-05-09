@@ -75,7 +75,7 @@
                     vm.message.template = vm.template.id;
                 }
                 messagesService.createMessage(vm.message).then(function () {
-                    $state.go('dashboard');
+                    $state.go('board.dashboard');
                 }, function () {
                     alertService.addAlert('Nie udało się zapisać wiadomości.', 'danger', 30000);
                 });
