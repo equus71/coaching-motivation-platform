@@ -78,6 +78,7 @@ USE_L10N = True
 
 USE_TZ = True
 
+PRODUCTION = os.environ.get('PRODUCTION', False)
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.7/howto/static-files/
@@ -87,11 +88,12 @@ STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 STATIC_ROOT = 'staticfiles'
 STATIC_URL = '/static/'
 
-STATICFILES_DIRS = (
+STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
-    os.path.join(BASE_DIR, 'node_modules'),
     os.path.join(BASE_DIR, 'bower_components'),
-)
+]
+if not PRODUCTION:
+    STATICFILES_DIRS.append(os.path.join(BASE_DIR, 'node_modules'))
 
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': ('rest_framework.permissions.IsAdminUser',),
@@ -101,8 +103,6 @@ REST_FRAMEWORK = {
 TEMPLATE_DIRS = (
     os.path.join(BASE_DIR, 'templates').replace('\\', '/'),
 )
-
-PRODUCTION = os.environ.get('PRODUCTION', False)
 
 LOGGING = {
     'version': 1,
