@@ -16,6 +16,7 @@
         vm.closeTemplatePicker = closeTemplatePicker;
         vm.sendMessage = sendMessage;
         vm.fieldValidation = validationService.fieldValidation;
+        vm.messageTypChange = messageTypeHandler;
         vm.message = {
             type: 'EMAIL',
             header: '',
@@ -63,6 +64,8 @@
             vm.message.sendAt = new Date();//default: now
             vm.message.sendAt.setMilliseconds(0);
             vm.message.sendAt.setSeconds(0);
+
+            vm.bodyMaxLength = setBodyLimit(vm.message);
         }
 
         function sendMessage() {
@@ -111,6 +114,18 @@
             vm.message.recipientPhone = vm.contact.phone || '';
         }
 
+        function messageTypeHandler() {
+            vm.bodyMaxLength = setBodyLimit(vm.message);
+        }
+
+        function setBodyLimit(message) {
+            if (message.type == "EMAIL") {
+                return 65536;
+            } else {
+                return 480;
+            }
+        }
+
         function templateChange(event, template) {
             var undo = undoService.undoOperation(vm, null, {
                 template: vm.template,
@@ -118,6 +133,7 @@
             });
             vm.template = template;
             vm.message.type = template.type;
+            vm.bodyMaxLength = setBodyLimit(vm.message);
             $location.search('templateId', template.id);
             vm.message = renderTemplate(vm.message, vm.template, vm.contact);
             undo.callbacks.push(function (vm) {

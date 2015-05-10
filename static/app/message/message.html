@@ -6,7 +6,7 @@
                 {{ vm.contact ? vm.contact.firstName + ' ' + vm.contact.lastName : 'Wybierz adresata' }}</button>
             <button type="button" class="btn btn-default" ng-click="vm.openTemplatePicker()">
                 {{ vm.template.name || 'Wybierz szablon' }}</button>
-            <select class="form-control" ng-model="vm.message.type">
+            <select class="form-control" ng-model="vm.message.type" ng-change="vm.messageTypChange()">
                 <option value="SMS">SMS</option>
                 <option value="EMAIL">Email</option>
             </select>
@@ -46,10 +46,10 @@
         </div>
         <div class="form-group" ng-class="{'has-error': vm.fieldValidation(vm.messageForm.messageBody)}">
             <label for="messageBody" class="control-label">Treść wiadomości</label>
-            <textarea ng-maxlength="65536" ng-required="true" ng-model="vm.message.body"
+            <textarea ng-maxlength="vm.bodyMaxLength" ng-required="true" ng-model="vm.message.body"
                       class="form-control" name="messageBody" rows="16" cmp-is-focused></textarea>
-            <!-- TODO: add character counter for smses -->
         </div>
+        <div ng-show="vm.message.type == 'SMS'" class="text-right">{{ vm.message.body.length }} </div>
     </div>
     <div class="col-sm-4" ng-if="vm.contact">
         <cmp-notes contact="vm.contact"></cmp-notes>
