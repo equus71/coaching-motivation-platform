@@ -20,4 +20,5 @@ class Command(BaseCommand):
             contact.save()
 
         send_messages = [msg for msg in messages_in_queue if msg.state == "SEND"]
-        print len(send_messages) + " messages send (from " + len(messages_in_queue) + " messages in queue)"
+        print str(len(send_messages)) + " messages send (from " \
+              + str(len(messages_in_queue)) + " messages in queue)"
