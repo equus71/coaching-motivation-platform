@@ -1,3 +1,7 @@
+import datetime
+
+from django.db.models import Q
+from django.utils import timezone
 from django.views.generic import TemplateView
 from rest_framework import viewsets, permissions, mixins
 from rest_framework.response import Response
@@ -101,8 +105,22 @@ class StatsView(APIView):
     def get(self, request, format=None):
         return Response({"stats": {
             "activeClients": Contact.objects.filter(isActive=True).count(),
-            # TODO: contact needed computation
-            "contactNeeded": 5,
+            "contactNeeded": len(self.get_contact_needed()),
             "templates": MessageTemplate.objects.count(),
             "inMsgQueue": Message.objects.filter(state="QUEUED").count()
         }})
+
+    @staticmethod
+    def get_contact_needed():
+        contacts = Contact.objects \
+            .filter(Q(isActive=True) &
+                    Q(Q(postponed__lt=timezone.now()) |
+                      Q(postponed=None)) &
+                    Q(Q(lastContact__lt=timezone.now() - datetime.timedelta(hours=24)) |
+                      Q(lastContact=None))).all()
+        contact_needed = [contact for contact in contacts
+                          if (not contact.lastContact or
+                              contact.lastContact + datetime.timedelta(hours=contact.notificationsFrequency)
+                              < timezone.now()) and
+                          not contact.plannedContact]
+        return contact_needed
