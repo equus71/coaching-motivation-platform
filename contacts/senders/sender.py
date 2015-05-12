@@ -13,8 +13,7 @@ def get_sender_for_message(message):
 def get_sms_sender_for_message(message):
     if settings.SMS_SENDER == 'PROMOSMS':
         return PromoSmsSender()
-    # TODO: fix raw Exception cannot take message
-    raise Exception(message="SMS sender not defined")
+    raise Exception("SMS sender not defined")
 
 
 def get_email_sender_for_message(message):
