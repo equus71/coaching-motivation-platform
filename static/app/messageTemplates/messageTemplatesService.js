@@ -13,6 +13,7 @@
             getTemplate: getTemplate,
             saveTemplate: saveTemplate,
             createTemplate: createTemplate,
+            deleteTemplate: deleteTemplate,
             sortTemplatesByMatch: sortTemplatesByMatch
         };
         function getTemplates() {
@@ -61,6 +62,13 @@
                 deferred.reject();
             });
             return deferred.promise;
+        }
+
+        function deleteTemplate(template){
+            return $http({
+                url: '/api/v1/messageTemplates/' + template.id + '/',
+                method: 'DELETE'
+            });
         }
 
         function sortTemplatesByMatch(templates, contact) {

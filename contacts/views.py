@@ -88,6 +88,7 @@ class TagViewSet(mixins.ListModelMixin,
 class MessageTemplatesViewSet(mixins.CreateModelMixin,
                               mixins.ListModelMixin,
                               mixins.RetrieveModelMixin,
+                              mixins.DestroyModelMixin,
                               mixins.UpdateModelMixin,
                               viewsets.GenericViewSet):
     queryset = MessageTemplate.objects.all()

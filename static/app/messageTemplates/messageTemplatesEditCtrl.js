@@ -5,14 +5,15 @@
         .module('cmp.messageTemplates')
         .controller('MessageTemplatesEditCtrl', MessageTemplatesEditCtrl);
 
-    MessageTemplatesEditCtrl.$inject = ['$state', 'alertService', 'messageTemplatesService', 'tagService', 'validationService'];
+    MessageTemplatesEditCtrl.$inject = ['$state', 'alertService', 'deleteModalService', 'messageTemplatesService', 'tagService', 'validationService'];
 
-    function MessageTemplatesEditCtrl($state, alertService, messageTemplatesService, tagService, validationService) {
+    function MessageTemplatesEditCtrl($state, alertService, deleteModalService, messageTemplatesService, tagService, validationService) {
         var vm = this;
 
         vm.matchingTags = tagService.getMatchingTags;
         vm.fieldValidation = validationService.fieldValidation;
         vm.save = saveTemplate;
+        vm.delete = deleteTemplate;
         vm.formattedTags = [];
         vm.availableVariables = [
             {
@@ -59,6 +60,14 @@
             } else {
                 validationService.markFormFieldsAsTouched(vm.templateForm);
             }
+        }
+
+        function deleteTemplate() {
+            deleteModalService.makeDeleteModal(vm.template, "MESSAGE_TEMPLATE").then(function(){
+                messageTemplatesService.deleteTemplate(vm.template).then(function(){
+                    $state.go('.^');
+                })
+            });
         }
     }
 
