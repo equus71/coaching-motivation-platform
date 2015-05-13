@@ -119,8 +119,5 @@ class StatsView(APIView):
                     Q(Q(lastContact__lt=timezone.now() - datetime.timedelta(hours=24)) |
                       Q(lastContact=None))).all()
         contact_needed = [contact for contact in contacts
-                          if (not contact.lastContact or
-                              contact.lastContact + datetime.timedelta(hours=contact.notificationsFrequency)
-                              < timezone.now()) and
-                          not contact.plannedContact]
+                          if contact.state == 'CONTACT_NEEDED']
         return contact_needed
