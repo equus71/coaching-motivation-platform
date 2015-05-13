@@ -1,0 +1,14 @@
+<div>
+    <div class="modal-header">
+        <button type="button" class="close" ng-click="$dismiss()">x</button>
+        <h4>Usunąć szablon: {{ vmm.resource.name }} ?</h4>
+    </div>
+    <div class="modal-body">
+        Tej operacji nie można cofnąć. Spowoduję ona usunięcię szablonu: <strong>{{ vmm.resource.name }}</strong>.
+        <p>Usunąć szablon?</p>
+        <p class="text-right">
+            <button type="button" class="btn btn-warning" ng-click="$close()">Tak</button>
+            <button type="button" class="btn btn-default" ng-click="$dismiss()">Nie</button>
+        </p>
+    </div>
+</div>

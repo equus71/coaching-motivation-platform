@@ -13,7 +13,8 @@
             getContactsMessages: getContactsMessages,
             getMessage: getMessage,
             saveMessage: saveMessage,
-            createMessage: createMessage
+            createMessage: createMessage,
+            deleteMessage: deleteMessage
         };
         function getMessages() {
             var deferred = $q.defer();
@@ -77,6 +78,13 @@
                 deferred.reject();
             });
             return deferred.promise;
+        }
+
+        function deleteMessage(message){
+            return $http({
+                url: '/api/v1/messages/' + message.id + '/',
+                method: 'DELETE'
+            });
         }
 
         function formatDatesToJS(message) {

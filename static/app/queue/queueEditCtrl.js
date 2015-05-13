@@ -5,9 +5,9 @@
         .module('cmp.queue')
         .controller('QueueEditCtrl', QueueEditCtrl);
 
-    QueueEditCtrl.$inject = ['$state', 'contactsService', 'messagesService'];
+    QueueEditCtrl.$inject = ['$state', 'contactsService', 'deleteModalService', 'messagesService', 'validationService'];
 
-    function QueueEditCtrl($state, contactsService, messagesService) {
+    function QueueEditCtrl($state, contactsService, deleteModalService, messagesService, validationService) {
         var vm = this;
 
         vm.message = {};
@@ -42,7 +42,11 @@
         }
 
         function deleteMessage(){
-
+            deleteModalService.makeDeleteModal(vm.message, "MESSAGE").then(function(){
+                messagesService.deleteMessage(vm.message).then(function(){
+                    $state.go('.^');
+                })
+            });
         }
     }
 

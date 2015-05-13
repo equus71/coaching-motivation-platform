@@ -68,13 +68,13 @@
             </div>
             <div class="form-group" ng-class="{'has-error': vm.fieldValidation(vm.messageForm.header)}"
                  ng-if="vm.message.type == 'EMAIL'">
-                <label for="header" class="col-sm-2 control-label">Tytuł wiadomości</label>
+                <label for="header" class="col-sm-2 control-label">Temat wiadomości</label>
 
                 <div class="col-sm-10">
                     <input type="text" name="header" class="form-control" ng-model="vm.message.header"
                            cmp-is-focused
-                           ng-maxlength="16"
-                           placeholder="Telefon">
+                           ng-maxlength="256"
+                           placeholder="Temat wiadmości">
                 </div>
             </div>
             <div class="form-group" ng-class="{'has-error': vm.fieldValidation(vm.messageForm.body)}">

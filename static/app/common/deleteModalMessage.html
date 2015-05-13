@@ -1,0 +1,14 @@
+<div>
+    <div class="modal-header">
+        <button type="button" class="close" ng-click="$dismiss()">x</button>
+        <h4>Usunąć wiadomość do: {{ vmm.resource.recipientName }} ?</h4>
+    </div>
+    <div class="modal-body">
+        Tej operacji nie można cofnąć. Spowoduję ona usunięcię wiadomości skierowanej do: <strong>{{ vmm.resource.recipientName }}</strong> utworzonej {{ vmm.resource.sendAt | date: 'HH:mm dd MMM yyyy'}}.
+        <p>Usunąć wiadomość?</p>
+        <p class="text-right">
+            <button type="button" class="btn btn-warning" ng-click="$close()">Tak</button>
+            <button type="button" class="btn btn-default" ng-click="$dismiss()">Nie</button>
+        </p>
+    </div>
+</div>
