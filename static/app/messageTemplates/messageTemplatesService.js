@@ -84,7 +84,7 @@
                             }else{
                                 return sum;
                             }
-                        });
+                        }, 0);
                 }).reverse();
         }
     }
