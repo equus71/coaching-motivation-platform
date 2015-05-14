@@ -13,6 +13,7 @@
             getContact: getContact,
             saveContact: saveContact,
             createContact: createContact,
+            deleteContact: deleteContact,
             deactivateContact: deactivateContact,
             postponeContact: postponeContact,
             markContacted: markContacted,
@@ -83,6 +84,13 @@
                 deferred.reject();
             });
             return deferred.promise;
+        }
+
+        function deleteContact(contact){
+            return $http({
+                url: '/api/v1/contacts/' + contact.id + '/',
+                method: 'DELETE'
+            });
         }
 
         function formatDatesToJS(contact) {

@@ -26,15 +26,13 @@ class ContactViewSet(mixins.CreateModelMixin,
                      mixins.ListModelMixin,
                      mixins.RetrieveModelMixin,
                      mixins.UpdateModelMixin,
+                     mixins.DestroyModelMixin,
                      viewsets.GenericViewSet):
     queryset = Contact.objects.order_by('-lastContact')
     serializer_class = ContactSerializer
     filter_fields = ('isActive',)
 
     permission_classes = (permissions.IsAuthenticated,)
-
-    def perform_create(self, serializer):
-        serializer.save()
 
 
 class ContactMessagesViewSet(mixins.ListModelMixin,
@@ -65,9 +63,6 @@ class MessageViewSet(mixins.ListModelMixin,
         if self.action == u'create':
             return MessageCreateSerializer
         return MessageDetailsSerializer
-
-    def perform_create(self, serializer):
-        serializer.save()
 
 
 class MessageCreateViewSet(mixins.CreateModelMixin,

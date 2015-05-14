@@ -23,10 +23,13 @@
 
             var modalUrl = '';
             if (type == 'MESSAGE_TEMPLATE') {
-                modalUrl = 'common/deleteModalTemplate.html';
+                modalUrl = 'common/deleteModal/deleteModalTemplate.html';
             }
             if (type === 'MESSAGE') {
-                modalUrl = 'common/deleteModalMessage.html';
+                modalUrl = 'common/deleteModal/deleteModalMessage.html';
+            }
+            if (type === 'CONTACT') {
+                modalUrl = 'common/deleteModal/deleteModalContact.html';
             }
             if (!deleteModal && modalUrl) {
                 deleteModal = $modal.open({
