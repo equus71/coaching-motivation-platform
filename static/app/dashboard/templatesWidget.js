@@ -26,10 +26,16 @@
             vm.currentPage = 1;
             vm.pageSize = 10;
 
-            messageTemplatesService.getTemplates().then(function (data) {
-                vm.templates = data;
-            });
+            activate();
 
+            function activate() {
+                vm.loading = true;
+
+                messageTemplatesService.getTemplates().then(function (data) {
+                    vm.templates = data;
+                    vm.loading = false;
+                });
+            }
         }
     }
 

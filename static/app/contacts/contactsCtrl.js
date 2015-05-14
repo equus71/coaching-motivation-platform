@@ -21,9 +21,12 @@
         activate();
 
         function activate() {
+            vm.loading = true;
+
             contactsService.getContacts().then(function (data) {
                 vm.contacts = data;
                 vm.contacts = contactsService.sortContacts(vm.contacts);
+                vm.loading = false;
             });
         }
 

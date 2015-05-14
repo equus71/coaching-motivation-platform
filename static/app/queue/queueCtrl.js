@@ -21,8 +21,11 @@
         activate();
 
         function activate() {
+            vm.loading = true;
+
             messagesService.getMessages().then(function (data) {
                 vm.messages = data;
+                vm.loading = false;
             })
         }
 

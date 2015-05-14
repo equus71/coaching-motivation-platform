@@ -21,8 +21,10 @@
         activate();
 
         function activate() {
+            vm.loading = true;
             messageTemplatesService.getTemplates().then(function (data) {
                 vm.templates = data;
+                vm.loading = false;
             })
         }
 

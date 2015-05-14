@@ -1,18 +1,22 @@
 <div class="well">
-    <div>{{ contact.firstName }} {{ contact.lastName }} (lat {{ contact.age }})</div>
-    <p>
-        <cmp-tag tags="contact.tags" limit="36"></cmp-tag>
-    </p>
-    <div>Email: {{ contact.email }}</div>
-    <div>Telefon: {{ contact.phone }}</div>
-    <div>
-        <small><strong>NOTATKI:</strong></small>
-    </div>
+    <div ng-if="contact">
+        <div>{{ contact.firstName }} {{ contact.lastName }} (lat {{ contact.age }})</div>
+        <p>
+            <cmp-tag tags="contact.tags" limit="36"></cmp-tag>
+        </p>
+        <div>Email: {{ contact.email }}</div>
+        <div>Telefon: {{ contact.phone }}</div>
+        <div>
+            <small><strong>NOTATKI:</strong></small>
+        </div>
             <textarea ng-maxlength="65536" maxlength="65536" ng-model="contact.notes"
                       class="form-control" name="notes" rows="12" cmp-is-focused></textarea>
 
-    <div class="help-block">
-        <!-- TODO: add some in-progress indicator -->
-        <button class="btn btn-success" ng-click="vm.saveNotes(contact)"><i class="fa fa-save"></i> Zapisz notatki</button>
+        <div class="help-block">
+            <!-- TODO: add some in-progress indicator -->
+            <button class="btn btn-success" ng-click="vm.saveNotes(contact)"><i class="fa fa-save"></i> Zapisz notatki
+            </button>
+        </div>
     </div>
+    <cmp-loading ng-if="!contact"></cmp-loading>
 </div>
