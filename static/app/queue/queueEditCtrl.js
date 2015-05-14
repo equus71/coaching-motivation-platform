@@ -30,10 +30,11 @@
 
         function saveMessage(){
             if (vm.messageForm.$valid) {
-                vm.saving = true;
+                vm.saveInProgress = true;
                 messagesService.saveMessage(vm.message).then(function () {
                     $state.go('^');
                 }, function () {
+                    vm.saveInProgress = false;
                     alertService.addAlert('Nie udało się zapisać wiadomości.', 'danger', 30000);
                 });
             } else {

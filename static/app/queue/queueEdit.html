@@ -5,7 +5,8 @@
         </div>
         <div class="pull-right">
             <a class="btn btn-danger" ng-click="vm.deleteMessage()"><i class="fa fa-trash-o"></i> Skasuj</a>
-            <a class="btn btn-success" ng-click="vm.saveMessage()"><i class="fa fa-save"></i> Zapisz</a>
+            <a class="btn btn-success" ng-click="vm.saveMessage()"
+               ng-disabled="vm.saveInProgress"><i class="fa fa-save" ng-if="!vm.saveInProgress"></i><i class="fa fa-spinner fa-spin" ng-if="vm.saveInProgress"></i> Zapisz</a>
         </div>
     </div>
 </div>

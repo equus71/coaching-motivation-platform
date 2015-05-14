@@ -28,11 +28,12 @@
 
         function saveContact() {
             if (vm.contactForm.$valid) {
-                vm.saving = true;
+                vm.saveInProgress = true;
                 vm.contact.tags = tagService.getPlainTags(vm.formattedTags);
                 contactsService.createContact(vm.contact).then(function () {
                     $state.go('^');
                 }, function () {
+                    vm.saveInProgress = false;
                     alertService.addAlert('Nie udało się zapisać kontaktu.', 'danger');
                 });
             } else {

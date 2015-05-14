@@ -77,9 +77,11 @@
                 if (vm.template){
                     vm.message.template = vm.template.id;
                 }
+                vm.sendingInProgress = true;
                 messagesService.createMessage(vm.message).then(function () {
                     $state.go('board.dashboard');
                 }, function () {
+                    vm.sendingInProgress = false;
                     alertService.addAlert('Nie udało się zapisać wiadomości.', 'danger', 30000);
                 });
             } else {

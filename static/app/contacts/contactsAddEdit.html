@@ -4,9 +4,8 @@
             <a class="btn btn-default" ui-sref="^"><i class="fa fa-chevron-left"></i> Cofnij</a>
         </div>
         <!--TODO: deleting -->
-        <!--TODO: protection from double save -->
         <div class="pull-right">
-            <a class="btn btn-success" ng-click="vm.save()"><i class="fa fa-save"></i> Zapisz</a>
+            <a class="btn btn-success" ng-click="vm.save()" ng-disabled="vm.saveInProgress"><i class="fa fa-save" ng-if="!vm.saveInProgress"></i><i class="fa fa-spinner fa-spin" ng-if="vm.saveInProgress"></i> Zapisz</a>
         </div>
     </div>
 </div>

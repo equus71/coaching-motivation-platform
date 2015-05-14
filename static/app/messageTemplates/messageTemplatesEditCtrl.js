@@ -50,11 +50,12 @@
 
         function saveTemplate() {
             if (vm.templateForm.$valid) {
-                vm.saving = true;
+                vm.saveInProgress = true;
                 vm.template.tags = tagService.getPlainTags(vm.formattedTags);
                 messageTemplatesService.saveTemplate(vm.template).then(function () {
                     $state.go('^');
                 }, function () {
+                    vm.saveInProgress = false;
                     alertService.addAlert('Nie udało się zapisać szablonu.', 'danger');
                 });
             } else {
