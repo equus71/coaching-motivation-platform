@@ -54,13 +54,12 @@ class Contact(models.Model):
     @property
     def plannedContact(self):
         try:
-            latest = Message.objects.filter(contact=self.id,
-                                            state='QUEUED').earliest('sendAtDate')
+            earliest = self.messages.filter(state='QUEUED').earliest('sendAtDate')
         except ObjectDoesNotExist:
             return None
 
-        if latest:
-            return latest.sendAtDate
+        if earliest:
+            return earliest.sendAtDate
 
         return None
 
