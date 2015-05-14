@@ -35,7 +35,7 @@ class StatsViewTest(TestCase):
                           lastContact=timezone.now())
         contact.save()
         message = Message(type='SMS', recipientName='Test test', contact=contact, recipientPhone="1234", body="test",
-                          sendAtDate=timezone.now(), state="QUEUE")
+                          sendAtDate=timezone.now(), state="QUEUED")
         message.save()
 
         # WHEN: run get_contact_needed
