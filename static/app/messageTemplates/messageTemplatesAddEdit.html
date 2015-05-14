@@ -57,6 +57,7 @@
                     <textarea ng-maxlength="65536" ng-required="true" ng-model="vm.template.templateBody" class="form-control" name="templateBody" rows="16" cmp-is-focused></textarea>
                 </div>
             </div>
+            <div ng-show="vm.template.type == 'SMS'" class="text-right">szacunkowo znaków: {{ vm.template.templateBody.length }} </div>
         </form>
     </div>
     <div class="col-xs-12 col-sm-4">
