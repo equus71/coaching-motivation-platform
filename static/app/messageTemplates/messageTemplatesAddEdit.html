@@ -4,9 +4,9 @@
             <a class="btn btn-default" ui-sref="^"><i class="fa fa-chevron-left"></i> Cofnij</a>
         </div>
         <div class="pull-right">
-            <a class="btn btn-danger" ng-if="vm.template.id" ng-click="vm.delete()"><i class="fa fa-trash-o"></i> Skasuj</a>
-            <a class="btn btn-success" ng-click="vm.save()"
-                    ng-disabled="vm.saveInProgress"><i class="fa fa-save" ng-if="!vm.saveInProgress"></i><i class="fa fa-spinner fa-spin" ng-if="vm.saveInProgress"></i> Zapisz</a>
+            <button type="button" class="btn btn-danger" ng-if="vm.template.id" ng-click="vm.delete()"><i class="fa fa-trash-o"></i> Skasuj</button>
+            <button type="button" class="btn btn-success" ng-click="vm.save()"
+                    ng-disabled="vm.saveInProgress"><i class="fa fa-save" ng-if="!vm.saveInProgress"></i><i class="fa fa-spinner fa-spin" ng-if="vm.saveInProgress"></i> Zapisz</button>
         </div>
     </div>
 </div>
