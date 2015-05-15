@@ -18,6 +18,8 @@ class PromoSmsSender(object):
             promosms_request_dict['from'] = settings.PROMOSMS_FROM
         if settings.PROMOSMS_TYPE:
             promosms_request_dict['type'] = settings.PROMOSMS_TYPE
+        if settings.PROMOSMS_SINGLE:
+            promosms_request_dict['single'] = settings.PROMOSMS_SINGLE
         return promosms_request_dict
 
     def send(self, message, contact):
