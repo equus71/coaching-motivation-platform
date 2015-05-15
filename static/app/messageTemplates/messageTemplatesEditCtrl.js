@@ -67,7 +67,7 @@
             deleteModalService.makeDeleteModal(vm.template, "MESSAGE_TEMPLATE").then(function(){
                 messageTemplatesService.deleteTemplate(vm.template).then(function(){
                     $state.go('.^');
-                })
+                });
             });
         }
     }
