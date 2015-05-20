@@ -6,8 +6,6 @@ from coaching_motivation_platform import settings
 
 
 class PromoSmsSender(object):
-    # TODO: add cfg for longer smses
-
     def prepare_initial_settings(self):
         promosms_request_dict = {
             'login': settings.PROMOSMS_LOGIN,
@@ -31,6 +29,8 @@ class PromoSmsSender(object):
         except UnicodeEncodeError:
         # TODO: add logging of the request format errors
             return message, contact
+
+        # TODO: add filter for non-breaking space
 
         try:
             response = requests.get(settings.PROMOSMS_SMS_ENDPOINT + "?" + urllib.urlencode(promosms_request_dict))
