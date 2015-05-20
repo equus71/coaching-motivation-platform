@@ -5,9 +5,9 @@
         .module('cmp.messageTemplates')
         .controller('MessageTemplatesAddCtrl', MessageTemplatesAddCtrl);
 
-    MessageTemplatesAddCtrl.$inject = ['$state', 'alertService', 'messageTemplatesService', 'tagService', 'validationService'];
+    MessageTemplatesAddCtrl.$inject = ['$state', 'alertService', 'messageTemplatesService', 'tagService', 'templatingService', 'validationService'];
 
-    function MessageTemplatesAddCtrl($state, alertService, messageTemplatesService, tagService, validationService) {
+    function MessageTemplatesAddCtrl($state, alertService, messageTemplatesService, tagService, templatingService, validationService) {
         var vm = this;
 
         vm.matchingTags = tagService.getMatchingTags;
@@ -21,33 +21,14 @@
             "templateBody": "",
             "templateHeader": ""
         };
-        vm.availableVariables = [
-            {
-                key: "imie",
-                desc: "Imie kontaktu"
-            },
-            {
-                key: "imie_w",
-                desc: "Imie kontaktu w wołaczu"
-            },
-            {
-                key: "nazwisko",
-                desc: "Nazwisko kontaktu"
-            },
-            {
-                key: "tytul",
-                desc: "Tytuł, Pan/Pani"
-            },
-            {
-                key: "tytul_w",
-                desc: "Tytuł w wołaczu"
-            }
-        ];
 
         activate();
 
         function activate() {
             tagService.clearCache();
+            templatingService.getDefaultVariables().then(function(data){
+                vm.availableVariables = data;
+            });
         }
 
         function saveTemplate() {

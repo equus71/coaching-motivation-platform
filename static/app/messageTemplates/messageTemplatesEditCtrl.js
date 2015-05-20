@@ -5,9 +5,9 @@
         .module('cmp.messageTemplates')
         .controller('MessageTemplatesEditCtrl', MessageTemplatesEditCtrl);
 
-    MessageTemplatesEditCtrl.$inject = ['$state', 'alertService', 'deleteModalService', 'messageTemplatesService', 'tagService', 'validationService'];
+    MessageTemplatesEditCtrl.$inject = ['$state', 'alertService', 'deleteModalService', 'messageTemplatesService', 'tagService', 'templatingService', 'validationService'];
 
-    function MessageTemplatesEditCtrl($state, alertService, deleteModalService, messageTemplatesService, tagService, validationService) {
+    function MessageTemplatesEditCtrl($state, alertService, deleteModalService, messageTemplatesService, tagService, templatingService, validationService) {
         var vm = this;
 
         vm.matchingTags = tagService.getMatchingTags;
@@ -15,28 +15,6 @@
         vm.save = saveTemplate;
         vm.delete = deleteTemplate;
         vm.formattedTags = [];
-        vm.availableVariables = [
-            {
-                key: "imie",
-                desc: "Imie kontaktu"
-            },
-            {
-                key: "imie_w",
-                desc: "Imie kontaktu w wołaczu"
-            },
-            {
-                key: "nazwisko",
-                desc: "Nazwisko kontaktu"
-            },
-            {
-                key: "tytul",
-                desc: "Tytuł, Pan/Pani"
-            },
-            {
-                key: "tytul_w",
-                desc: "Tytuł w wołaczu"
-            }
-        ];
 
         activate();
 
@@ -44,6 +22,9 @@
             messageTemplatesService.getTemplate($state.params.templateId).then(function (data) {
                 vm.template = data;
                 vm.formattedTags = tagService.generateFormattedTags(vm.template.tags);
+            });
+            templatingService.getDefaultVariables().then(function(data){
+                vm.availableVariables = data;
             });
             tagService.clearCache();
         }
