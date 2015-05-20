@@ -133,9 +133,13 @@ ol.breadcrumb {
 
 .login-pg {
   height: 100%;
-  background: url("../img/bg.png") #ffffff no-repeat center top; }
+  background: -webkit-linear-gradient(90deg, #4b6cb7 10%, #182848 90%);
+  background: -moz-linear-gradient(90deg, #4b6cb7 10%, #182848 90%);
+  background: -ms-linear-gradient(90deg, #4b6cb7 10%, #182848 90%);
+  background: -o-linear-gradient(90deg, #4b6cb7 10%, #182848 90%);
+  background: linear-gradient(90deg, #4b6cb7 10%, #182848 90%); }
   .login-pg .widget {
     margin: 50px 0 150px 0;
-    box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5); }
+    box-shadow: 2px 2px 7px rgba(0, 0, 0, 0.5); }
 
 /*# sourceMappingURL=stylesheet.css.map */
