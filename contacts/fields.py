@@ -6,7 +6,8 @@ from contacts.models import Tag
 
 class TagListField(serializers.Field):
     """
-    Field serializing list of the Yags to the list of their names and serializing back names to the ids of the Tags
+    Field serializing list of the Tags to the list of their names and serializing back names
+    to the ids of the Tags.
     """
 
     def to_representation(self, value):
