@@ -1,7 +1,5 @@
 machine:
   services:
     - postgresql
-
-test:
-  pre:
-    - export DATABASE_URL=postgres://ubuntu@localhost:5432/circle_test
+  environment:
+    DATABASE_URL: postgres://ubuntu@localhost:5432/circle_test
